@@ -1,11 +1,20 @@
 CMPLR = kompile
+RNR = krun
 
 SRCS = $(wildcard *.k)
+TSTS = $(wildcard *.test)
 
-.PHONY = all clean
+.PHONY = build clean testAll
 
-all: ${SRCS}
+build: ${SRCS}
 	${CMPLR} ${SRCS}
+
+testAll: build ${TSTS}
+
+%.test: FORCE
+	${RNR} $@
+
+FORCE: ;
 
 clean:
 	rm -r *-kompiled
