@@ -1,13 +1,15 @@
 CMPLR = kompile
 RNR = krun
 
+CFLAGS = --gen-bison-parser
+
 SRCS = $(wildcard *.k)
 TSTS = $(wildcard *.test)
 
 .PHONY = build clean testAll
 
 build: ${SRCS}
-	${CMPLR} ${SRCS}
+	${CMPLR} ${CFLAGS} ${SRCS}
 
 testAll: build ${TSTS}
 
