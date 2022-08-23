@@ -1,0 +1,3 @@
+isBlueOrYellow(Blueberry())
+isBlueOrYellow(Banana())
+isBlueOrYellow(BlueBanana())
