@@ -12,7 +12,10 @@ module LESSON-10
                                 +String " " 
                                 +String getFirsWord(
                                             substrString(S, findChar(S, ".", 0) +Int 2, lengthString(S))) 
-                            requires lengthString(S) >Int findChar(S, ".", 0) +Int 1
+                            requires lengthString(S) >Int findChar(S, ".", 0) +Int 2
+
+    rule getFirsWord(S) => substrString(S, 0, findChar(S, " ", 0)) 
+                            requires lengthString(S) ==Int findChar(S, ".", 0) +Int 1
 
     rule getFirsWord(_) => "." [owise]
 endmodule
