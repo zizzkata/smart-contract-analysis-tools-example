@@ -10,6 +10,7 @@ module LESSON-22-SPEC-SYNTAX
                 | "$n" [token]
                 | "$s" [token]
                 | "$sum" [token]
+                | "$fibo" [token]
 
 endmodule
 
@@ -61,7 +62,7 @@ module LESSON-22-SPEC
 
     claim
         <k>
-            def $sum($n, .Ids) {
+            def $sum($n) {
                 $s = 0 ;
                 while (0 < $n) {
                     $s = $s + $n;
@@ -70,7 +71,7 @@ module LESSON-22-SPEC
                 return $s;
             }
 
-            $s = $sum(N:Int, .Ints);
+            $s = $sum(N:Int);
         => . ... </k>
         <funcs> .Map => ?_ </funcs>
         <store> $s |-> (_ => ((N +Int 1) *Int N /Int 2)) </store>
@@ -101,4 +102,25 @@ module LESSON-22-SPEC
             $c |-> (C:Int => C -Int B)
         </store>
         requires B >=Int 0
+
+    claim
+        <k>
+            def $fibo($n) {
+                $s = 0;
+
+                if (  $n <= 1 ) {
+                    return 0;}
+
+                $s = ($fibo($n - 1) + $fibo($n - 2));
+
+                return $s; }
+
+            $a = $fibo(N:Int);
+        => . ...
+        </k>
+        <store>
+            $s |-> (_ => 8)
+            $a |-> (_ => 2)
+        </store>
+        requires N >=Int 0
 endmodule

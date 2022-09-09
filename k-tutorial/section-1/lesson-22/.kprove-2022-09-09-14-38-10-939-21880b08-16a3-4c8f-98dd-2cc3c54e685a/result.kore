@@ -1,0 +1,225 @@
+// Last configuration:
+\and{SortGeneratedTopCell{}}(
+    /* term: */
+    /* Fl Fn D Sfa */
+    Lbl'-LT-'generatedTop'-GT-'{}(
+        /* Fl Fn D Sfa */
+        Lbl'-LT-'k'-GT-'{}(
+            /* Fl Fn D Sfa */
+            kseq{}(
+                /* Fl Fn D Sfa */
+                /* Inj: */ inj{SortBExp{}, SortKItem{}}(
+                    /* Fl Fn D Sfa */ VarHOLE:SortBExp{}
+                ),
+                /* Fl Fn D Sfa */
+                kseq{}(
+                    /* Fl Fn D Sfa */
+                    Lbl'Hash'freezerif'LParUndsRParUnds'else'UndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block'Unds'Block0'Unds'{}(
+                        /* Fl Fn D Sfa */
+                        kseq{}(
+                            /* Fl Fn D Sfa */
+                            /* Inj: */ inj{SortBlock{}, SortKItem{}}(
+                                /* Fl Fn D Sfa */ VarK1:SortBlock{}
+                            ),
+                            /* Fl Fn D Sfa Cl */ dotk{}()
+                        ),
+                        /* Fl Fn D Sfa */
+                        kseq{}(
+                            /* Fl Fn D Sfa */
+                            /* Inj: */ inj{SortBlock{}, SortKItem{}}(
+                                /* Fl Fn D Sfa */ VarK2:SortBlock{}
+                            ),
+                            /* Fl Fn D Sfa Cl */ dotk{}()
+                        )
+                    ),
+                    /* Created: Kore.Rewrite.RewriteStep.resetResultPattern */
+                    /* Fl Fn D Sfa */
+                    Var'Unds'DotVar2:SortK{}
+                )
+            )
+        ),
+        /* Fl Fn D Sfa */
+        Lbl'-LT-'store'-GT-'{}(
+            /* Fl Fn D Sfa */
+            /* InternalMap: */ Lbl'Unds'Map'Unds'{}(
+                /* concrete element: */ Lbl'UndsPipe'-'-GT-Unds'{}(
+                    /* Inj: */ inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$s")),
+                    /* Fl Fn D Sfa */ Var'Unds'Gen1:SortKItem{}
+                ),
+                /* concrete element: */ Lbl'UndsPipe'-'-GT-Unds'{}(
+                    /* Inj: */ inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$a")),
+                    /* Fl Fn D Sfa Cli */
+                    /* Inj: */ inj{SortInt{}, SortKItem{}}(
+                        /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("0")
+                    )
+                )
+            )
+        ),
+        /* Fl Fn D Sfa Cl */
+        Lbl'-LT-'funcs'-GT-'{}(
+            /* Fl Fn D Sfa Cl */
+            /* InternalMap: */ /* concrete element: */ Lbl'UndsPipe'-'-GT-Unds'{}(
+                /* Inj: */ inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$fibo")),
+                /* Fl Fn D Sfa Cli */
+                /* Inj: */ inj{SortStmt{}, SortKItem{}}(
+                    /* Fl Fn D Sfa Cl */
+                    Lbldef'UndsLParUndsRParUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'Ids'Unds'Block{}(
+                        /* Fl Fn D Sfa Cl */
+                        \dv{SortId{}}(/* Fl Fn D Sfa Cl */ "$fibo"),
+                        /* Fl Fn D Sfa Cl */
+                        Lbl'UndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Ids'Unds'Id'Unds'Ids{}(
+                            /* Fl Fn D Sfa Cl */
+                            \dv{SortId{}}(/* Fl Fn D Sfa Cl */ "$n"),
+                            /* Fl Fn D Sfa Cli */
+                            /* Inj: */ inj{SortBots{}, SortIds{}}(
+                                /* Fl Fn D Sfa Cl */
+                                Lbl'Stop'List'LBraQuotUndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Bots'Unds'Bot'Unds'Bots'QuotRBraUnds'Bots{}()
+                            )
+                        ),
+                        /* Fl Fn D Sfa Cl */
+                        Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(
+                            /* Fl Fn D Sfa Cl */
+                            Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(
+                                /* Fl Fn D Sfa Cl */
+                                Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(
+                                    /* Fl Fn D Sfa Cl */
+                                    \dv{SortId{}}(/* Fl Fn D Sfa Cl */ "$s"),
+                                    /* Fl Fn D Sfa Cli */
+                                    /* Inj: */ inj{SortInt{}, SortIExp{}}(
+                                        /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("0")
+                                    )
+                                ),
+                                /* Fl Fn D Sfa Cl */
+                                Lblreturn'UndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'IExp{}(
+                                    /* Fl Fn D Sfa Cli */
+                                    /* Inj: */ inj{SortId{}, SortIExp{}}(
+                                        /* Fl Fn D Sfa Cl */
+                                        \dv{SortId{}}(/* Fl Fn D Sfa Cl */ "$s")
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        ),
+        /* Fl Fn D Sfa */
+        Lbl'-LT-'generatedCounter'-GT-'{}(
+            /* Fl Fn D Sfa */ Var'Unds'Gen3:SortInt{}
+        ),
+        /* Fl Fn D Sfa */
+        Lbl'-LT-'stack'-GT-'{}(/* Fl Fn D Sfa */ Var'Unds'Gen4:SortList{})
+    ),
+\and{SortGeneratedTopCell{}}(
+    /* predicate: */
+    \and{SortGeneratedTopCell{}}(
+        /* Sfa */
+        \equals{SortBool{}, SortGeneratedTopCell{}}(
+            /* Fl Fn D Sfa Cl */ \dv{SortBool{}}("false"),
+            /* Fl Fn D Sfa */
+            LblisKResult{}(
+                /* Fl Fn D Sfa */
+                kseq{}(
+                    /* Fl Fn D Sfa */
+                    /* Inj: */ inj{SortBExp{}, SortKItem{}}(
+                        /* Fl Fn D Sfa */ VarHOLE:SortBExp{}
+                    ),
+                    /* Fl Fn D Sfa Cl */ dotk{}()
+                )
+            )
+        ),
+    \and{SortGeneratedTopCell{}}(
+        /* Sfa */
+        \equals{SortBool{}, SortGeneratedTopCell{}}(
+            /* Fl Fn D Sfa Cl */ \dv{SortBool{}}("true"),
+            /* Fl Fn D Sfa */
+            Lbl'Unds-GT-Eqls'Int'Unds'{}(
+                /* Fl Fn D Sfa */ VarN:SortInt{},
+                /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("0")
+            )
+        ),
+        /* Sfa */
+        \not{SortGeneratedTopCell{}}(
+            /* Spa */
+            \and{SortGeneratedTopCell{}}(
+                /* Spa */
+                \equals{SortBExp{}, SortGeneratedTopCell{}}(
+                    /* Fl Fn D Sfa */ VarHOLE:SortBExp{},
+                    /* Fl Fn D Sfa Cl */
+                    Lbl'UndsBangEqlsUndsUnds'LESSON-22-SYNTAX'Unds'BExp'Unds'IExp'Unds'IExp{}(
+                        /* Fl Fn D Sfa Cl */
+                        Lbl'UndsPlusUndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(
+                            /* Fl Fn D Sfa Cli */
+                            /* Inj: */ inj{SortInt{}, SortIExp{}}(
+                                /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("3")
+                            ),
+                            /* Fl Fn D Sfa Cli */
+                            /* Inj: */ inj{SortInt{}, SortIExp{}}(
+                                /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("4")
+                            )
+                        ),
+                        /* Fl Fn D Sfa Cli */
+                        /* Inj: */ inj{SortInt{}, SortIExp{}}(
+                            /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("7")
+                        )
+                    )
+                ),
+                /* Spa */
+                \and{SortGeneratedTopCell{}}(
+                    /* Spa */
+                    \equals{SortBlock{}, SortGeneratedTopCell{}}(
+                        /* Fl Fn D Sfa */ VarK1:SortBlock{},
+                        /* Fl Fn D Sfa Cl */
+                        Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(
+                            /* Fl Fn D Sfa Cl */
+                            Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(
+                                /* Fl Fn D Sfa Cl */
+                                \dv{SortId{}}(/* Fl Fn D Sfa Cl */ "$a"),
+                                /* Fl Fn D Sfa Cli */
+                                /* Inj: */ inj{SortInt{}, SortIExp{}}(
+                                    /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("1")
+                                )
+                            )
+                        )
+                    ),
+                    /* Spa */
+                    \equals{SortBlock{}, SortGeneratedTopCell{}}(
+                        /* Fl Fn D Sfa */ VarK2:SortBlock{},
+                        /* Fl Fn D Sfa Cl */
+                        Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(
+                            /* Fl Fn D Sfa Cl */
+                            Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(
+                                /* Fl Fn D Sfa Cl */
+                                \dv{SortId{}}(/* Fl Fn D Sfa Cl */ "$a"),
+                                /* Fl Fn D Sfa Cli */
+                                /* Inj: */ inj{SortInt{}, SortIExp{}}(
+                                    /* Fl Fn D Sfa Cl */ \dv{SortInt{}}("2")
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )),
+    /* substitution: */
+    /* Spa */
+    \equals{SortK{}, SortGeneratedTopCell{}}(
+        /* Fl Fn D Sfa */ Var'Unds'DotVar1:SortK{},
+        /* Fl Fn D Sfa */
+        kseq{}(
+            /* Fl Fn D Sfa */
+            /* Inj: */ inj{SortStmt{}, SortKItem{}}(
+                /* Fl Fn D Sfa */
+                Lblif'LParUndsRParUnds'else'UndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block'Unds'Block{}(
+                    /* Fl Fn D Sfa */ VarHOLE:SortBExp{},
+                    /* Fl Fn D Sfa */ VarK1:SortBlock{},
+                    /* Fl Fn D Sfa */ VarK2:SortBlock{}
+                )
+            ),
+            /* Created: Kore.Rewrite.RewriteStep.resetResultPattern */
+            /* Fl Fn D Sfa */
+            Var'Unds'DotVar2:SortK{}
+        )
+    )
+))

@@ -1,0 +1,321 @@
+[org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)")]
+module LESSON-22-SPEC
+
+// imports
+import LESSON-22 []
+
+
+// claims
+// rule `Map:update`(`_Map_`(`_|->_`(K1,V1),M),K2,V2)=>`_Map_`(`_|->_`(K1,V1),`Map:update`(M,K2,V2)) requires `_=/=K_`(K1,K2) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(422,8,422,90)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        Lbl'UndsEqlsSlshEqls'K'Unds'{}(kseq{}(VarK1:SortKItem{},dotk{}()),kseq{}(VarK2:SortKItem{},dotk{}())),
+        \dv{SortBool{}}("true")),
+    \equals{SortMap{},R} (
+      LblMap'Coln'update{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK1:SortKItem{},VarV1:SortKItem{}),VarM:SortMap{}),VarK2:SortKItem{},VarV2:SortKItem{}),
+     \and{SortMap{}} (
+       Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK1:SortKItem{},VarV1:SortKItem{}),LblMap'Coln'update{}(VarM:SortMap{},VarK2:SortKItem{},VarV2:SortKItem{})),
+        \top{SortMap{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(422,8,422,90)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule #Equals{Bool,#SortParam}(`_in_keys(_)_MAP_Bool_KItem_Map`(@Key,`.Map`(.KList)),#token("false","Bool"))=>#Ceil{KItem,#SortParam}(@Key) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(444,8,444,57)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification, sortParams({Q0})]
+  axiom{R,Q0} \implies{R} (
+    \top{R}(),
+    \equals{Q0,R} (
+      \equals{SortBool{}, Q0}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(@VarKey:SortKItem{},Lbl'Stop'Map{}()),\dv{SortBool{}}("false")),
+     \and{Q0} (
+       \ceil{SortKItem{}, Q0}(@VarKey:SortKItem{}),
+        \top{Q0}())))
+  [sortParams{}(), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(444,8,444,57)"), simplification{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{Stmt,KItem}(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`def_(_)__LESSON-22-SYNTAX_Stmt_Id_Ids_Block`(#token("$sum","Id"),`_,__LESSON-22-SYNTAX_Ids_Id_Ids`(#token("$n","Id"),inj{Bots,Ids}(`.List{"_,__LESSON-22-SYNTAX_Bots_Bot_Bots"}_Bots`(.KList))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$s","Id"),inj{Int,IExp}(#token("0","Int"))),`while(_)__LESSON-22-SYNTAX_Stmt_BExp_Block`(`_<__LESSON-22-SYNTAX_BExp_IExp_IExp`(inj{Int,IExp}(#token("0","Int")),inj{Id,IExp}(#token("$n","Id"))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$s","Id"),`_+__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Id,IExp}(#token("$s","Id")),inj{Id,IExp}(#token("$n","Id")))),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$n","Id"),`_-__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Id,IExp}(#token("$n","Id")),inj{Int,IExp}(#token("1","Int")))))))),`return_;_LESSON-22-SYNTAX_Stmt_IExp`(inj{Id,IExp}(#token("$s","Id")))))),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$s","Id"),`_(_)_LESSON-22-SYNTAX_IExp_Id_Exps`(#token("$sum","Id"),inj{Ints,Exps}(`_,__LESSON-22-SYNTAX_Ints_Int_Ints`(N,inj{Bots,Ints}(`.List{"_,__LESSON-22-SYNTAX_Bots_Bot_Bots"}_Bots`(.KList))))))))~>_DotVar1),`<store>`(`_|->_`(inj{Id,KItem}(#token("$s","Id")),_Gen1)),`<funcs>`(`.Map`(.KList)),_DotVar0,`<stack>`(`.List`(.KList)))=>`<generatedTop>`(`<k>`(_DotVar1),`<store>`(`_|->_`(inj{Id,KItem}(#token("$s","Id")),inj{Int,KItem}(`_/Int_`(`_*Int_`(`_+Int_`(N,#token("1","Int")),N),#token("2","Int"))))),`<funcs>`(?_Gen0),_DotVar0,`<stack>`(`.List`(.KList))) requires `_>=Int_`(N,#token("0","Int")) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(64,9,79,27)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \equals{SortBool{},SortGeneratedTopCell{}}(
+        Lbl'Unds-GT-Eqls'Int'Unds'{}(VarN:SortInt{},\dv{SortInt{}}("0")),
+        \dv{SortBool{}}("true")), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortStmt{}, SortKItem{}}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbldef'UndsLParUndsRParUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'Ids'Unds'Block{}(\dv{SortId{}}("$sum"),Lbl'UndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Ids'Unds'Id'Unds'Ids{}(\dv{SortId{}}("$n"),inj{SortBots{}, SortIds{}}(Lbl'Stop'List'LBraQuotUndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Bots'Unds'Bot'Unds'Bots'QuotRBraUnds'Bots{}())),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$s"),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("0"))),Lblwhile'LParUndsRParUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block{}(Lbl'Unds-LT-UndsUnds'LESSON-22-SYNTAX'Unds'BExp'Unds'IExp'Unds'IExp{}(inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("0")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$n"))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$s"),Lbl'UndsPlusUndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$s")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$n")))),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$n"),Lbl'Unds'-'UndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$n")),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("1")))))))),Lblreturn'UndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$s")))))),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$s"),Lbl'UndsLParUndsRParUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'Id'Unds'Exps{}(\dv{SortId{}}("$sum"),inj{SortInts{}, SortExps{}}(Lbl'UndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Ints'Unds'Int'Unds'Ints{}(VarN:SortInt{},inj{SortBots{}, SortInts{}}(Lbl'Stop'List'LBraQuotUndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Bots'Unds'Bot'Unds'Bots'QuotRBraUnds'Bots{}()))))))),Var'Unds'DotVar1:SortK{})),Lbl'-LT-'store'-GT-'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$s")),Var'Unds'Gen1:SortKItem{})),Lbl'-LT-'funcs'-GT-'{}(Lbl'Stop'Map{}()),Var'Unds'DotVar0:SortGeneratedCounterCell{},Lbl'-LT-'stack'-GT-'{}(Lbl'Stop'List{}()))), weakAlwaysFinally{SortGeneratedTopCell{}} (
+       \exists{SortGeneratedTopCell{}} (Var'QuesUnds'Gen0:SortMap{}, 
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(Var'Unds'DotVar1:SortK{}),Lbl'-LT-'store'-GT-'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$s")),inj{SortInt{}, SortKItem{}}(Lbl'UndsSlsh'Int'Unds'{}(Lbl'UndsStar'Int'Unds'{}(Lbl'UndsPlus'Int'Unds'{}(VarN:SortInt{},\dv{SortInt{}}("1")),VarN:SortInt{}),\dv{SortInt{}}("2"))))),Lbl'-LT-'funcs'-GT-'{}(Var'QuesUnds'Gen0:SortMap{}),Var'Unds'DotVar0:SortGeneratedCounterCell{},Lbl'-LT-'stack'-GT-'{}(Lbl'Stop'List{}()))))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(64,9,79,27)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+// rule `Map:update`(`Map:update`(M,K,_Gen0),K,V)=>`Map:update`(M,K,V) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(419,8,419,51)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \top{R}(),
+    \equals{SortMap{},R} (
+      LblMap'Coln'update{}(LblMap'Coln'update{}(VarM:SortMap{},VarK:SortKItem{},Var'Unds'Gen0:SortKItem{}),VarK:SortKItem{},VarV:SortKItem{}),
+     \and{SortMap{}} (
+       LblMap'Coln'update{}(VarM:SortMap{},VarK:SortKItem{},VarV:SortKItem{}),
+        \top{SortMap{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(419,8,419,51)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{Stmt,KItem}(`if(_)_else__LESSON-22-SYNTAX_Stmt_BExp_Block_Block`(`_!=__LESSON-22-SYNTAX_BExp_IExp_IExp`(`_+__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Int,IExp}(#token("3","Int")),inj{Int,IExp}(#token("4","Int"))),inj{Int,IExp}(#token("7","Int"))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$a","Id"),inj{Int,IExp}(#token("1","Int")))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$a","Id"),inj{Int,IExp}(#token("2","Int"))))))~>_DotVar1),`<store>`(STORE),_Gen0,_Gen1,_Gen2)=>`<generatedTop>`(`<k>`(_DotVar1),`<store>`(`Map:update`(STORE,inj{Id,KItem}(#token("$a","Id")),inj{Int,KItem}(#token("2","Int")))),_Gen0,_Gen1,_Gen2) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(32,11,38,52)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortStmt{}, SortKItem{}}(Lblif'LParUndsRParUnds'else'UndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block'Unds'Block{}(Lbl'UndsBangEqlsUndsUnds'LESSON-22-SYNTAX'Unds'BExp'Unds'IExp'Unds'IExp{}(Lbl'UndsPlusUndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("3")),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("4"))),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("7"))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$a"),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("1")))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$a"),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("2")))))),Var'Unds'DotVar1:SortK{})),Lbl'-LT-'store'-GT-'{}(VarSTORE:SortMap{}),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})), weakAlwaysFinally{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(Var'Unds'DotVar1:SortK{}),Lbl'-LT-'store'-GT-'{}(LblMap'Coln'update{}(VarSTORE:SortMap{},inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$a")),inj{SortInt{}, SortKItem{}}(\dv{SortInt{}}("2")))),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{}))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(32,11,38,52)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+// rule `_[_<-undef]`(`_Map_`(`_|->_`(K1,V1),M),K2)=>`_Map_`(`_|->_`(K1,V1),`_[_<-undef]`(M,K2)) requires `_=/=K_`(K1,K2) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(429,8,429,96)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        Lbl'UndsEqlsSlshEqls'K'Unds'{}(kseq{}(VarK1:SortKItem{},dotk{}()),kseq{}(VarK2:SortKItem{},dotk{}())),
+        \dv{SortBool{}}("true")),
+    \equals{SortMap{},R} (
+      Lbl'UndsLSqBUnds-LT-'-undef'RSqB'{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK1:SortKItem{},VarV1:SortKItem{}),VarM:SortMap{}),VarK2:SortKItem{}),
+     \and{SortMap{}} (
+       Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK1:SortKItem{},VarV1:SortKItem{}),Lbl'UndsLSqBUnds-LT-'-undef'RSqB'{}(VarM:SortMap{},VarK2:SortKItem{})),
+        \top{SortMap{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(429,8,429,96)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule #Equals{Bool,#SortParam}(#token("false","Bool"),`_in_keys(_)_MAP_Bool_KItem_Map`(@Key,`.Map`(.KList)))=>#Ceil{KItem,#SortParam}(@Key) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(443,8,443,57)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification, sortParams({Q0})]
+  axiom{R,Q0} \implies{R} (
+    \top{R}(),
+    \equals{Q0,R} (
+      \equals{SortBool{}, Q0}(\dv{SortBool{}}("false"),Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(@VarKey:SortKItem{},Lbl'Stop'Map{}())),
+     \and{Q0} (
+       \ceil{SortKItem{}, Q0}(@VarKey:SortKItem{}),
+        \top{Q0}())))
+  [sortParams{}(), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(443,8,443,57)"), simplification{}()]
+
+// rule #Equals{Bool,#SortParam}(#token("false","Bool"),`_in_keys(_)_MAP_Bool_KItem_Map`(@Key,`_Map_`(`_|->_`(Key',Val),@M)))=>#And{#SortParam}(#And{#SortParam}(#And{#SortParam}(#Ceil{KItem,#SortParam}(@Key),#Ceil{Map,#SortParam}(`_Map_`(`_|->_`(Key',Val),@M))),#Not{#SortParam}(#Equals{KItem,#SortParam}(@Key,Key'))),#Equals{Bool,#SortParam}(#token("false","Bool"),`_in_keys(_)_MAP_Bool_KItem_Map`(@Key,@M))) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(445,8,445,165)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification, sortParams({Q0})]
+  axiom{R,Q0} \implies{R} (
+    \top{R}(),
+    \equals{Q0,R} (
+      \equals{SortBool{}, Q0}(\dv{SortBool{}}("false"),Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(@VarKey:SortKItem{},Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarKey'Apos':SortKItem{},VarVal:SortKItem{}),@VarM:SortMap{}))),
+     \and{Q0} (
+       \and{Q0}(\and{Q0}(\and{Q0}(\ceil{SortKItem{}, Q0}(@VarKey:SortKItem{}),\ceil{SortMap{}, Q0}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarKey'Apos':SortKItem{},VarVal:SortKItem{}),@VarM:SortMap{}))),\not{Q0}(\equals{SortKItem{}, Q0}(@VarKey:SortKItem{},VarKey'Apos':SortKItem{}))),\equals{SortBool{}, Q0}(\dv{SortBool{}}("false"),Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(@VarKey:SortKItem{},@VarM:SortMap{}))),
+        \top{Q0}())))
+  [sortParams{}(), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(445,8,445,165)"), simplification{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{Stmt,KItem}(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$a","Id"),inj{Int,IExp}(A)),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$b","Id"),inj{Int,IExp}(B))),`if(_)_else__LESSON-22-SYNTAX_Stmt_BExp_Block_Block`(`_<__LESSON-22-SYNTAX_BExp_IExp_IExp`(inj{Id,IExp}(#token("$a","Id")),inj{Id,IExp}(#token("$b","Id"))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$c","Id"),inj{Id,IExp}(#token("$b","Id")))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$c","Id"),inj{Id,IExp}(#token("$a","Id")))))))~>_DotVar1),`<store>`(STORE),_Gen0,_Gen1,_Gen2)=>`<generatedTop>`(`<k>`(_DotVar1),`<store>`(`Map:update`(`Map:update`(`Map:update`(STORE,inj{Id,KItem}(#token("$a","Id")),inj{Int,KItem}(A)),inj{Id,KItem}(#token("$b","Id")),inj{Int,KItem}(B)),inj{Id,KItem}(#token("$c","Id")),inj{Int,KItem}(?C))),_Gen0,_Gen1,_Gen2) requires #token("true","Bool") ensures `_orBool_`(`_==Int_`(?C,A),`_==Int_`(?C,B)) [org.kframework.attributes.Location(Location(40,11,48,45)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "ensures" Bool [klabel(#ruleEnsures), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortStmt{}, SortKItem{}}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$a"),inj{SortInt{}, SortIExp{}}(VarA:SortInt{})),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$b"),inj{SortInt{}, SortIExp{}}(VarB:SortInt{}))),Lblif'LParUndsRParUnds'else'UndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block'Unds'Block{}(Lbl'Unds-LT-UndsUnds'LESSON-22-SYNTAX'Unds'BExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$a")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$b"))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$c"),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$b")))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$c"),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$a"))))))),Var'Unds'DotVar1:SortK{})),Lbl'-LT-'store'-GT-'{}(VarSTORE:SortMap{}),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})), weakAlwaysFinally{SortGeneratedTopCell{}} (
+       \exists{SortGeneratedTopCell{}} (Var'Ques'C:SortInt{}, 
+      \and{SortGeneratedTopCell{}} (
+      \equals{SortBool{},SortGeneratedTopCell{}}(
+        Lbl'Unds'orBool'Unds'{}(Lbl'UndsEqlsEqls'Int'Unds'{}(Var'Ques'C:SortInt{},VarA:SortInt{}),Lbl'UndsEqlsEqls'Int'Unds'{}(Var'Ques'C:SortInt{},VarB:SortInt{})),
+        \dv{SortBool{}}("true")), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(Var'Unds'DotVar1:SortK{}),Lbl'-LT-'store'-GT-'{}(LblMap'Coln'update{}(LblMap'Coln'update{}(LblMap'Coln'update{}(VarSTORE:SortMap{},inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$a")),inj{SortInt{}, SortKItem{}}(VarA:SortInt{})),inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$b")),inj{SortInt{}, SortKItem{}}(VarB:SortInt{})),inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$c")),inj{SortInt{}, SortKItem{}}(Var'Ques'C:SortInt{}))),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(40,11,48,45)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+// rule #Equals{Bool,#SortParam}(`_in_keys(_)_MAP_Bool_KItem_Map`(@Key,`_Map_`(`_|->_`(Key',Val),@M)),#token("false","Bool"))=>#And{#SortParam}(#And{#SortParam}(#And{#SortParam}(#Ceil{KItem,#SortParam}(@Key),#Ceil{Map,#SortParam}(`_Map_`(`_|->_`(Key',Val),@M))),#Not{#SortParam}(#Equals{KItem,#SortParam}(@Key,Key'))),#Equals{Bool,#SortParam}(`_in_keys(_)_MAP_Bool_KItem_Map`(@Key,@M),#token("false","Bool"))) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(446,8,446,165)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification, sortParams({Q0})]
+  axiom{R,Q0} \implies{R} (
+    \top{R}(),
+    \equals{Q0,R} (
+      \equals{SortBool{}, Q0}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(@VarKey:SortKItem{},Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarKey'Apos':SortKItem{},VarVal:SortKItem{}),@VarM:SortMap{})),\dv{SortBool{}}("false")),
+     \and{Q0} (
+       \and{Q0}(\and{Q0}(\and{Q0}(\ceil{SortKItem{}, Q0}(@VarKey:SortKItem{}),\ceil{SortMap{}, Q0}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarKey'Apos':SortKItem{},VarVal:SortKItem{}),@VarM:SortMap{}))),\not{Q0}(\equals{SortKItem{}, Q0}(@VarKey:SortKItem{},VarKey'Apos':SortKItem{}))),\equals{SortBool{}, Q0}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(@VarKey:SortKItem{},@VarM:SortMap{}),\dv{SortBool{}}("false"))),
+        \top{Q0}())))
+  [sortParams{}(), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(446,8,446,165)"), simplification{}()]
+
+// rule `Map:lookup`(`_Map_`(`_|->_`(K1,_V),M),K2)=>`Map:lookup`(M,K2) requires `_=/=K_`(K1,K2) ensures `notBool_`(`_in_keys(_)_MAP_Bool_KItem_Map`(K1,M)) [org.kframework.attributes.Location(Location(433,8,433,94)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool "ensures" Bool [klabel(#ruleRequiresEnsures), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        Lbl'UndsEqlsSlshEqls'K'Unds'{}(kseq{}(VarK1:SortKItem{},dotk{}()),kseq{}(VarK2:SortKItem{},dotk{}())),
+        \dv{SortBool{}}("true")),
+    \equals{SortKItem{},R} (
+      LblMap'Coln'lookup{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK1:SortKItem{},Var'Unds'V:SortKItem{}),VarM:SortMap{}),VarK2:SortKItem{}),
+     \and{SortKItem{}} (
+       LblMap'Coln'lookup{}(VarM:SortMap{},VarK2:SortKItem{}),
+        \equals{SortBool{},SortKItem{}}(
+        LblnotBool'Unds'{}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK1:SortKItem{},VarM:SortMap{})),
+        \dv{SortBool{}}("true")))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(433,8,433,94)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule #Ceil{KItem,#SortParam}(`Map:lookup`(@M,@K))=>#And{#SortParam}(#And{#SortParam}(#Equals{Bool,#SortParam}(`_in_keys(_)_MAP_Bool_KItem_Map`(@K,@M),#token("true","Bool")),#Ceil{Map,#SortParam}(@M)),#Ceil{KItem,#SortParam}(@K)) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(411,8,411,97)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification, sortParams({Q0})]
+  axiom{R,Q0} \implies{R} (
+    \top{R}(),
+    \equals{Q0,R} (
+      \ceil{SortKItem{}, Q0}(LblMap'Coln'lookup{}(@VarM:SortMap{},@VarK:SortKItem{})),
+     \and{Q0} (
+       \and{Q0}(\and{Q0}(\equals{SortBool{}, Q0}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(@VarK:SortKItem{},@VarM:SortMap{}),\dv{SortBool{}}("true")),\ceil{SortMap{}, Q0}(@VarM:SortMap{})),\ceil{SortKItem{}, Q0}(@VarK:SortKItem{})),
+        \top{Q0}())))
+  [sortParams{}(), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(411,8,411,97)"), simplification{}()]
+
+// rule #Equals{Map,#SortParam}(`Map:update`(M,K,V),`Map:update`(M,K,V'))=>#Equals{KItem,#SortParam}(V,V') requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(23,10,23,72)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification, sortParams({Q0})]
+  axiom{R,Q0} \implies{R} (
+    \top{R}(),
+    \equals{Q0,R} (
+      \equals{SortMap{}, Q0}(LblMap'Coln'update{}(VarM:SortMap{},VarK:SortKItem{},VarV:SortKItem{}),LblMap'Coln'update{}(VarM:SortMap{},VarK:SortKItem{},VarV'Apos':SortKItem{})),
+     \and{Q0} (
+       \equals{SortKItem{}, Q0}(VarV:SortKItem{},VarV'Apos':SortKItem{}),
+        \top{Q0}())))
+  [sortParams{}(), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(23,10,23,72)"), simplification{}()]
+
+// rule `_[_<-undef]`(`_Map_`(`_|->_`(K,_Gen0),M),K)=>M requires #token("true","Bool") ensures `notBool_`(`_in_keys(_)_MAP_Bool_KItem_Map`(K,M)) [org.kframework.attributes.Location(Location(425,8,425,74)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "ensures" Bool [klabel(#ruleEnsures), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \top{R}(),
+    \equals{SortMap{},R} (
+      Lbl'UndsLSqBUnds-LT-'-undef'RSqB'{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK:SortKItem{},Var'Unds'Gen0:SortKItem{}),VarM:SortMap{}),VarK:SortKItem{}),
+     \and{SortMap{}} (
+       VarM:SortMap{},
+        \equals{SortBool{},SortMap{}}(
+        LblnotBool'Unds'{}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK:SortKItem{},VarM:SortMap{})),
+        \dv{SortBool{}}("true")))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(425,8,425,74)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `_[_<-undef]`(M,K)=>M requires `notBool_`(`_in_keys(_)_MAP_Bool_KItem_Map`(K,M)) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(426,8,426,65)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        LblnotBool'Unds'{}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK:SortKItem{},VarM:SortMap{})),
+        \dv{SortBool{}}("true")),
+    \equals{SortMap{},R} (
+      Lbl'UndsLSqBUnds-LT-'-undef'RSqB'{}(VarM:SortMap{},VarK:SortKItem{}),
+     \and{SortMap{}} (
+       VarM:SortMap{},
+        \top{SortMap{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(426,8,426,65)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `_in_keys(_)_MAP_Bool_KItem_Map`(K,`Map:update`(_M,K,_Gen0))=>#token("true","Bool") requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(439,8,439,40)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \top{R}(),
+    \equals{SortBool{},R} (
+      Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK:SortKItem{},LblMap'Coln'update{}(Var'Unds'M:SortMap{},VarK:SortKItem{},Var'Unds'Gen0:SortKItem{})),
+     \and{SortBool{}} (
+       \dv{SortBool{}}("true"),
+        \top{SortBool{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(439,8,439,40)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `_in_keys(_)_MAP_Bool_KItem_Map`(K1,`Map:update`(M,K2,_Gen0))=>#token("true","Bool") requires `_orBool_`(`_==K_`(K1,K2),`_in_keys(_)_MAP_Bool_KItem_Map`(K1,M)) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(440,8,440,81)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        Lbl'Unds'orBool'Unds'{}(Lbl'UndsEqlsEqls'K'Unds'{}(kseq{}(VarK1:SortKItem{},dotk{}()),kseq{}(VarK2:SortKItem{},dotk{}())),Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK1:SortKItem{},VarM:SortMap{})),
+        \dv{SortBool{}}("true")),
+    \equals{SortBool{},R} (
+      Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK1:SortKItem{},LblMap'Coln'update{}(VarM:SortMap{},VarK2:SortKItem{},Var'Unds'Gen0:SortKItem{})),
+     \and{SortBool{}} (
+       \dv{SortBool{}}("true"),
+        \top{SortBool{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(440,8,440,81)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `_in_keys(_)_MAP_Bool_KItem_Map`(K,`_[_<-undef]`(_M,K))=>#token("false","Bool") requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(438,8,438,45)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \top{R}(),
+    \equals{SortBool{},R} (
+      Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK:SortKItem{},Lbl'UndsLSqBUnds-LT-'-undef'RSqB'{}(Var'Unds'M:SortMap{},VarK:SortKItem{})),
+     \and{SortBool{}} (
+       \dv{SortBool{}}("false"),
+        \top{SortBool{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(438,8,438,45)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{Stmt,KItem}(`while(_)__LESSON-22-SYNTAX_Stmt_BExp_Block`(`_<__LESSON-22-SYNTAX_BExp_IExp_IExp`(inj{Int,IExp}(#token("0","Int")),inj{Id,IExp}(#token("$n","Id"))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$s","Id"),`_+__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Id,IExp}(#token("$s","Id")),inj{Id,IExp}(#token("$n","Id")))),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$n","Id"),`_-__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Id,IExp}(#token("$n","Id")),inj{Int,IExp}(#token("1","Int"))))))))~>_DotVar1),`<store>`(`_Map_`(`_|->_`(inj{Id,KItem}(#token("$s","Id")),inj{Int,KItem}(S)),`_|->_`(inj{Id,KItem}(#token("$n","Id")),inj{Int,KItem}(N)))),_Gen0,_Gen1,_Gen2)=>`<generatedTop>`(`<k>`(_DotVar1),`<store>`(`_Map_`(`_|->_`(inj{Id,KItem}(#token("$s","Id")),inj{Int,KItem}(`_+Int_`(S,`_/Int_`(`_*Int_`(`_+Int_`(N,#token("1","Int")),N),#token("2","Int"))))),`_|->_`(inj{Id,KItem}(#token("$n","Id")),inj{Int,KItem}(#token("0","Int"))))),_Gen0,_Gen1,_Gen2) requires `_>=Int_`(N,#token("0","Int")) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(51,9,61,27)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \equals{SortBool{},SortGeneratedTopCell{}}(
+        Lbl'Unds-GT-Eqls'Int'Unds'{}(VarN:SortInt{},\dv{SortInt{}}("0")),
+        \dv{SortBool{}}("true")), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortStmt{}, SortKItem{}}(Lblwhile'LParUndsRParUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block{}(Lbl'Unds-LT-UndsUnds'LESSON-22-SYNTAX'Unds'BExp'Unds'IExp'Unds'IExp{}(inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("0")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$n"))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$s"),Lbl'UndsPlusUndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$s")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$n")))),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$n"),Lbl'Unds'-'UndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$n")),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("1")))))))),Var'Unds'DotVar1:SortK{})),Lbl'-LT-'store'-GT-'{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$s")),inj{SortInt{}, SortKItem{}}(VarS:SortInt{})),Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$n")),inj{SortInt{}, SortKItem{}}(VarN:SortInt{})))),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})), weakAlwaysFinally{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(Var'Unds'DotVar1:SortK{}),Lbl'-LT-'store'-GT-'{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$s")),inj{SortInt{}, SortKItem{}}(Lbl'UndsPlus'Int'Unds'{}(VarS:SortInt{},Lbl'UndsSlsh'Int'Unds'{}(Lbl'UndsStar'Int'Unds'{}(Lbl'UndsPlus'Int'Unds'{}(VarN:SortInt{},\dv{SortInt{}}("1")),VarN:SortInt{}),\dv{SortInt{}}("2"))))),Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$n")),inj{SortInt{}, SortKItem{}}(\dv{SortInt{}}("0"))))),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{}))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(51,9,61,27)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{Stmt,KItem}(`while(_)__LESSON-22-SYNTAX_Stmt_BExp_Block`(`_<__LESSON-22-SYNTAX_BExp_IExp_IExp`(inj{Int,IExp}(#token("0","Int")),inj{Id,IExp}(#token("$b","Id"))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$a","Id"),`_+__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Id,IExp}(#token("$a","Id")),inj{Id,IExp}(#token("$c","Id")))),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$b","Id"),`_-__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Id,IExp}(#token("$b","Id")),inj{Int,IExp}(#token("1","Int"))))),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$c","Id"),`_-__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Id,IExp}(#token("$c","Id")),inj{Int,IExp}(#token("1","Int"))))))))~>_DotVar1),`<store>`(`_Map_`(`_Map_`(`_|->_`(inj{Id,KItem}(#token("$a","Id")),inj{Int,KItem}(A)),`_|->_`(inj{Id,KItem}(#token("$b","Id")),inj{Int,KItem}(B))),`_|->_`(inj{Id,KItem}(#token("$c","Id")),inj{Int,KItem}(C)))),_Gen0,_Gen1,_Gen2)=>`<generatedTop>`(`<k>`(_DotVar1),`<store>`(`_Map_`(`_Map_`(`_|->_`(inj{Id,KItem}(#token("$a","Id")),inj{Int,KItem}(`_+Int_`(`_+Int_`(A,`_*Int_`(B,`_-Int_`(C,B))),`_/Int_`(`_*Int_`(`_+Int_`(B,#token("1","Int")),B),#token("2","Int"))))),`_|->_`(inj{Id,KItem}(#token("$b","Id")),inj{Int,KItem}(#token("0","Int")))),`_|->_`(inj{Id,KItem}(#token("$c","Id")),inj{Int,KItem}(`_-Int_`(C,B))))),_Gen0,_Gen1,_Gen2) requires `_>=Int_`(B,#token("0","Int")) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(92,9,104,27)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \equals{SortBool{},SortGeneratedTopCell{}}(
+        Lbl'Unds-GT-Eqls'Int'Unds'{}(VarB:SortInt{},\dv{SortInt{}}("0")),
+        \dv{SortBool{}}("true")), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortStmt{}, SortKItem{}}(Lblwhile'LParUndsRParUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block{}(Lbl'Unds-LT-UndsUnds'LESSON-22-SYNTAX'Unds'BExp'Unds'IExp'Unds'IExp{}(inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("0")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$b"))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$a"),Lbl'UndsPlusUndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$a")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$c")))),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$b"),Lbl'Unds'-'UndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$b")),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("1"))))),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$c"),Lbl'Unds'-'UndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$c")),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("1")))))))),Var'Unds'DotVar1:SortK{})),Lbl'-LT-'store'-GT-'{}(Lbl'Unds'Map'Unds'{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$a")),inj{SortInt{}, SortKItem{}}(VarA:SortInt{})),Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$b")),inj{SortInt{}, SortKItem{}}(VarB:SortInt{}))),Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$c")),inj{SortInt{}, SortKItem{}}(VarC:SortInt{})))),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})), weakAlwaysFinally{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(Var'Unds'DotVar1:SortK{}),Lbl'-LT-'store'-GT-'{}(Lbl'Unds'Map'Unds'{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$a")),inj{SortInt{}, SortKItem{}}(Lbl'UndsPlus'Int'Unds'{}(Lbl'UndsPlus'Int'Unds'{}(VarA:SortInt{},Lbl'UndsStar'Int'Unds'{}(VarB:SortInt{},Lbl'Unds'-Int'Unds'{}(VarC:SortInt{},VarB:SortInt{}))),Lbl'UndsSlsh'Int'Unds'{}(Lbl'UndsStar'Int'Unds'{}(Lbl'UndsPlus'Int'Unds'{}(VarB:SortInt{},\dv{SortInt{}}("1")),VarB:SortInt{}),\dv{SortInt{}}("2"))))),Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$b")),inj{SortInt{}, SortKItem{}}(\dv{SortInt{}}("0")))),Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$c")),inj{SortInt{}, SortKItem{}}(Lbl'Unds'-Int'Unds'{}(VarC:SortInt{},VarB:SortInt{}))))),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{}))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(92,9,104,27)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+// rule `_in_keys(_)_MAP_Bool_KItem_Map`(K1,`Map:update`(M,K2,_Gen0))=>`_in_keys(_)_MAP_Bool_KItem_Map`(K1,M) requires `_=/=K_`(K1,K2) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(441,8,441,70)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        Lbl'UndsEqlsSlshEqls'K'Unds'{}(kseq{}(VarK1:SortKItem{},dotk{}()),kseq{}(VarK2:SortKItem{},dotk{}())),
+        \dv{SortBool{}}("true")),
+    \equals{SortBool{},R} (
+      Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK1:SortKItem{},LblMap'Coln'update{}(VarM:SortMap{},VarK2:SortKItem{},Var'Unds'Gen0:SortKItem{})),
+     \and{SortBool{}} (
+       Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK1:SortKItem{},VarM:SortMap{}),
+        \top{SortBool{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(441,8,441,70)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `Map:lookup`(`_Map_`(`_|->_`(K,V),M),K)=>V requires #token("true","Bool") ensures `notBool_`(`_in_keys(_)_MAP_Bool_KItem_Map`(K,M)) [org.kframework.attributes.Location(Location(432,8,432,68)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "ensures" Bool [klabel(#ruleEnsures), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \top{R}(),
+    \equals{SortKItem{},R} (
+      LblMap'Coln'lookup{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK:SortKItem{},VarV:SortKItem{}),VarM:SortMap{}),VarK:SortKItem{}),
+     \and{SortKItem{}} (
+       VarV:SortKItem{},
+        \equals{SortBool{},SortKItem{}}(
+        LblnotBool'Unds'{}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK:SortKItem{},VarM:SortMap{})),
+        \dv{SortBool{}}("true")))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(432,8,432,68)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `Map:update`(`_Map_`(`_|->_`(K,_Gen0),M),K,V)=>`_Map_`(`_|->_`(K,V),M) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(417,8,417,49)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \top{R}(),
+    \equals{SortMap{},R} (
+      LblMap'Coln'update{}(Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK:SortKItem{},Var'Unds'Gen0:SortKItem{}),VarM:SortMap{}),VarK:SortKItem{},VarV:SortKItem{}),
+     \and{SortMap{}} (
+       Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK:SortKItem{},VarV:SortKItem{}),VarM:SortMap{}),
+        \top{SortMap{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(417,8,417,49)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `Map:lookup`(`Map:update`(_MAP,K,V1),K)=>V1 requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(434,8,434,45)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \top{R}(),
+    \equals{SortKItem{},R} (
+      LblMap'Coln'lookup{}(LblMap'Coln'update{}(Var'Unds'MAP:SortMap{},VarK:SortKItem{},VarV1:SortKItem{}),VarK:SortKItem{}),
+     \and{SortKItem{}} (
+       VarV1:SortKItem{},
+        \top{SortKItem{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(434,8,434,45)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{IExp,KItem}(`_+__LESSON-22-SYNTAX_IExp_IExp_IExp`(inj{Int,IExp}(#token("3","Int")),inj{Int,IExp}(#token("4","Int"))))~>_DotVar1),_Gen0,_Gen1,_Gen2,_Gen3)=>`<generatedTop>`(`<k>`(inj{Int,KItem}(#token("7","Int"))~>_DotVar1),_Gen0,_Gen1,_Gen2,_Gen3) requires #token("true","Bool") ensures #token("true","Bool") [org.kframework.attributes.Location(Location(30,11,30,35)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody [klabel(#ruleNoConditions), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortIExp{}, SortKItem{}}(Lbl'UndsPlusUndsUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'IExp'Unds'IExp{}(inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("3")),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("4")))),Var'Unds'DotVar1:SortK{})),Var'Unds'Gen0:SortStoreCell{},Var'Unds'Gen1:SortFuncsCell{},Var'Unds'Gen2:SortGeneratedCounterCell{},Var'Unds'Gen3:SortStackCell{})), weakAlwaysFinally{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortInt{}, SortKItem{}}(\dv{SortInt{}}("7")),Var'Unds'DotVar1:SortK{})),Var'Unds'Gen0:SortStoreCell{},Var'Unds'Gen1:SortFuncsCell{},Var'Unds'Gen2:SortGeneratedCounterCell{},Var'Unds'Gen3:SortStackCell{}))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(30,11,30,35)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{Stmt,KItem}(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$a","Id"),inj{Int,IExp}(A)),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$b","Id"),inj{Int,IExp}(B))),`if(_)_else__LESSON-22-SYNTAX_Stmt_BExp_Block_Block`(`_<__LESSON-22-SYNTAX_BExp_IExp_IExp`(inj{Id,IExp}(#token("$a","Id")),inj{Id,IExp}(#token("$b","Id"))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$c","Id"),inj{Id,IExp}(#token("$b","Id")))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$c","Id"),inj{Id,IExp}(#token("$a","Id")))))))~>_DotVar1),`<store>`(STORE),_Gen0,_Gen1,_Gen2)=>`<generatedTop>`(`<k>`(_DotVar1),`<store>`(`Map:update`(`Map:update`(`Map:update`(STORE,inj{Id,KItem}(#token("$a","Id")),inj{Int,KItem}(A)),inj{Id,KItem}(#token("$b","Id")),inj{Int,KItem}(B)),inj{Id,KItem}(#token("$c","Id")),inj{Int,KItem}(?C))),_Gen0,_Gen1,_Gen2) requires #token("true","Bool") ensures `_==Int_`(?C,`maxInt(_,_)_INT-COMMON_Int_Int_Int`(A,B)) [org.kframework.attributes.Location(Location(81,11,89,36)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "ensures" Bool [klabel(#ruleEnsures), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortStmt{}, SortKItem{}}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$a"),inj{SortInt{}, SortIExp{}}(VarA:SortInt{})),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$b"),inj{SortInt{}, SortIExp{}}(VarB:SortInt{}))),Lblif'LParUndsRParUnds'else'UndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'BExp'Unds'Block'Unds'Block{}(Lbl'Unds-LT-UndsUnds'LESSON-22-SYNTAX'Unds'BExp'Unds'IExp'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$a")),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$b"))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$c"),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$b")))),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$c"),inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$a"))))))),Var'Unds'DotVar1:SortK{})),Lbl'-LT-'store'-GT-'{}(VarSTORE:SortMap{}),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})), weakAlwaysFinally{SortGeneratedTopCell{}} (
+       \exists{SortGeneratedTopCell{}} (Var'Ques'C:SortInt{}, 
+      \and{SortGeneratedTopCell{}} (
+      \equals{SortBool{},SortGeneratedTopCell{}}(
+        Lbl'UndsEqlsEqls'Int'Unds'{}(Var'Ques'C:SortInt{},LblmaxInt'LParUndsCommUndsRParUnds'INT-COMMON'Unds'Int'Unds'Int'Unds'Int{}(VarA:SortInt{},VarB:SortInt{})),
+        \dv{SortBool{}}("true")), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(Var'Unds'DotVar1:SortK{}),Lbl'-LT-'store'-GT-'{}(LblMap'Coln'update{}(LblMap'Coln'update{}(LblMap'Coln'update{}(VarSTORE:SortMap{},inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$a")),inj{SortInt{}, SortKItem{}}(VarA:SortInt{})),inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$b")),inj{SortInt{}, SortKItem{}}(VarB:SortInt{})),inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$c")),inj{SortInt{}, SortKItem{}}(Var'Ques'C:SortInt{}))),Var'Unds'Gen0:SortFuncsCell{},Var'Unds'Gen1:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(81,11,89,36)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+// rule `Map:lookup`(`Map:update`(MAP,K1,_V1),K2)=>`Map:lookup`(MAP,K2) requires `_=/=K_`(K1,K2) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(435,8,435,73)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        Lbl'UndsEqlsSlshEqls'K'Unds'{}(kseq{}(VarK1:SortKItem{},dotk{}()),kseq{}(VarK2:SortKItem{},dotk{}())),
+        \dv{SortBool{}}("true")),
+    \equals{SortKItem{},R} (
+      LblMap'Coln'lookup{}(LblMap'Coln'update{}(VarMAP:SortMap{},VarK1:SortKItem{},Var'Unds'V1:SortKItem{}),VarK2:SortKItem{}),
+     \and{SortKItem{}} (
+       LblMap'Coln'lookup{}(VarMAP:SortMap{},VarK2:SortKItem{}),
+        \top{SortKItem{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(435,8,435,73)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// rule `Map:update`(M,K,V)=>`_Map_`(`_|->_`(K,V),M) requires `notBool_`(`_in_keys(_)_MAP_Bool_KItem_Map`(K,M)) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(418,8,418,71)), org.kframework.attributes.Source(Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol]), simplification]
+  axiom{R} \implies{R} (
+    \equals{SortBool{},R}(
+        LblnotBool'Unds'{}(Lbl'Unds'in'Unds'keys'LParUndsRParUnds'MAP'Unds'Bool'Unds'KItem'Unds'Map{}(VarK:SortKItem{},VarM:SortMap{})),
+        \dv{SortBool{}}("true")),
+    \equals{SortMap{},R} (
+      LblMap'Coln'update{}(VarM:SortMap{},VarK:SortKItem{},VarV:SortKItem{}),
+     \and{SortMap{}} (
+       Lbl'Unds'Map'Unds'{}(Lbl'UndsPipe'-'-GT-Unds'{}(VarK:SortKItem{},VarV:SortKItem{}),VarM:SortMap{}),
+        \top{SortMap{}}())))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(418,8,418,71)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/opt/homebrew/Cellar/kframework/5.3.161/include/kframework/builtin/domains.md)"), org'Stop'kframework'Stop'definition'Stop'Production{}(), simplification{}()]
+
+// claim `<generatedTop>`(`<k>`(inj{Stmt,KItem}(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`def_(_)__LESSON-22-SYNTAX_Stmt_Id_Ids_Block`(#token("$fibo","Id"),`_,__LESSON-22-SYNTAX_Ids_Id_Ids`(#token("$n","Id"),inj{Bots,Ids}(`.List{"_,__LESSON-22-SYNTAX_Bots_Bot_Bots"}_Bots`(.KList))),`{_}_LESSON-22-SYNTAX_Block_Stmt`(`___LESSON-22-SYNTAX_Stmt_Stmt_Stmt`(`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$s","Id"),inj{Int,IExp}(#token("0","Int"))),`return_;_LESSON-22-SYNTAX_Stmt_IExp`(inj{Id,IExp}(#token("$s","Id")))))),`_=_;_LESSON-22-SYNTAX_Stmt_Id_IExp`(#token("$s","Id"),`_(_)_LESSON-22-SYNTAX_IExp_Id_Exps`(#token("$fibo","Id"),inj{Ints,Exps}(`_,__LESSON-22-SYNTAX_Ints_Int_Ints`(N,inj{Bots,Ints}(`.List{"_,__LESSON-22-SYNTAX_Bots_Bot_Bots"}_Bots`(.KList))))))))~>_DotVar1),`<store>`(`_|->_`(inj{Id,KItem}(#token("$s","Id")),_Gen1)),`<funcs>`(`.Map`(.KList)),_Gen0,_Gen2)=>`<generatedTop>`(`<k>`(_DotVar1),`<store>`(`_|->_`(inj{Id,KItem}(#token("$s","Id")),inj{Int,KItem}(#token("8","Int")))),`<funcs>`(?_Gen0),_Gen0,_Gen2) requires `_>=Int_`(N,#token("0","Int")) ensures #token("true","Bool") [org.kframework.attributes.Location(Location(107,9,121,27)), org.kframework.attributes.Source(Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)), org.kframework.definition.Production(syntax #RuleContent ::= #RuleBody "requires" Bool [klabel(#ruleRequires), symbol])]
+  claim{} \implies{SortGeneratedTopCell{}} (
+      \and{SortGeneratedTopCell{}} (
+      \equals{SortBool{},SortGeneratedTopCell{}}(
+        Lbl'Unds-GT-Eqls'Int'Unds'{}(VarN:SortInt{},\dv{SortInt{}}("0")),
+        \dv{SortBool{}}("true")), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(kseq{}(inj{SortStmt{}, SortKItem{}}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbldef'UndsLParUndsRParUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'Ids'Unds'Block{}(\dv{SortId{}}("$fibo"),Lbl'UndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Ids'Unds'Id'Unds'Ids{}(\dv{SortId{}}("$n"),inj{SortBots{}, SortIds{}}(Lbl'Stop'List'LBraQuotUndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Bots'Unds'Bot'Unds'Bots'QuotRBraUnds'Bots{}())),Lbl'LBraUndsRBraUnds'LESSON-22-SYNTAX'Unds'Block'Unds'Stmt{}(Lbl'UndsUndsUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Stmt'Unds'Stmt{}(Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$s"),inj{SortInt{}, SortIExp{}}(\dv{SortInt{}}("0"))),Lblreturn'UndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'IExp{}(inj{SortId{}, SortIExp{}}(\dv{SortId{}}("$s")))))),Lbl'UndsEqlsUndsSClnUnds'LESSON-22-SYNTAX'Unds'Stmt'Unds'Id'Unds'IExp{}(\dv{SortId{}}("$s"),Lbl'UndsLParUndsRParUnds'LESSON-22-SYNTAX'Unds'IExp'Unds'Id'Unds'Exps{}(\dv{SortId{}}("$fibo"),inj{SortInts{}, SortExps{}}(Lbl'UndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Ints'Unds'Int'Unds'Ints{}(VarN:SortInt{},inj{SortBots{}, SortInts{}}(Lbl'Stop'List'LBraQuotUndsCommUndsUnds'LESSON-22-SYNTAX'Unds'Bots'Unds'Bot'Unds'Bots'QuotRBraUnds'Bots{}()))))))),Var'Unds'DotVar1:SortK{})),Lbl'-LT-'store'-GT-'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$s")),Var'Unds'Gen1:SortKItem{})),Lbl'-LT-'funcs'-GT-'{}(Lbl'Stop'Map{}()),Var'Unds'Gen0:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})), weakAlwaysFinally{SortGeneratedTopCell{}} (
+       \exists{SortGeneratedTopCell{}} (Var'QuesUnds'Gen0:SortMap{}, 
+      \and{SortGeneratedTopCell{}} (
+      \top{SortGeneratedTopCell{}}(), Lbl'-LT-'generatedTop'-GT-'{}(Lbl'-LT-'k'-GT-'{}(Var'Unds'DotVar1:SortK{}),Lbl'-LT-'store'-GT-'{}(Lbl'UndsPipe'-'-GT-Unds'{}(inj{SortId{}, SortKItem{}}(\dv{SortId{}}("$s")),inj{SortInt{}, SortKItem{}}(\dv{SortInt{}}("8")))),Lbl'-LT-'funcs'-GT-'{}(Var'QuesUnds'Gen0:SortMap{}),Var'Unds'Gen0:SortGeneratedCounterCell{},Var'Unds'Gen2:SortStackCell{})))))
+  [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(107,9,121,27)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)"), org'Stop'kframework'Stop'definition'Stop'Production{}()]
+
+endmodule [org'Stop'kframework'Stop'attributes'Stop'Location{}("Location(27,1,122,10)"), org'Stop'kframework'Stop'attributes'Stop'Source{}("Source(/Users/enzoevers/Documents/Git/kframework-playground/k-tutorial/section-1/lesson-22/lesson-22-spec.k)")]
