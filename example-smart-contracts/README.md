@@ -30,10 +30,8 @@ $ git submodule update --init --recursive -- lib/forge-std
 
 ## Using foundry in docker
 
-### Windows
 ```bash
-$ cd <path to>/example-smart-contracts
-$ docker run -v %cd%:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
+$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
 ```
 
 # `./kevm`
@@ -43,7 +41,6 @@ $ docker run -v %cd%:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contr
 ### Windows
 
 ```bash
-$ cd <path to>/example-smart-contracts
-$ docker run -v %cd%:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
-$ docker run -v %cd%:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/VeriToken-bin-runtime.k"
+$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
+$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/VeriToken-bin-runtime.k"
 ```
