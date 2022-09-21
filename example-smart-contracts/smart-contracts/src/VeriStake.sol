@@ -65,10 +65,15 @@ contract VeriStake {
 
         uint256 stakedAmount = staked[msg.sender];
         require(amount <= stakedAmount, "VeriStake (withdraw): amount more than staked");
-
+        
         veriToken.transfer(msg.sender, amount);
 
-        staked[msg.sender] = stakedAmount - amount;
+        // This is a special block timestamp. No one will loose their
+        // Stake at this timestamp.
+        // We want to see which formal verification tool can find this behaviuor.
+        if (block.timestamp != 42){
+            staked[msg.sender] = stakedAmount - amount;
+        }
 
         emit Withdrawn(msg.sender, amount);
     }
