@@ -13,8 +13,37 @@ We would like to have the following scenarios:
 Point 4 makes our example have at least 2 contracts.
 
 ## Contracts
-### ERC20 token
+### ERC20 token ([VeriToken](./smart-contracts/src/VeriToken.sol))
 One of the most popular smart contract standard is ERC20. The makes sure that we are use imports and that we can call functions from that import.
 
-### Staking contract
+### Staking contract ([VeriStake](./smart-contracts/src/VeriToken.sol))
 This staking contract makes use of our ERC20 token and locks up the token for a certain amount of time.
+
+# `./smart-contracts`
+
+## Initialize
+```bash
+$ cd <path to>/smart-contracts
+$ yarn install
+$ git submodule update --init --recursive -- lib/forge-std
+```
+
+## Using foundry in docker
+
+### Windows
+```bash
+$ cd <path to>/example-smart-contracts
+$ docker run -v %cd%:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
+```
+
+# `./kevm`
+
+## solc-to-k
+
+### Windows
+
+```bash
+$ cd <path to>/example-smart-contracts
+$ docker run -v %cd%:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
+$ docker run -v %cd%:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/VeriToken-bin-runtime.k"
+```
