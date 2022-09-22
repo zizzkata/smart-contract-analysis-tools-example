@@ -38,9 +38,9 @@ $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundr
 
 ## solc-to-k
 
-### Windows
-
 ```bash
 $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
 $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/VeriToken-bin-runtime.k"
 ```
+
+For more information see the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm`.
