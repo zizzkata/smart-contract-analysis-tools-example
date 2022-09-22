@@ -1,0 +1,17 @@
+FROM ubuntu:jammy as base
+
+RUN apt update && apt -y upgrade
+RUN apt -y install z3 cvc4
+RUN apt -y install curl wget xz-utils sudo 
+
+RUN apt-get -y update \ 
+	&& apt-get install -y apt-utils \
+	&& apt-get install -y software-properties-common \
+	&& apt-get -y update
+
+RUN add-apt-repository -y ppa:ethereum/ethereum \
+	&& apt-get update \
+	&& apt-get install -y solc
+
+RUN wget https://github.com/dapphub/dapptools/releases/download/seth%2F0.11.0/hevm -P /bin
+RUN chmod a+x /usr/bin/hevm
