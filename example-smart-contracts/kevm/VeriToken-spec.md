@@ -90,7 +90,7 @@ claim [decimals]:
 
     <callData>   VeriToken.decimals()                 </callData>
     <k>          #execute   => #halt ...          </k>
-    <output>     .ByteArray => #buf(32, DECIMALS) </output>
+    <output>     .ByteArray => #buf(1, 6) </output>
     <statusCode> _          => EVMC_SUCCESS       </statusCode>
 
     <account>
@@ -101,6 +101,41 @@ claim [decimals]:
 
     requires DECIMALS_KEY ==Int #loc(VeriToken._decimals)
         andBool DECIMALS     ==Int 255 &Int #lookup(ACCT_STORAGE, DECIMALS_KEY)
+```
+
+### Calling totalSupply() works
+
+```k
+claim [totalSupply]:
+    <mode>     NORMAL   </mode>
+    <schedule> ISTANBUL </schedule>
+
+    <callStack> .List                                      </callStack>
+    <program>   #binRuntime(VeriToken)                         </program>
+    <jumpDests> #computeValidJumpDests(#binRuntime(VeriToken)) </jumpDests>
+
+    <id>         ACCTID      => ?_ </id>
+    <localMem>   .Memory     => ?_ </localMem>
+    <memoryUsed> 0           => ?_ </memoryUsed>
+    <wordStack>  .WordStack  => ?_ </wordStack>
+    <pc>         0           => ?_ </pc>
+    <endPC>      _           => ?_ </endPC>
+    <gas>        #gas(_VGAS) => ?_ </gas>
+    <callValue>  0           => ?_ </callValue>
+
+    <callData>   VeriToken.totalSupply()                 </callData>
+    <k>          #execute   => #halt ...             </k>
+    <output>     .ByteArray => #buf(32, TOTALSUPPLY) </output>
+    <statusCode> _          => EVMC_SUCCESS          </statusCode>
+
+    <account>
+        <acctID> ACCTID </acctID>
+        <storage> ACCT_STORAGE </storage>
+        ...
+     </account>
+
+    requires TOTALSUPPLY_KEY ==Int #loc(VeriToken._totalSupply)
+        andBool TOTALSUPPLY     ==Int #lookup(ACCT_STORAGE,  TOTALSUPPLY_KEY)
 ```
 
 ```k
