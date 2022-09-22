@@ -98,9 +98,6 @@ claim [decimals]:
     <storage> ACCT_STORAGE </storage>
         ...
     </account>
-
-    requires DECIMALS_KEY ==Int #loc(VeriToken._decimals)
-        andBool DECIMALS     ==Int 255 &Int #lookup(ACCT_STORAGE, DECIMALS_KEY)
 ```
 
 ### Calling totalSupply() works
