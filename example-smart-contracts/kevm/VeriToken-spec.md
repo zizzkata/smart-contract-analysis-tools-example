@@ -13,6 +13,9 @@ File [VeriToken.sol](../smart-contracts/src/VeriToken.sol) contains the solidity
 Call the following to generate `VeriToken-bin-runtime.k`.
 
 ```bash
+$ cd <path to repo root>
+$ git submodule update --init --recursive -- verified-smart-contracts
+
 $ cd <path to>/smart-contracts
 $ yarn install
 $ git submodule update --init --recursive -- lib/forge-std
@@ -21,8 +24,8 @@ $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundr
 $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/VeriToken-bin-runtime.k"
 ```
 
-```k
-$ docker run -v %cd%:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
+```bash
+$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
 ```
 
 ## Verification module
