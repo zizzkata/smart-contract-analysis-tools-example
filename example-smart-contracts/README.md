@@ -23,6 +23,7 @@ This staking contract makes use of our ERC20 token and locks up the token for a 
 
 ## Initialize
 ```bash
+
 $ cd <path to>/smart-contracts
 $ yarn install
 $ git submodule update --init --recursive -- lib/forge-std
@@ -34,13 +35,12 @@ $ git submodule update --init --recursive -- lib/forge-std
 $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
 ```
 
-# `./kevm`
-
-## solc-to-k
+## SMTChecker (solc)
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/VeriToken-bin-runtime.k"
+$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "solc --base-path /prj/smart-contracts --include-path /prj/smart-contracts/node_modules --include-path /prj/smart-contracts/lib  --model-checker-engine all --model-checker-solvers all --model-checker-targets \"underflow,overflow\" --model-checker-timeout 60000 /prj/smart-contracts/src/VeriStake.sol"
 ```
 
-For more information see the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm`.
+# `./kevm`
+
+See the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm`.
