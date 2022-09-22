@@ -25,7 +25,7 @@ $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-so
 ```
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
+$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile --backend haskell /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
 ```
 
 ## Verification module
