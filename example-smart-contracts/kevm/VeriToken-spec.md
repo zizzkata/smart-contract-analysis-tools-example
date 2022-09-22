@@ -64,7 +64,7 @@ module VERITOKEN-SPEC
 
 ### Functional claims
 ```k
-claim <k> runLemma(#bufStrict(32, #loc(ERC20._allowances[OWNER]))) => doneLemma(#buf(32, keccak(#buf(32, OWNER) ++ #buf(32, 1)))) ... </k>
+claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLemma(#buf(32, keccak(#buf(32, OWNER) ++ #buf(32, 1)))) ... </k>
       requires #rangeAddress(OWNER)
 ```
 
@@ -76,8 +76,8 @@ claim [decimals]:
     <schedule> ISTANBUL </schedule>
 
     <callStack> .List                                      </callStack>
-    <program>   #binRuntime(ERC20)                         </program>
-    <jumpDests> #computeValidJumpDests(#binRuntime(ERC20)) </jumpDests>
+    <program>   #binRuntime(VeriToken)                         </program>
+    <jumpDests> #computeValidJumpDests(#binRuntime(VeriToken)) </jumpDests>
 
     <id>         ACCTID      => ?_ </id>
     <localMem>   .Memory     => ?_ </localMem>
@@ -88,7 +88,7 @@ claim [decimals]:
     <gas>        #gas(_VGAS) => ?_ </gas>
     <callValue>  0           => ?_ </callValue>
 
-    <callData>   ERC20.decimals()                 </callData>
+    <callData>   VeriToken.decimals()                 </callData>
     <k>          #execute   => #halt ...          </k>
     <output>     .ByteArray => #buf(32, DECIMALS) </output>
     <statusCode> _          => EVMC_SUCCESS       </statusCode>
@@ -99,7 +99,7 @@ claim [decimals]:
         ...
     </account>
 
-    requires DECIMALS_KEY ==Int #loc(ERC20._decimals)
+    requires DECIMALS_KEY ==Int #loc(VeriToken._decimals)
         andBool DECIMALS     ==Int 255 &Int #lookup(ACCT_STORAGE, DECIMALS_KEY)
 ```
 
