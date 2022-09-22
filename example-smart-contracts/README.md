@@ -37,6 +37,8 @@ $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundr
 
 ## SMTChecker (solc)
 
+Using the custom Docker image because the [official solc image](https://hub.docker.com/r/ethereum/solc) doesn't include z3 and/or cvc4.
+
 ```bash
 $ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "solc --base-path /prj/smart-contracts --include-path /prj/smart-contracts/node_modules --include-path /prj/smart-contracts/lib  --model-checker-engine all --model-checker-solvers all --model-checker-targets \"underflow,overflow\" --model-checker-timeout 60000 /prj/smart-contracts/src/VeriStake.sol"
 ```
