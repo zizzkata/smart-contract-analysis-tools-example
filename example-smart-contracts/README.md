@@ -101,7 +101,7 @@ First create the runtime binary:
 
 ```bash
 $ docker run -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/solc:0.8.13 --base-path /prj --include-path /prj/node_modules --include-path apps/smart-contracts/lib -o /prj/solc-out --bin-runtime --overwrite /prj/src/VeriStake.sol
-$ docker run -v <path to>/example-smart-contracts/smart-contracts:/prj ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --code <(/prj/solc-out/VeriStatke.bin-runtime)"
+$ docker run -v <path to>/example-smart-contracts/smart-contracts:/prj ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --code \"$(</prj/solc-out/VeriStake.bin-runtime)\""
 ```
 
 # `./kevm`

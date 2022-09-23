@@ -2,7 +2,7 @@
 
 ## Docker
 
-### hevm
+### hev
 ```bash
 $ docker build -t ghcr.io/enzoevers/hevm:latest -f Dockerfile.hevm .
 $ docker push ghcr.io/enzoevers/hevm:latest
