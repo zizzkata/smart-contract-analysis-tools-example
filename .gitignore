@@ -33,3 +33,4 @@ yarn-error.log*
 
 # Custom
 **/**/flattened
+**/**/solc-out
