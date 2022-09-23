@@ -32,7 +32,7 @@ $ git submodule update --init --recursive -- lib/forge-std
 ## Using foundry in docker
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
+$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
 ```
 
 ## SMTChecker (solc)
@@ -42,7 +42,7 @@ Using the custom Docker image because the [official solc image](https://hub.dock
 For more information about the SMTChecker see the [Solidity docs](https://docs.soliditylang.org/en/v0.8.17/smtchecker.html).
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "solc --base-path /prj/smart-contracts --include-path /prj/smart-contracts/node_modules --include-path /prj/smart-contracts/lib  --model-checker-engine all --model-checker-solvers all --model-checker-targets all --model-checker-timeout 60000 /prj/smart-contracts/src/VeriStake.sol"
+$ docker run --rm  -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "solc --base-path /prj/smart-contracts --include-path /prj/smart-contracts/node_modules --include-path /prj/smart-contracts/lib  --model-checker-engine all --model-checker-solvers all --model-checker-targets all --model-checker-timeout 60000 /prj/smart-contracts/src/VeriStake.sol"
 ```
 
 The expected output will look like this:
@@ -100,13 +100,13 @@ Note that external function calls are not inlined, even if the source code of th
 First create the runtime binary:
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/solc:0.8.13 --base-path /prj --include-path /prj/node_modules --include-path apps/smart-contracts/lib -o /prj/solc-out --bin-runtime --overwrite /prj/src/PrimalityCheck.sol
+$ docker run --rm -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/solc:0.8.13 --base-path /prj --include-path /prj/node_modules --include-path apps/smart-contracts/lib -o /prj/solc-out --bin-runtime --overwrite /prj/src/PrimalityCheck.sol
 ```
 
 Then run hevm. The assertions are described [here](https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require).
 
 ```bash
-$ docker run ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --assertions '[0x00, 0x01, 0x11, 0x12, 021, 0x22, 0x31, 0x32, 0x41, 0x51]' --code $(< <path to>/example-smart-contracts/smart-contracts/solc-out/PrimalityCheck.bin-runtime) --sig 'factor(uint, uint)'"
+$ docker run --rm  ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --assertions '[0x00, 0x01, 0x11, 0x12, 021, 0x22, 0x31, 0x32, 0x41, 0x51]' --code $(< <path to>/example-smart-contracts/smart-contracts/solc-out/PrimalityCheck.bin-runtime) --sig 'factor(uint, uint)'"
 ```
 
 # `./kevm`

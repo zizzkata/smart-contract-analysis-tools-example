@@ -54,7 +54,7 @@ contract VeriStake {
         stakeDays[msg.sender] = duration / 1 days;
         releaseTime[msg.sender] = stakedUntil;
         
-        assert(1 == 2);
+        assert(staked[msg.sender] != 0);
          
         emit Staked(msg.sender, stakedAmount, stakedUntil);
     }
