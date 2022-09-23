@@ -106,7 +106,7 @@ $ docker run -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/
 Then run hevm. The assertions are described [here](https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require).
 
 ```bash
-$ docker run ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --assertions '[0x00, 0x01, 0x11, 0x12, 021, 0x22, 0x31, 0x32, 0x41, 0x51]' --code $(< <path to>/example-smart-contracts/smart-contracts/solc-out/PrimalityCheck.bin-runtime)"
+$ docker run ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --assertions '[0x00, 0x01, 0x11, 0x12, 021, 0x22, 0x31, 0x32, 0x41, 0x51]' --code $(< <path to>/example-smart-contracts/smart-contracts/solc-out/PrimalityCheck.bin-runtime) --sig 'factor(uint, uint)'"
 ```
 
 # `./kevm`
