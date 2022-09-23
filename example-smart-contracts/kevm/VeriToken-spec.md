@@ -13,26 +13,23 @@ File [VeriToken.sol](../smart-contracts/src/VeriToken.sol) contains the solidity
 Call the following to generate `VeriToken-bin-runtime.k`.
 
 ```bash
-$ cd <path to repo root>
-$ git submodule update --init --recursive -- verified-smart-contracts
-
 $ cd <path to>/smart-contracts
 $ yarn install
 $ git submodule update --init --recursive -- lib/forge-std
 
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/VeriToken-bin-runtime.k"
+$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
+$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/generated/VeriToken-bin-runtime.k"
 ```
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile --backend haskell /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
+$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile --backend haskell /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
 ```
 
 ## Verification module
 ---
 
 ```k
-requires "VeriToken-bin-runtime.k"
+requires "generated/VeriToken-bin-runtime.k"
 
 module VERIFICATION
     imports EDSL

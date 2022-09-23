@@ -33,4 +33,5 @@ yarn-error.log*
 
 # Custom
 **/**/flattened
+**/**/kevm-generated
 **/**/solc-out
