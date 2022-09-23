@@ -3,25 +3,6 @@ FROM ubuntu:jammy as base
 RUN apt update && apt -y upgrade
 RUN apt install -y z3 cvc4
 RUN apt install -y wget
-#RUN curl -sSL https://get.haskellstack.org/ | sh
-
-#RUN git clone https://github.com/dapphub/dapptools.git
-#RUN cd dapptools/src/hevm && stack setup && stack install
-
-#COPY hevm-stack.yaml /root/hevm-stack.yaml
-#RUN stack install hevm --stack-yaml /root/hevm-stack.yaml
-
-#RUN apt -y install z3 cvc4
-#RUN apt -y install wget
-
-#RUN apt-get -y update \ 
-#	&& apt-get install -y apt-utils \
-#	&& apt-get install -y software-properties-common \
-#	&& apt-get -y update
-
-#RUN add-apt-repository -y ppa:ethereum/ethereum \
-#	&& apt-get update \
-#	&& apt-get install -y solc
 
 RUN mkdir -p /nix/store/gckxrwrq6rfnib7j62m3mmn09d3qskqg-z3-4.8.10/bin
 RUN ln -s /usr/bin/z3 /nix/store/gckxrwrq6rfnib7j62m3mmn09d3qskqg-z3-4.8.10/bin/z3
