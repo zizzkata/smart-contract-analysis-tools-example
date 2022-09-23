@@ -97,17 +97,34 @@ Note that external function calls are not inlined, even if the source code of th
 
 ## hevm
 
+Note that for hevm to work we need to comment the transer fucntion on te IERC20 address. It seems that external functions calls makes hevm not look at the rest of the function.   
+
 First create the runtime binary:
 
 ```bash
-$ docker run --rm -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/solc:0.8.13 --base-path /prj --include-path /prj/node_modules --include-path apps/smart-contracts/lib -o /prj/solc-out --bin-runtime --overwrite /prj/src/PrimalityCheck.sol
+$ docker run --rm -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/solc:0.8.13 --base-path /prj --include-path /prj/node_modules --include-path apps/smart-contracts/lib -o /prj/solc-out --bin-runtime --overwrite /prj/src/VeriStakee.sol
 ```
 
 Then run hevm. The assertions are described [here](https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require).
 
 ```bash
-$ docker run --rm  ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --assertions '[0x00, 0x01, 0x11, 0x12, 021, 0x22, 0x31, 0x32, 0x41, 0x51]' --code $(< <path to>/example-smart-contracts/smart-contracts/solc-out/PrimalityCheck.bin-runtime) --sig 'factor(uint, uint)'"
+$ docker run --rm  ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --assertions '[0x00, 0x01, 0x11, 0x12, 021, 0x22, 0x31, 0x32, 0x41, 0x51]' --code $(< <path to>/example-smart-contracts/smart-contracts/solc-out/PrimalityCheck.bin-runtime) --sig 'stake(uint256, uint256)'"
 ```
+
+The output will  then look like this:
+
+```bash
+checking postcondition...
+Assertion violation found.
+Calldata:
+0x7b0472f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000
+stake(115792089237316195423570985008687907853269984665640564039457584007913129639935, 0)
+Caller:
+0x0000000000000000000000000000000000000000
+Callvalue:
+0
+```
+
 
 # `./kevm`
 ---
