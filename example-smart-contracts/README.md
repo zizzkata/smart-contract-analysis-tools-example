@@ -22,14 +22,16 @@ This staking contract makes use of our ERC20 token and locks up the token for a 
 # `./smart-contracts`
 ---
 ## Initialize
-```bash
 
+```bash
 $ cd <path to>/smart-contracts
 $ yarn install
 $ git submodule update --init --recursive -- lib/forge-std
 ```
 
-## Using foundry in docker
+## Using foundry in docker for normal development
+
+Congifurations like solc version and optimize runs can be set in [foundry.toml](./smart-contracts/foundry.toml).
 
 ```bash
 $ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"

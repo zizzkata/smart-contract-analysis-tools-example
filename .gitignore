@@ -23,7 +23,7 @@ yarn-error.log*
 **/secrets.json
 
 # Foundry
-**/**/cache/**
+**/**/cache
 **/**/out
 
 # Hardhat
