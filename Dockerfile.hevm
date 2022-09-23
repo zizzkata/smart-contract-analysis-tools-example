@@ -2,7 +2,7 @@ FROM ubuntu:jammy as base
 
 RUN apt update && apt -y upgrade
 RUN apt -y install z3 cvc4
-RUN apt -y install curl wget xz-utils sudo 
+RUN apt -y install wget
 
 RUN apt-get -y update \ 
 	&& apt-get install -y apt-utils \

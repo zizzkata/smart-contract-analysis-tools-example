@@ -20,7 +20,7 @@ One of the most popular smart contract standard is ERC20. The makes sure that we
 This staking contract makes use of our ERC20 token and locks up the token for a certain amount of time.
 
 # `./smart-contracts`
-
+---
 ## Initialize
 ```bash
 
@@ -97,16 +97,7 @@ Note that external function calls are not inlined, even if the source code of th
 
 ## hevm
 
-### Build the Docker image
-It seems that the original [dapphub docker](https://hub.docker.com/u/dapphub) images are not up to date. So we will create them ourselves.
-
-```bash
-$ cd <path to this repo>
-$ git submodule update --init --recursive -- dapptools
-$ docker build --pull -t ghcr.io/enzoevers/hevm:latest ./dapptools/src/hevm
-$ docker push ghcr.io/enzoevers/hevm:latest
-```
 
 # `./kevm`
-
+---
 See the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm`.
