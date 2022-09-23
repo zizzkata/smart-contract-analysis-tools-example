@@ -1,15 +1,9 @@
 [submodule "k"]
 	path = k
 	url = git@github.com:runtimeverification/k.git
-[submodule "verified-smart-contracts"]
-	path = verified-smart-contracts
-	url = git@github.com:runtimeverification/verified-smart-contracts.git
 [submodule "evm-semantics"]
 	path = evm-semantics
 	url = git@github.com:runtimeverification/evm-semantics.git
 [submodule "example-smart-contracts/smart-contracts/lib/forge-std"]
 	path = example-smart-contracts/smart-contracts/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
-[submodule "dapptools"]
-	path = dapptools
-	url = https://github.com/dapphub/dapptools.git
