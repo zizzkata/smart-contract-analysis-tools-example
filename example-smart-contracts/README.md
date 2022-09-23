@@ -101,7 +101,7 @@ First create the runtime binary:
 
 ```bash
 $ docker run -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/solc:0.8.13 --base-path /prj --include-path /prj/node_modules --include-path apps/smart-contracts/lib -o /prj/solc-out --bin-runtime --overwrite /prj/src/VeriStake.sol
-```bash
+```
 
 Then run hevm. The assertions are described [here](https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require).
 
