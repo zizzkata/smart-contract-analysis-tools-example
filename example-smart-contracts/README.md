@@ -97,7 +97,7 @@ Note that external function calls are not inlined, even if the source code of th
 
 ## hevm
 
-Note that for hevm to work we need to comment the transer fucntion on te IERC20 address. It seems that external functions calls makes hevm not look at the rest of the function.   
+Note that for hevm to work we need to comment out the transer fucntion on te IERC20 address. Symbolic execution on storage is [not supported](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-symbolic).   
 
 First create the runtime binary:
 
