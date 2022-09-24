@@ -22,7 +22,7 @@ $ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/ke
 ```
 
 ```bash
-$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile --backend haskell /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
+$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm prove --backend haskell /prj/kevm/VeriToken-spec.md --verif-module VERITOKEN-SPEC"
 ```
 
 ## Verification module
@@ -60,6 +60,7 @@ module VERITOKEN-SPEC
 ```
 
 ### Functional claims
+
 ```k
 claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLemma(#buf(32, keccak(#buf(32, OWNER) ++ #buf(32, 1)))) ... </k>
       requires #rangeAddress(OWNER)
