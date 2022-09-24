@@ -22,17 +22,19 @@ This staking contract makes use of our ERC20 token and locks up the token for a 
 # `./smart-contracts`
 
 ## Initialize
-```bash
 
+```bash
 $ cd <path to>/smart-contracts
 $ yarn install
 $ git submodule update --init --recursive -- lib/forge-std
 ```
 
-## Using foundry in docker
+## Using foundry in docker for normal development
+
+Congifurations like solc version and optimize runs can be set in [foundry.toml](./smart-contracts/foundry.toml). More info about this can be found in the [docs](https://book.getfoundry.sh/config/?highlight=foundry.toml#configuring-with-foundrytoml).
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
+$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
 ```
 
 ## SMTChecker (solc)
@@ -42,7 +44,7 @@ Using the custom Docker image because the [official solc image](https://hub.dock
 For more information about the SMTChecker see the [Solidity docs](https://docs.soliditylang.org/en/v0.8.17/smtchecker.html).
 
 ```bash
-$ docker run -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "solc --base-path /prj/smart-contracts --include-path /prj/smart-contracts/node_modules --include-path /prj/smart-contracts/lib  --model-checker-engine all --model-checker-solvers all --model-checker-targets all --model-checker-timeout 60000 /prj/smart-contracts/src/VeriStake.sol"
+$ docker run --rm  -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "solc --base-path /prj/smart-contracts --include-path /prj/smart-contracts/node_modules --include-path /prj/smart-contracts/lib  --model-checker-engine all --model-checker-solvers all --model-checker-targets all --model-checker-timeout 60000 /prj/smart-contracts/src/VeriStake.sol"
 ```
 
 The expected output will look like this:
@@ -94,6 +96,37 @@ Note:
 Note that array aliasing is not supported, therefore all mapping information is erased after a mapping local variable/parameter is assigned.   You can re-introduce information using require().
 Note that external function calls are not inlined, even if the source code of the function is available. This is due to the possibility that the actual called contract has the same ABI but implements the function differently.
 ```
+
+## hevm
+
+Note that for hevm to work we need to comment out the transer fucntion on te IERC20 address. Symbolic execution on storage is [not supported](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-symbolic).   
+
+First create the runtime binary:
+
+```bash
+$ docker run --rm -v <path to>/example-smart-contracts/smart-contracts:/prj ethereum/solc:0.8.13 --base-path /prj --include-path /prj/node_modules --include-path apps/smart-contracts/lib -o /prj/solc-out --bin-runtime --overwrite /prj/src/VeriStakee.sol
+```
+
+Then run hevm. The assertions are described [here](https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require).
+
+```bash
+$ docker run --rm  ghcr.io/enzoevers/hevm:latest /bin/bash -c "hevm symbolic --smttimeout 60000 --assertions '[0x00, 0x01, 0x11, 0x12, 021, 0x22, 0x31, 0x32, 0x41, 0x51]' --code $(< <path to>/example-smart-contracts/smart-contracts/solc-out/PrimalityCheck.bin-runtime) --sig 'stake(uint256, uint256)'"
+```
+
+The output will  then look like this:
+
+```bash
+checking postcondition...
+Assertion violation found.
+Calldata:
+0x7b0472f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000
+stake(115792089237316195423570985008687907853269984665640564039457584007913129639935, 0)
+Caller:
+0x0000000000000000000000000000000000000000
+Callvalue:
+0
+```
+
 
 # `./kevm`
 

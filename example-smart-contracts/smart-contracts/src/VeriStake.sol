@@ -45,7 +45,7 @@ contract VeriStake {
     /// @param amount the amount to stake
     /// @param duration the duration of staking in seconds
     function stake(uint256 amount, uint256 duration) external {
-        veriToken.transferFrom(msg.sender, address(this), amount);
+        //veriToken.transferFrom(msg.sender, address(this), amount);
 
         uint256 stakedAmount =  staked[msg.sender] + amount;
         uint256 stakedUntil =  block.timestamp + duration;
@@ -53,7 +53,9 @@ contract VeriStake {
         staked[msg.sender] = stakedAmount;
         stakeDays[msg.sender] = duration / 1 days;
         releaseTime[msg.sender] = stakedUntil;
-
+        
+        assert(stakedUntil != 10000);
+         
         emit Staked(msg.sender, stakedAmount, stakedUntil);
     }
 

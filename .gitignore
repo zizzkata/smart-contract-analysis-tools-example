@@ -23,7 +23,7 @@ yarn-error.log*
 **/secrets.json
 
 # Foundry
-**/**/cache/**
+**/**/cache
 **/**/out
 
 # Hardhat
@@ -33,3 +33,5 @@ yarn-error.log*
 
 # Custom
 **/**/flattened
+**/**/kevm-generated
+**/**/solc-out

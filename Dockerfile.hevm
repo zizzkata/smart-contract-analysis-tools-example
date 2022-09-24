@@ -1,0 +1,24 @@
+# Using ubuntu 18.04 due to the binary of z3
+FROM ubuntu:18.04 as base
+
+RUN apt update && apt -y upgrade
+RUN apt install -y cvc4
+RUN apt install -y wget unzip
+
+RUN apt-get -y update \ 
+	&& apt-get install -y apt-utils \
+	&& apt-get install -y software-properties-common \
+	&& apt-get -y update
+
+RUN add-apt-repository -y ppa:ethereum/ethereum \
+	&& apt-get update \
+	&& apt-get install -y solc
+
+# Get z3 and make sure that hevm can find it
+RUN wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-x64-ubuntu-18.04.zip -O /root/z3-4.8.10.zip
+RUN unzip /root/z3-4.8.10.zip -d /root/z3-4.8.10
+RUN mkdir -p /nix/store/gckxrwrq6rfnib7j62m3mmn09d3qskqg-z3-4.8.10/bin
+RUN ln -s /root/z3-4.8.10/z3-4.8.10-x64-ubuntu-18.04/bin/z3 /nix/store/gckxrwrq6rfnib7j62m3mmn09d3qskqg-z3-4.8.10/bin/z3
+
+RUN wget https://github.com/dapphub/dapptools/releases/download/seth%2F0.11.0/hevm -P /usr/bin
+RUN chmod a+x /usr/bin/hevm
