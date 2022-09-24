@@ -18,7 +18,7 @@ $ yarn install
 $ git submodule update --init --recursive -- lib/forge-std
 
 $ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
-$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/generated/VeriToken-bin-runtime.k"
+$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "mkdir -p /prj/kevm/generated && kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/generated/VeriToken-bin-runtime.k"
 ```
 
 ```bash
