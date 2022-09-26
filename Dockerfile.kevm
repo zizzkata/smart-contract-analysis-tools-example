@@ -1,17 +1,23 @@
 #FROM runtimeverificationinc/runtimeverification-evm-semantics:ubuntu-focal-master
-FROM ubuntu:20.04 as base
+ARG UBUNTU_VERSION=focal
+FROM ubuntu:${UBUNTU_VERSION} as base
 
-ENV DEBIAN_FRONTEND=noninteractive
-
+ARG UBUNTU_VERSION
 ARG LLVM_VERSION=12
+ARG K_VERSION=5.4.3
+ARG KEVM_VERSION=1.0.1
+ARG KEVM_COMMIT=0e96c8d
+ARG Z3_VERSION=4.8.15
 
 # Install dependencies
 # https://github.com/runtimeverification/evm-semantics/tree/v1.0.1-0e96c8d#ubuntu
-RUN apt update \
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt update \
+    && apt upgrade -y \
 	&& apt install -y \
 		autoconf \
 		bison \
-		clang-$LLVM_VERSION \
+		clang-${LLVM_VERSION} \
 		cmake \
 		curl \
 		flex \
@@ -28,8 +34,8 @@ RUN apt update \
 		libssl-dev \
 		libtool \
 		libyaml-dev \
-		lld-$LLVM_VERSION \
-		llvm-$LLVM_VERSION-tools \
+		lld-${LLVM_VERSION} \
+		llvm-${LLVM_VERSION}-tools \
 		make \
 		maven \
 		netcat-openbsd \
@@ -44,7 +50,9 @@ RUN apt update \
 
 # Non-duplicates from k repo readme
 # https://github.com/runtimeverification/k/blob/master/package/debian/Dockerfile
-RUN    apt update                \
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt update                \
+    && apt upgrade -y            \
     && apt install -y            \
         build-essential          \
         debhelper                \
@@ -66,21 +74,22 @@ RUN    apt update                \
         python3-pip              
 
 # Needed for add-apt-repository
-RUN apt install -y apt-utils \
-	&& apt install -y software-properties-common \
-	&& apt update
+RUN apt install -y \
+        apt-utils \
+	    software-properties-common
 
 # Install git
 RUN add-apt-repository -y ppa:git-core/ppa \
 	&& apt update \
+    && apt upgrade -y \
 	&& apt install -y git
 
 # Install z3
-# Version 4.8.15 required by kevm v1.0.1-0e96c8d
-# https://github.com/runtimeverification/evm-semantics/releases/tag/v1.0.1-0e96c8d
+# Version $Z3_VERSION required by kevm v${KEVM_VERSION}-${KEVM_COMMIT}
+# https://github.com/runtimeverification/evm-semantics/releases/tag/v$KEVM_VERSION
 RUN git clone https://github.com/Z3Prover/z3.git \
 	&& cd z3 \
-	&& git checkout z3-4.8.15 \
+	&& git checkout z3-${Z3_VERSION} \
 	&& python3 scripts/mk_make.py \
 	&& cd build \
 	&& make -j8 \
@@ -95,29 +104,39 @@ ENV PATH=$HOME/.local/bin:$PATH
 # Get the evm-semantics repo
 RUN git clone https://github.com/runtimeverification/evm-semantics.git /root/evm-semantics \
 	&& cd /root/evm-semantics \
-	&& git checkout v1.0.1-0e96c8d
+	&& git checkout v${KEVM_VERSION}-${KEVM_COMMIT}
 
 WORKDIR /root/evm-semantics
 
-RUN apt update
+RUN apt update \
+    && apt upgrade -y
 
-# K Framework
-RUN git submodule update --init --recursive -- deps/k \
-	&& make -j8 k-deps
-
-# Blockchain Plugin
-RUN git submodule update --init --recursive -- deps/plugin \
-	&& make -j8 plugin-deps
-	
-# Building
-RUN make -j8 build
+# # Install dependencies with poetry
 RUN apt install -y python3-pip
+# RUN pip3 install /root/evm-semantics/kevm-pyk \
+#     && rm -r /root/evm-semantics
 RUN pip3 install virtualenv \
 					poetry
 RUN cd /root/evm-semantics/kevm-pyk \
 	&& make poetry-install
 ENV PYTHONPATH=/root/.cache/pypoetry/virtualenvs/kevm-pyk-wYudXE09-py3.8/lib/python3.8/site-packages:$PYTHONPATH
 ENV PYTHONPATH=/root/evm-semantics/kevm-pyk/src:$PYTHONPATH
+
+# K Framework
+# Comment out the lines described in this issue https://github.com/runtimeverification/k/issues/2910
+#   in deps/k/kernel/src/main/java/org/kframework/parser/ParserUtils.java
+#   lines 227 and 228
+RUN git submodule update --init --recursive -- deps/k
+RUN sed -i '227s/^/\/\/ /' deps/k/kernel/src/main/java/org/kframework/parser/ParserUtils.java \
+    && sed -i '228s/^/\/\/ /' deps/k/kernel/src/main/java/org/kframework/parser/ParserUtils.java
+RUN make -j8 k-deps
+
+# Blockchain Plugin
+RUN git submodule update --init --recursive -- deps/plugin \
+	&& make -j8 plugin-deps
+	
+# # Building
+RUN make -j8 build
 
 ENV PATH=/root/evm-semantics/.build/usr/bin:$PATH
 
@@ -127,19 +146,3 @@ WORKDIR /
 RUN add-apt-repository -y ppa:ethereum/ethereum \
 	&& apt -y update \
 	&& apt install -y solc
-
-# https://github.com/runtimeverification/evm-semantics/issues/1390
-
-# RUN apt -y update \
-# 	&& apt install -y wget
-	
-# RUN wget https://github.com/runtimeverification/evm-semantics/releases/download/v1.0.1-0e96c8d/kevm_1.0.1_amd64_focal.deb -O /root/kevm_amd64_focal.deb
-# RUN apt -y install /root/kevm_amd64_focal.deb
-
-# RUN apt install -y apt-utils \
-# 	&& apt install -y software-properties-common \
-# 	&& apt -y update
-    
-# RUN add-apt-repository -y ppa:ethereum/ethereum \
-# 	&& apt -y update \
-# 	&& apt install -y solc
