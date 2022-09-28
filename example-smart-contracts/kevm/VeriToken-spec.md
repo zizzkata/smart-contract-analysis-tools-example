@@ -6,7 +6,7 @@ requires "optimizations.md"
 requires "lemmas/lemmas.k"
 ```
 
-## Solidity code
+## Generating and running the specifications
 ---
 File [VeriToken.sol](../smart-contracts/src/VeriToken.sol) contains the solidity code being verified.
 
@@ -15,7 +15,7 @@ The [`run-spec.sh`](./run-spec.sh) script  contains all the  commands needed to 
 You might need to run it with sudo.
 
 ```bash
-$ ./run-spec.sh ../ VeriToken 2>&1 | tee VeriToken-kevm.result
+$ ./run-VeriToken-spec.sh ../ VeriToken 2>&1 | tee VeriToken-kevm.result
 ```
 
 If you see `#Top` at the end of the file it  means the specifications are met.
