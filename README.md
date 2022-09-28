@@ -29,7 +29,7 @@ https://www.youtube.com/watch?v=Awsv0BlJgbo
 
 Matching logic can define a multitude of other logics:
 
-<img src="./img/matching-logics.png" witdth=80%>
+<img src="./img/matching-logics.png" width="60%">
 
 Matching logic lets someone define a language's semantics as rewrite rules.
 
