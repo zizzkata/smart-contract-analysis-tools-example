@@ -130,3 +130,5 @@ Caller:
 Callvalue:
 0
 ```
+
+As of now, `hevm` is probably better used as part of the whole dapphub framework where the `prove` prefix for tests will make use of hevm. Then also the cheatcodes (as we know from `forge`) can be  used. 

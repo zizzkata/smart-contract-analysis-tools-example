@@ -15,7 +15,7 @@ The [`run-spec.sh`](./run-spec.sh) script  contains all the  commands needed to 
 You might need to run it with sudo.
 
 ```bash
-$ ./run-spec.sh ../ VeriToken
+$ ./run-spec.sh ../ VeriToken 2>&1 | sudo  tee ./generated/VeriToken-kevm.log
 ```
 
 ## Verification module
@@ -61,8 +61,7 @@ claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLe
 
 ### Calling decimals() works
 
-Note: currently this claim is not  included
-```
+```k
 claim [decimals]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
