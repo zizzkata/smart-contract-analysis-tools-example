@@ -21,7 +21,7 @@ This staking contract makes use of our ERC20 token and locks up the token for a 
 
 # `./kevm`
 
-See the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm` for instructions.
+See the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm` for instructions. An example output can be found in [`VeriToken-kevm.result`](./kevm/VeriToken-kevm.result).
 
 # `./smart-contracts`
 
@@ -103,7 +103,14 @@ Note that external function calls are not inlined, even if the source code of th
 
 ## hevm
 
-Note that for hevm to work we need to comment out the transer fucntion on te IERC20 address. Symbolic execution on storage is [not supported](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-symbolic).   
+Note that for hevm to work we need to comment out the transer fucntion on te IERC20 address.
+
+```solidity
+veriToken.transferFrom(msg.sender, address(this), amount); // old
+// veriToken.transferFrom(msg.sender, address(this), amount); // new
+```
+
+Symbolic execution on storage is [not supported](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-symbolic).   
 
 First create the runtime binary:
 

@@ -15,8 +15,10 @@ The [`run-spec.sh`](./run-spec.sh) script  contains all the  commands needed to 
 You might need to run it with sudo.
 
 ```bash
-$ ./run-spec.sh ../ VeriToken 2>&1 | sudo  tee ./generated/VeriToken-kevm.log
+$ ./run-spec.sh ../ VeriToken 2>&1 | tee VeriToken-kevm.result
 ```
+
+If you see `#Top` at the end of the file it  means the specifications are met.
 
 ## Verification module
 ---
@@ -85,8 +87,7 @@ claim [decimals]:
     <statusCode> _          => EVMC_SUCCESS       </statusCode>
 
     <account>
-    <acctID> ACCTID </acctID>
-    <storage> ACCT_STORAGE </storage>
+        <acctID> ACCTID </acctID>
         ...
     </account>
 ```
