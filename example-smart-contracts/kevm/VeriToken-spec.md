@@ -10,19 +10,54 @@ requires "lemmas/lemmas.k"
 ---
 File [VeriToken.sol](../smart-contracts/src/VeriToken.sol) contains the solidity code being verified.
 
-Call the following to generate `VeriToken-bin-runtime.k`.
-
+Setup the local environment.
 ```bash
-$ cd <path to>/smart-contracts
-$ yarn install
-$ git submodule update --init --recursive -- lib/forge-std
-
-$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge flatten --output ../flattened/VeriToken-flat.sol src/VeriToken.sol"
-$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "mkdir -p /prj/kevm/generated && kevm solc-to-k /prj/flattened/VeriToken-flat.sol VeriToken > /prj/kevm/generated/VeriToken-bin-runtime.k"
+$ cd <path to>/example-smart-contracts                        
+$ export projectPath=$PWD                                          \
+    && export contractName=VeriToken                               \
+    && cd ./smart-contracts                                        \
+    && yarn install                                                \
+    && git submodule update --init --recursive -- lib/forge-std    \
+    && cd ../
 ```
 
+Flatten the contract to be verified.
 ```bash
-$ docker run --rm -v <path to>/example-smart-contracts:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "kevm kompile --backend haskell /prj/kevm/VeriToken-spec.md --main-module VERITOKEN-SPEC"
+$ docker run --rm -v $projectPath:/prj ghcr.io/foundry-rs/foundry:latest "  \
+    cd /prj/smart-contracts                                                 \
+    && forge flatten src/$contractName.sol                                  \
+    --output ../flattened/$contractName-flat.sol"
+```
+
+Generate helper modules for kevm to make writing claims easier.
+```bash
+$ docker run --rm -v $projectPath:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "                 \
+    mkdir -p /prj/kevm/generated                                                                    \
+    && kevm solc-to-k /prj/flattened/$contractName-flat.sol $contractName                           \
+    --pyk --verbose --profile --verbose --definition root/evm-semantics/.build/usr/lib/kevm/haskell \
+    --main-module $contractName-VERIFICATION                                                        \
+    > /prj/kevm/generated/$contractName-bin-runtime.k"
+```
+
+Generate the required files for verification.
+```bash
+$ docker run --rm -v $projectPath:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "                 \
+    kevm kompile --backend haskell /prj/kevm/$contractName-spec.md                                  \
+        --definition /prj/kevm/generated/$contractName-spec/haskell                                 \
+        --main-module VERIFICATION                                                                  \
+        --syntax-module VERIFICATION                                                                \
+        --concrete-rules-file /root/evm-semantics/tests/specs/examples/concrete-rules.txt           \
+        -I root/evm-semantics/.build/usr/lib/kevm/include/kframework                                \
+        -I root/evm-semantics/.build/usr/lib/kevm/blockchain-k-plugin/include/kframework            \
+        --verbose" 
+```
+
+Verify the the Solidity contract
+```bash
+$ docker run --rm -v $projectPath:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c " \
+    kevm prove --backend haskell /prj/kevm/$contractName-spec.md                    \
+        --definition /prj/kevm/generated/$contractName-spec/haskell                 \
+        --verbose"
 ```
 
 ## Verification module
@@ -35,7 +70,7 @@ module VERIFICATION
     imports EDSL
     imports LEMMAS
     imports EVM-OPTIMIZATIONS
-    imports VERITOKEN-BIN-RUNTIME
+    imports VeriToken-VERIFICATION
 
     syntax Step ::= ByteArray | Int
     syntax KItem ::= runLemma ( Step ) | doneLemma ( Step )
@@ -60,6 +95,7 @@ module VERITOKEN-SPEC
 ```
 
 ### Functional claims
+
 ```k
 claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLemma(#buf(32, keccak(#buf(32, OWNER) ++ #buf(32, 1)))) ... </k>
       requires #rangeAddress(OWNER)
