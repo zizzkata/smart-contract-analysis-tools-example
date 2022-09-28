@@ -114,7 +114,7 @@ veriToken.transferFrom(msg.sender, address(this), amount); // old
 // veriToken.transferFrom(msg.sender, address(this), amount); // new
 ```
 
-Symbolic execution on storage is [not supported](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-symbolic).   
+Symbolic execution on storage is [not supported](https://github.com/dapphub/dapptools/tree/master/src/hevm#hevm-symbolic). In a blog post on [fv.ethereum.org](https://fv.ethereum.org/2020/07/28/symbolic-hevm-release/#limitations) it shows that (in 2020) hevm still had its limitations. It should be verified with the git repository which of these limiations are still relevant.
 
 First create the runtime binary:
 
