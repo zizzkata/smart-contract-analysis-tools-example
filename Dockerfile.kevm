@@ -1,4 +1,3 @@
-#FROM runtimeverificationinc/runtimeverification-evm-semantics:ubuntu-focal-master
 ARG UBUNTU_VERSION=focal
 FROM ubuntu:${UBUNTU_VERSION} as base
 
@@ -111,7 +110,7 @@ WORKDIR /root/evm-semantics
 RUN apt update \
     && apt upgrade -y
 
-# # Install dependencies with poetry
+# Install dependencies with poetry
 RUN apt install -y python3-pip
 # RUN pip3 install /root/evm-semantics/kevm-pyk \
 #     && rm -r /root/evm-semantics
@@ -135,7 +134,7 @@ RUN make -j8 k-deps
 RUN git submodule update --init --recursive -- deps/plugin \
 	&& make -j8 plugin-deps
 	
-# # Building
+# Building
 RUN make -j8 build
 
 ENV PATH=/root/evm-semantics/.build/usr/bin:$PATH
