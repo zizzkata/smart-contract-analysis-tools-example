@@ -45,7 +45,7 @@ Working on bytecode:
 - hevm
 - kevm
 
-The main benefit of 
+The main benefit of working with bytecode is that you are working with the code which will actually be deployed. You are not dependent of potential error in the compiler.
 
 ## Docker
 
