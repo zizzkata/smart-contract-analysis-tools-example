@@ -139,6 +139,7 @@ RUN git submodule update --init --recursive -- deps/plugin \
 RUN make -j8 build
 
 ENV PATH=/root/evm-semantics/.build/usr/bin:$PATH
+ENV PATH=/root/evm-semantics/.build/usr/lib/kevm/kframework/bin:$PATH
 
 WORKDIR /
 
@@ -146,3 +147,7 @@ WORKDIR /
 RUN add-apt-repository -y ppa:ethereum/ethereum \
 	&& apt -y update \
 	&& apt install -y solc
+
+RUN apt autoremove --purge \
+    && apt autoclean \
+    && apt clean
