@@ -39,7 +39,7 @@ $ docker run --rm -v $projectPath:/prj ghcr.io/enzoevers/kevm-solc:latest bash -
     > /prj/kevm/generated/$contractName-bin-runtime.k"
 ```
 
-Generate the required files for verification.
+Generate the required files for verification. Whenever you change the specifications, run this command again.
 ```bash
 $ docker run --rm -v $projectPath:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "                 \
     kevm kompile --backend haskell /prj/kevm/$contractName-spec.md                                  \
@@ -103,7 +103,7 @@ claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLe
 
 ### Calling decimals() works
 
-```k
+```
 claim [decimals]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
