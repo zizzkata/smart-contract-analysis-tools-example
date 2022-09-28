@@ -2,10 +2,21 @@
 
 In `example-smart-contracts` you will find an environment where we have a standard forge project (`smart-contracts`). We also have a kevm specification (in `kevm`) in which we describe the specifications for the contracts to formally verify.
 
-Instruction on how to formally verify can be found in `./example-smart-contracts/kevm/VeriToken-spec.md`.
-Instruction on how to use other formal verification tools like SMTChecker and HEVM can be found in `./example-smart-contracts/README.md`.
+Instruction on how to formally verify a smart contract can be found in `./example-smart-contracts/kevm/VeriToken-spec.md`.
+Instruction on how to use other formal verification tools like **SMTChecker** and **hevm** can be found in `./example-smart-contracts/README.md`.
 
-To get in contact with the developers of the k-framework and kevm go to the channel on [Riot](https://riot.im/app/#/room/#k:matrix.org).
+To get in contact with the developers of the k-framework and kevm, go to the channel on [Riot](https://riot.im/app/#/room/#k:matrix.org).
+
+## Formal verification
+
+Formal verification is a very wide field. The 'amount' and what kind of formal verification should be done on a project depends per project.
+
+### Satisfiable Modulo Theory (SMT)
+In short, SMT allows us to define a set of constraints and determine if it can be true or not (satisfiability).
+
+### Symbolic execution
+
+### Matching logic
 
 ## Docker
 
