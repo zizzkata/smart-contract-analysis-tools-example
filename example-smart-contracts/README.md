@@ -19,6 +19,10 @@ One of the most popular smart contract standard is ERC20. The makes sure that we
 ### Staking contract ([VeriStake](./smart-contracts/src/VeriToken.sol))
 This staking contract makes use of our ERC20 token and locks up the token for a certain amount of time.
 
+# `./kevm`
+
+See the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm` for instructions.
+
 # `./smart-contracts`
 
 ## Initialize
@@ -126,8 +130,3 @@ Caller:
 Callvalue:
 0
 ```
-
-
-# `./kevm`
-
-See the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm`.
