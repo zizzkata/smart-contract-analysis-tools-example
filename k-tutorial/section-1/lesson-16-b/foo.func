@@ -1,2 +1,0 @@
-fun foo() { return 5; }
-fun main() { return foo(); }
