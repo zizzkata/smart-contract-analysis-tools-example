@@ -1,4 +1,4 @@
-# kframework-playground
+# Smart contract formal verification
 
 In `example-smart-contracts` you will find an environment where we have a standard forge project (`smart-contracts`). We also have a kevm specification (in `kevm`) in which we describe the specifications for the contracts to formally verify.
 
