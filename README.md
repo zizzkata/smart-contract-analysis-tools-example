@@ -11,6 +11,10 @@ To get in contact with the developers of the k-framework and kevm go to the chan
 
 Installing formal verification tools can take quite some time. Additionally, installing kevm can be a bit tricky since it is still development. Therefore docker images are created to make life easier.
 
+### Note on cpu architecture
+
+Currently there are only `x86_64` compatibal images built.
+
 ### hevm
 ```bash
 $ docker build -t ghcr.io/enzoevers/hevm:latest -f Dockerfile.hevm .
