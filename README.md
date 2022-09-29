@@ -1,11 +1,33 @@
 # Smart contract formal verification
+## Context
+In order to see how the formal verification (FV) tools can work in real world scenarios, we need a real world scenario. It should be simple enough however to make it easy to debug and analyse manually.
 
-In `example-smart-contracts` you will find an environment where we have a standard forge project (`smart-contracts`). We also have a kevm specification (in `kevm`) in which we describe the specifications for the contracts to formally verify.
+## Scenarios
+We would like to have the following scenarios:
+0. We should be able to use imports
+1. Throw an error which only occures by a sequence of transactions.
+2. Make sure that a certain function is always called after another function is called.
+3. Make sure that we can define contstraints on variables (non-decreasing, always less than x, etc.).
+4. Having an external contract influence another contract.
+5. Make sure that a function updates the state of the contract 'as expected'.
 
-Instruction on how to formally verify a smart contract can be found in `./example-smart-contracts/kevm/VeriToken-spec.md`.
-Instruction on how to use other formal verification tools like **SMTChecker** and **hevm** can be found in `./example-smart-contracts/README.md`.
+Point 4 makes our example have at least 2 contracts.
 
-To get in contact with the developers of the k-framework and kevm, go to the channel on [Riot](https://riot.im/app/#/room/#k:matrix.org).
+### Contracts
+#### ERC20 token ([VeriToken](./example-smart-contracts/smart-contracts/src/VeriToken.sol))
+One of the most used smart contract standard is ERC20. The makes sure that we are use imports and that we can call functions from that import.
+
+#### Staking contract ([VeriStake](./example-smart-contracts/smart-contracts/src/VeriToken.sol))
+This staking contract makes use of our ERC20 token and locks up the token for a certain amount of time.
+
+### How to use this repository
+
+No custom installation, besides [Docker](https://docs.docker.com/get-docker/), is needed to use this repository. All required tools are already installed in Docker images.
+
+In `./example-smart-contracts/` you will find:
+-  `*/smart-contracts/`: a standard forge project.
+-  `*/kevm/`: a kevm specification in which we describe the specifications for the contracts to formally verify with the k-framework.
+-  `README.md`: Instruction on how to use the individual tools.
 
 ## Formal verification
 
