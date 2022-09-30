@@ -128,7 +128,13 @@ ENV PYTHONPATH=/root/evm-semantics/kevm-pyk/src:$PYTHONPATH
 RUN git submodule update --init --recursive -- deps/k
 RUN sed -i '227s/^/\/\/ /' deps/k/kernel/src/main/java/org/kframework/parser/ParserUtils.java \
     && sed -i '228s/^/\/\/ /' deps/k/kernel/src/main/java/org/kframework/parser/ParserUtils.java
-RUN make -j8 k-deps
+RUN if [ "$(uname -m)" = "aarch64" ]; then      \
+        apt install -y libnuma-dev              \
+        && export LANG=C.UTF-8                  \
+        && make -j8 k-deps APPLE_SILICON=true;  \
+    else                                        \
+        make -j8 k-deps;                        \
+    fi
 
 # Blockchain Plugin
 RUN git submodule update --init --recursive -- deps/plugin \
