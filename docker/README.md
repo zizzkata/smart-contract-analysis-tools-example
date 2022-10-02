@@ -16,7 +16,7 @@ To buidl the dockerfile to use `hevm` run:
 $ ./releaseDockerHevm.sh
 ```
 
-Building the image to use `kevm` requires;
+Building the image to use `kevm` requires:
 
 ```bash
 $ ./releaseDockerKevm.sh
