@@ -20,7 +20,7 @@ One of the most used smart contract standard is ERC20. The makes sure that we ar
 #### Staking contract ([VeriStake](./example-smart-contracts/smart-contracts/src/VeriToken.sol))
 This staking contract makes use of our ERC20 token and locks up the token for a certain amount of time.
 
-### How to use this repository
+## How to use this repository
 
 No custom installation, besides [Docker](https://docs.docker.com/get-docker/), is needed to use this repository. All required tools are already installed in Docker images.
 
