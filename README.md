@@ -27,7 +27,14 @@ No custom installation, besides [Docker](https://docs.docker.com/get-docker/), i
 In `./example-smart-contracts/` you will find:
 -  `*/smart-contracts/`: a standard forge project.
 -  `*/kevm/`: a kevm specification in which we describe the specifications for the contracts to formally verify with the k-framework.
--  `README.md`: Instruction on how to use other tools than kevm.
+-  `*/hevm/`: files needed to run hevm on the source code.
+-  `*/SMTChecker/`: files needed to run SMTChecker on the source code.
+
+## Docker
+
+Installing formal verification tools can take quite some time. Additionally, installing kevm can be a bit tricky since it is still development. Therefore docker images are created to make life easier.
+
+See the `./docker/` folder for more info.
 
 ## Formal verification
 
@@ -71,7 +78,7 @@ Matching logic lets someone define a language's semantics as rewrite rules.
 
 In matching logic a 'state' in a program is represented as a configuration. A rewrite rule `lhs => rhs` means that when the `lhs` matches the current configuration, it will be rewritten to the `rhs`.
 
-## Verifying code vs bytecode
+## Verifying source code vs bytecode
 Here only tools uses in the repo are considered.
 
 Works on Solidity code:
@@ -82,9 +89,3 @@ Working on bytecode:
 - kevm
 
 The main benefit of working with bytecode is that you are working with the code which will actually be deployed. You are not dependent of potential error in the compiler.
-
-## Docker
-
-Installing formal verification tools can take quite some time. Additionally, installing kevm can be a bit tricky since it is still development. Therefore docker images are created to make life easier.
-
-See the `./docker/` folder for more info.
