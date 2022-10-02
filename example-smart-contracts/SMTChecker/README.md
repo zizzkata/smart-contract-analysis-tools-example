@@ -10,9 +10,9 @@ Using the custom Docker image because the [official solc image](https://hub.dock
 For more information about the SMTChecker see the [Solidity docs](https://docs.soliditylang.org/en/v0.8.17/smtchecker.html).
 
 ```bash
-$ ./run-SMTChecker-VeriStatke.sh 2>&1 | tee VeriToken-SMTChecker.result
+$ ./run-SMTChecker-VeriStake.sh 2>&1 | tee VeriStake-SMTChecker.result
 ```
 
-The output can then be found in [VeriToken-SMTChecker.result](./VeriToken-SMTChecker.result).
+The output can then be found in [VeriStake-SMTChecker.result](./VeriVeriStake-SMTChecker.result).
 
 The expected output will look like this:

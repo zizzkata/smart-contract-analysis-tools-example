@@ -12,9 +12,9 @@ Symbolic execution on storage is [not supported](https://github.com/dapphub/dapp
 You might need to run `sudo` on the command below
 
 ```bash
-$ ./run-hevm-VeriStatke.sh 2>&1 | tee VeriToken-hevm.result
+$ ./run-hevm-VeriStake.sh 2>&1 | tee VeriStake-hevm.result
 ```
 
-The output can then be found in [VeriToken-hevm.result](./VeriToken-hevm.result)
+The output can then be found in [VeriStake-hevm.result](./VeriStake-hevm.result)
 
 As of now, `hevm` is probably better used as part of the whole dapphub framework where the `prove` prefix for tests will make use of hevm. Then also the cheatcodes (as we know from `forge`) can be  used. 

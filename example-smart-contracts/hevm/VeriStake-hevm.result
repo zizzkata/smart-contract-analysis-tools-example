@@ -1,0 +1,20 @@
+
+=================================================================
+Generate bin-runtime
+=================================================================
+
+Compiler run successful. Artifact(s) can be found in directory "/prj/solc-out".
+
+=================================================================
+Function: stake(uint256, uint256)
+=================================================================
+
+checking postcondition...
+Assertion violation found.
+Calldata:
+0x7b0472f00000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+stake(0, 115792089237316195423570985008687907853269984665640564039457584007913129639935)
+Caller:
+0x0000000000000000000000000000000000000000
+Callvalue:
+0
