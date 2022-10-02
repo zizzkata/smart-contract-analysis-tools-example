@@ -3,6 +3,8 @@ To get in contact with the developers of the k-framework and kevm, go to the cha
 
 The specifications being checked for are described in [VeriToken-spec.md](./VeriToken-spec.md)
 
+## Running
+
 You might need to run `sudo` on the command below.
 
 ```bash
