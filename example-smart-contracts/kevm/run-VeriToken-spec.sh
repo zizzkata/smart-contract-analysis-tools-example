@@ -9,8 +9,6 @@ echo "Setup the local environment"
 echo "================================================================="
 echo ""
 
-start=`date +%s`
-
 cd ${projectRoot}
 projectRoot=${PWD}
 
@@ -29,34 +27,22 @@ yarn install
 git submodule update --init --recursive -- lib/forge-std 
 cd ${projectRoot}
 
-end=`date +%s`
-runtime=$((end-start))
-echo "Runtime: ${runtime}s"
-
 echo ""
 echo "================================================================="
 echo "Flatten the contract to be verified"
 echo "================================================================="
 echo ""
 
-start=`date +%s`
-
 docker run --rm -v ${projectRoot}:/prj ghcr.io/foundry-rs/foundry:latest "  \
     cd /prj/smart-contracts                                                 \
     && forge flatten src/${contractName}.sol                                \
     --output ../flattened/${contractName}-flat.sol"
-
-end=`date +%s`
-runtime=$((end-start))
-echo "Runtime: ${runtime}s"
 
 echo ""
 echo "================================================================="
 echo "Generate helper modules for kevm to make writing claims easier"
 echo "================================================================="
 echo ""
-
-start=`date +%s`
 
 docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "                 \
     mkdir -p /prj/kevm/generated                                                                    \
@@ -65,17 +51,11 @@ docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -
     --main-module ${contractName}-VERIFICATION                                                      \
     > /prj/kevm/generated/${contractName}-bin-runtime.k"
 
-end=`date +%s`
-runtime=$((end-start))
-echo "Runtime: ${runtime}s"
-
 echo ""
 echo "================================================================="
 echo "Generate the required files for verification"
 echo "================================================================="
 echo ""
-
-start=`date +%s`
 
 # Whenever you change the specifications, run this command again.
 docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "         \
@@ -88,23 +68,13 @@ docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -
         -I root/evm-semantics/.build/usr/lib/kevm/blockchain-k-plugin/include/kframework    \
         --verbose"
 
-end=`date +%s`
-runtime=$((end-start))
-echo "Runtime: ${runtime}s"
-
 echo ""
 echo "================================================================="
 echo "Verify the the Solidity contract"
 echo "================================================================="
 echo ""
 
-start=`date +%s`
-
 docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c " \
     kevm prove --backend haskell /prj/kevm/${contractName}-spec.md                  \
         --definition /prj/kevm/generated/${contractName}-spec/haskell               \
         --verbose"
-
-end=`date +%s`
-runtime=$((end-start))
-echo "Runtime: ${runtime}s"
