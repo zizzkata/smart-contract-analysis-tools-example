@@ -1,7 +1,15 @@
 # kevm
 To get in contact with the developers of the k-framework and kevm, go to the channel on [Riot](https://riot.im/app/#/room/#k:matrix.org).
 
-See the [VeriToken-spec.md](./kevm/VeriToken-spec.md) in `./kevm` for instructions. 
+The specifications being checked for are described in [VeriToken-spec.md](./VeriToken-spec.md)
+
+You might need to run `sudo` on the command below.
+
+```bash
+$ ./run-VeriToken-spec.sh ../ VeriToken 2>&1 | tee VeriToken-kevm.result
+```
+
+If you see `#Top` at the end of the file it  means the specifications are met.
 
 An example output of a **successful** spec can be found in [VeriToken-kevm.result](./kevm/VeriToken-kevm.result). 
 

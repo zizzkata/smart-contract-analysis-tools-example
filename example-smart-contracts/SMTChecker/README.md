@@ -9,6 +9,8 @@ Using the custom Docker image because the [official solc image](https://hub.dock
 
 For more information about the SMTChecker see the [Solidity docs](https://docs.soliditylang.org/en/v0.8.17/smtchecker.html).
 
+You might need to run `sudo` on the command below.
+
 ```bash
 $ ./run-SMTChecker-VeriStake.sh 2>&1 | tee VeriStake-SMTChecker.result
 ```

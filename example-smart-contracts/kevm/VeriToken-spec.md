@@ -10,16 +10,6 @@ requires "lemmas/lemmas.k"
 ---
 File [VeriToken.sol](../smart-contracts/src/VeriToken.sol) contains the solidity code being verified.
 
-The [`run-spec.sh`](./run-spec.sh) script  contains all the  commands needed to run the spec as  defined in this markdown.
-
-You might need to run it with sudo.
-
-```bash
-$ ./run-VeriToken-spec.sh ../ VeriToken 2>&1 | tee VeriToken-kevm.result
-```
-
-If you see `#Top` at the end of the file it  means the specifications are met.
-
 ## Verification module
 ---
 
