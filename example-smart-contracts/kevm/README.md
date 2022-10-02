@@ -1,7 +1,7 @@
 # kevm
 To get in contact with the developers of the k-framework and kevm, go to the channel on [Riot](https://riot.im/app/#/room/#k:matrix.org).
 
-The specifications being checked for are described in [VeriToken-spec.md](./VeriToken-spec.md)
+The specifications being checked for are described in [VeriToken-spec.md](./VeriToken-spec.md). Several examples from the kevm repo can be found [here](https://github.com/runtimeverification/evm-semantics/tree/master/tests/specs/examples).
 
 ## Running
 
