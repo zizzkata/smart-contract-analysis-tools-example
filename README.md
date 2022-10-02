@@ -87,18 +87,4 @@ The main benefit of working with bytecode is that you are working with the code 
 
 Installing formal verification tools can take quite some time. Additionally, installing kevm can be a bit tricky since it is still development. Therefore docker images are created to make life easier.
 
-### Note on cpu architecture
-
-Currently there are only `x86_64` compatibal images built.
-
-### hevm
-```bash
-$ docker build -t ghcr.io/enzoevers/hevm:latest -f docker/Dockerfile.hevm .
-$ docker push ghcr.io/enzoevers/hevm:latest
-```
-
-### kevm
-```bash
-$ docker build -t ghcr.io/enzoevers/kevm-solc:latest -f docker/Dockerfile.kevm .
-$ docker push ghcr.io/enzoevers/kevm-solc:latest
-```
+See the `./docker/` folder for more info.
