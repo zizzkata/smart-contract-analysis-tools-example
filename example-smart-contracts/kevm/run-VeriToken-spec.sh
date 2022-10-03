@@ -44,7 +44,7 @@ echo "Generate helper modules for kevm to make writing claims easier"
 echo "================================================================="
 echo ""
 
-docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "                 \
+docker run --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/kevm:latest bash -c "                 \
     mkdir -p /prj/kevm/generated                                                                    \
     && kevm solc-to-k /prj/flattened/${contractName}-flat.sol ${contractName}                       \
     --pyk --verbose --profile --verbose --definition root/evm-semantics/.build/usr/lib/kevm/haskell \
@@ -58,7 +58,7 @@ echo "================================================================="
 echo ""
 
 # Whenever you change the specifications, run this command again.
-docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c "         \
+docker run --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/kevm:latest bash -c "         \
     kevm kompile --backend haskell /prj/kevm/${contractName}-spec.md                        \
         --definition /prj/kevm/generated/${contractName}-spec/haskell                       \
         --main-module VERIFICATION                                                          \
@@ -74,7 +74,7 @@ echo "Verify the the Solidity contract"
 echo "================================================================="
 echo ""
 
-docker run --rm -v ${projectRoot}:/prj ghcr.io/enzoevers/kevm-solc:latest bash -c " \
+docker run --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/kevm:latest bash -c " \
     kevm prove --backend haskell /prj/kevm/${contractName}-spec.md                  \
         --definition /prj/kevm/generated/${contractName}-spec/haskell               \
         --verbose"
