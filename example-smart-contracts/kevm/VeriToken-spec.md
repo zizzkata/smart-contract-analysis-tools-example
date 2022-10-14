@@ -53,7 +53,7 @@ claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLe
 
 ### Calling decimals() works
 
-```k
+```
 claim [decimals]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
@@ -84,7 +84,7 @@ claim [decimals]:
 
 ### Calling totalSupply() works
 
-```k
+```
 claim [totalSupply]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
@@ -115,6 +115,54 @@ claim [totalSupply]:
 
     requires TOTALSUPPLY_KEY ==Int #loc(VeriToken._totalSupply)
         andBool TOTALSUPPLY     ==Int #lookup(ACCT_STORAGE,  TOTALSUPPLY_KEY)
+```
+
+### Calling transfer(address to, uint256 amount) works
+
+```k
+claim [transfer]:
+    <mode>     NORMAL   </mode>
+    <schedule> ISTANBUL </schedule>
+
+    <callStack> .List                                      </callStack>
+    <program>   #binRuntime(VeriToken)                         </program>
+    <jumpDests> #computeValidJumpDests(#binRuntime(VeriToken)) </jumpDests>
+
+    <id>         ACCTID      => ?_ </id>
+    <caller>     OWNER       => ?_ </caller>
+    <localMem>   .Memory     => ?_ </localMem>
+    <memoryUsed> 0           => ?_ </memoryUsed>
+    <wordStack>  .WordStack  => ?_ </wordStack>
+    <pc>         0           => ?_ </pc>
+    <endPC>      _           => ?_ </endPC>
+    <gas>        #gas(_VGAS) => ?_ </gas>
+    <callValue>  0           => ?_ </callValue>
+
+    <callData>   VeriToken.transfer(RECEIVER, AMOUNT)       </callData>
+    <k>          #execute   => #halt ...                    </k>
+    <output>     .ByteArray => #buf(32, bool2Word(true))    </output>
+    <statusCode> _          => EVMC_SUCCESS                 </statusCode>
+
+    <account>
+        <acctID> ACCTID </acctID>
+        <storage> ACCT_STORAGE => ACCT_STORAGE [ BALANCE_OWNER_KEY <- BALANCE_NEW_OWNER ] [ BALANCE_RECEIVER_KEY <- BALANCE_NEW_RECEIVER ] </storage>
+        ...
+     </account>
+
+    requires BALANCE_OWNER_KEY ==Int #loc(VeriToken._balances[OWNER])
+        andBool BALANCE_RECEIVER_KEY ==Int #loc(VeriToken._balances[RECEIVER])
+        andBool BALANCE_OLD_OWNER ==Int #lookup(ACCT_STORAGE, BALANCE_OWNER_KEY)
+        andBool BALANCE_OLD_RECEIVER ==Int #lookup(ACCT_STORAGE, BALANCE_RECEIVER_KEY)
+        andBool BALANCE_OLD_OWNER >=Int AMOUNT
+        andBool #rangeUInt(256, (BALANCE_OLD_RECEIVER +Int AMOUNT))
+        andBool BALANCE_NEW_OWNER ==Int (BALANCE_OLD_OWNER -Int AMOUNT)
+        andBool BALANCE_NEW_RECEIVER ==Int (BALANCE_OLD_RECEIVER +Int AMOUNT)
+        andBool #rangeUInt(256, AMOUNT)
+        andBool #rangeAddress(OWNER)
+        andBool #rangeAddress(RECEIVER)
+        andBool OWNER =/=Int 0
+        andBool RECEIVER =/=Int 0
+
 ```
 
 ```k
