@@ -13,7 +13,7 @@ contract VeriToken is ERC20, IVeriToken {
     }
 
     // Change it from the default 18 to 6
-     function decimals() public view override returns (uint8) {
+    function decimals() public view override returns (uint8) {
         return 6;
     }
 

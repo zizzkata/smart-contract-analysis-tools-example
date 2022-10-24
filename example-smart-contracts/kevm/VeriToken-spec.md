@@ -49,9 +49,6 @@ module VERITOKEN-SPEC
 ```k
 claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLemma(#buf(32, keccak(#buf(32, OWNER) ++ #buf(32, 1)))) ... </k>
       requires #rangeAddress(OWNER)
-
-claim <k> runLemma(#bufStrict(32, #loc(VeriToken._balances[OWNER]))) => doneLemma(#buf(32, keccak(#buf(32, OWNER) ++ #buf(32, 1)))) ... </k>
-      requires #rangeAddress(OWNER)
 ```
 
 ### Calling decimals() works
