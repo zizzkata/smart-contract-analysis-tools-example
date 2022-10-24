@@ -15,3 +15,22 @@ $ docker run --rm -v ${PWD}:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smar
 ```
 
 # Exploits in the smart contracts
+
+A nice source that explains several exploits and how to prevent them can be seen [here](https://medium.com/hackernoon/hackpedia-16-solidity-hacks-vulnerabilities-their-fixes-and-real-world-examples-f3210eba5148)
+
+Some of these, along with some extra are for example:
+- Re-entrancy
+    - When sending ETH to a contract address, that address can create custom logic in its fallback function (`function () payable {}`). This logic can then execute anything it wants. It can call the contract that sent the ETH again and try to make it send more ETH.
+- Rounding errors
+    - A shared savings contract between known people where everyone can take out x% every n days. It can happen that the result results in fewer tokens received than expected due to rounding error. The impact of this depends on how much worth the token is that is withdrawn. 
+- Updating storage slots in caller context with `delegatecall()`
+    - Overwriting an address
+    - Overwriting a value used as the denominator with a huge value, resulting in the division being 0 
+- Partly prevent front-running using a check of gas price
+    - Front-running is when someone scan the memory pool with incomming transactions (txs), sees a transaction (tx) and copies its calldata by with a higher gas price. This would lead to the miner being more likely to pick the tx with the higher gas price. While not necessarily a vulnerability of a the smart contract, it can be good to keep in mind that this can be partly prevented by checking for a maximum gas price.
+- Sending ETH to a contract through selfdestruct of other contact
+    - If there would be a pool contract with ETH and an ERC20 token we could make all swaps fail the assert checks for a non-decreasing K value if `this.balance` and an ETH balance counter would be used interchangeably.
+    - An auction contract takes ETH and distributes an ERC20 token. Again if `this.balance` and an internal ETH balance counter are used interchangeably, someone can influence this price by sending eth if the price is denominated with `this.balance`.
+- Forgetting an access guard on a function
+    - Could lead to someone taking ownership of the contract 
+- Under/Overflow problems are not a problem anymore with newer Solidity versions.
