@@ -13,3 +13,5 @@ Congifurations like solc version and optimize runs can be set in [foundry.toml](
 ```bash
 $ docker run --rm -v ${PWD}:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test"
 ```
+
+# Exploits in the smart contracts
