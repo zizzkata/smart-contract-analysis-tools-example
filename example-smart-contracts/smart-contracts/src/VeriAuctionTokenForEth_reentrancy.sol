@@ -51,6 +51,10 @@ contract VeriAuctionTokenForEth is Ownable {
     // Auction active
     //====================
 
+    //==========
+    // External
+    //==========
+
     /// @notice Commit a certain amount of ETH.
     function commitTokens() payable external {
         require(!auctionFinalized(), "VeriAuctionTokenForEth (commitTokens): Auction is finalized");
@@ -62,13 +66,17 @@ contract VeriAuctionTokenForEth is Ownable {
     }
 
     /// @notice The auction is closed and the total amount if ETH is fixed.
-    function finalize() public onlyOwner {
+    function finalize() external onlyOwner {
         finalBalance = this.balance;
     }
     
     //====================
     // Auction Final
     //====================
+
+    //==========
+    // External
+    //==========
 
     /// @notice Claim an amount of tokens based of the share of a user 
     function claimTokens() external {
@@ -124,7 +132,7 @@ contract VeriAuctionTokenForEth is Ownable {
     //==========
     // Public
     //==========
-
+    
     function auctionFinalized() pure public returns(bool finialized) {
         return finalBalance > 0;
     }
