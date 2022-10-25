@@ -34,3 +34,7 @@ Some of these, along with some extra are for example:
 - Forgetting an access guard on a function
     - Could lead to someone taking ownership of the contract 
 - Under/Overflow problems are not a problem anymore with newer Solidity versions.
+
+# Creating the contracts with problems
+
+## [VeriAuctionTokenForEth_reentrancy.sol](./smart-contracts/src/VeriAuctionTokenForEth_reentrancy.sol)
