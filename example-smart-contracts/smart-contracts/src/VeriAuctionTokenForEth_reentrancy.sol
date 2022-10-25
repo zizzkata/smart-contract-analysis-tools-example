@@ -86,13 +86,14 @@ contract VeriAuctionTokenForEth is Ownable {
         require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");
 
         uint256 commitment = commited[msg.sender];
-        delete commited[msg.sender];
 
         if(auctionFinalized()) {
             unclaimableTokenAmount += calculateClaimableAmout();
         }
 
+        // In these two lines the re-entrancy attack happens.
         msg.sender.transfer(commitment);
+        delete commited[msg.sender];
     }
     
     /// @notice The owner can claim the tokens that will not be distrubuted due to people resigning.
