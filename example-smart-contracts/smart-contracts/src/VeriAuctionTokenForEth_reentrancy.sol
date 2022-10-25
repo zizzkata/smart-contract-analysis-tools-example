@@ -73,7 +73,13 @@ contract VeriAuctionTokenForEth is Ownable {
     /// @notice Claim an amount of tokens based of the share of a user 
     function claimTokens() external {
         require(auctionFinalized(), "VeriAuctionTokenForEth (claimTokens): Auction not finalized yet");
-        auctionToken.transfer(msg.sender, calculateClaimableAmout());
+
+        uint256 claimableAmount = calculateClaimableAmout();
+        
+        // These two lines can also be part of the re-entrancy attack in resignFromAuction().
+        // Than not only ETH was stolen, but the attacker would also get its share of the auction tokens.
+        delete commited[msg.sender];
+        auctionToken.transfer(msg.sender, claimableAmount);
     }
 
     /// @notice Let a user resign from the auction.
@@ -83,16 +89,23 @@ contract VeriAuctionTokenForEth is Ownable {
     ///         the contract by the owner of the contract.
     /// @dev User the delete keyword to get some gas back.
     function resignFromAuction() external {
-        require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");
-
-        uint256 commitment = commited[msg.sender];
+        require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");        
 
         if(auctionFinalized()) {
-            unclaimableTokenAmount += calculateClaimableAmout();
+            // Gas savings
+            uint256 _unclaimableTokenAmount = unclaimableTokenAmount;
+            
+            _unclaimableTokenAmount += calculateClaimableAmout();
+            require(_unclaimableTokenAmount <= amountToDistribute, "VeriAuctionTokenForEth (resignFromAuction): unclaimable amount would be larger than total tokens to distribute");
+            
+            unclaimableTokenAmount = _unclaimableTokenAmount; 
         }
 
+        uint256 commitment = commited[msg.sender];
+        require(this.balance >= commitment, "VeriAuctionTokenForEth (resignFromAuction): contract doesn't have enough ETH");
+
         // In these two lines the re-entrancy attack happens.
-        msg.sender.transfer(commitment);
+        msg.sender.call.value(commitment)();
         delete commited[msg.sender];
     }
     
