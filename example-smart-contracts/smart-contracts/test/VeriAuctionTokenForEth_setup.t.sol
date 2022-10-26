@@ -24,7 +24,9 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
     ERC20Mock token;
     uint256 amountOfTokensToDistribute;
 
-    address alice;
+    address payable alice;
+    address payable bob;
+    address payable charlie;
 
     //========================================
     // setup
@@ -43,8 +45,12 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
         token.approve(address(veriAuction), amountOfTokensToDistribute);
         veriAuction.depositAuctionTokens();
 
-        address payable[] memory users = utils.createUsers(1);
+        address payable[] memory users = utils.createUsers(3);
         alice = users[0];
-        vm.label(alice, "Alice");
+        vm.label(alice, "alice");
+        bob = users[1];
+        vm.label(bob, "bob");
+        charlie = users[2];
+        vm.label(charlie, "charlie");
     }
 }

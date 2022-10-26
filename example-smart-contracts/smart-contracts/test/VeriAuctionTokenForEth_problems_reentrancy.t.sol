@@ -33,19 +33,51 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     //====================
 
     function testReentrancyResignFromAuctionMultipleTimes() public {        
+        //----------
         // Setup
-        veriAuction.commitEth{value: 1 ether}();
-        
-        // Execute
+        //----------
 
+        vm.assume(address(attacker) != bob);
+        vm.assume(address(attacker) != charlie);
+
+        uint256 commitmentOfAttacker = 1 ether;
+        vm.deal(address(attacker), commitmentOfAttacker);
+        vm.prank(address(attacker));
+        veriAuction.commitEth{value: commitmentOfAttacker}();
+
+        // Make sure that there is enough ETH in the auction contract.
+        uint256 commitmentOfBob = commitmentOfAttacker * attackCount;
+        vm.deal(bob, commitmentOfBob);
+        vm.prank(bob);
+        veriAuction.commitEth{value: commitmentOfBob}();
+
+        // Add a little bit extra ETH to the auction contract.
+        uint256 commitmentOfCharlie = 1 ether;
+        vm.deal(charlie, commitmentOfCharlie);
+        vm.prank(charlie);
+        veriAuction.commitEth{value: commitmentOfCharlie}();
+        
+        //----------
+        // Execute
+        //----------
+
+
+        //----------
         // Test
+        //----------
     }
 
     function testReentrancyResignFromAuctionAndClaimTokensOnFinalizedAuction() public {        
+        //----------
         // Setup
+        //----------
         
+        //----------
         // Execute
+        //----------
 
+        //----------
         // Test
+        //----------
     }
 }
