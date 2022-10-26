@@ -3,11 +3,15 @@ pragma solidity ^0.8.13;
 
 import "./VeriAuctionTokenForEth_setup.t.sol";
 
+// Attacker
+import "./Attackers/VeriAuctionTokenForEth_reentrancy_attacker.sol";
+
 contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems_setup {
     //========================================
     // Variables
     //========================================
-    
+    VeriAuctionTokenForEth_reentrancy_attacker attacker;
+    uint256 attackCount;
 
     //========================================
     // setup
@@ -15,6 +19,9 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
     function setUp() public {
         veriAuctionTokenForEth_problems_setup();
+        
+        attackCount = 3;
+        attacker = new VeriAuctionTokenForEth_reentrancy_attacker(attackCount);
     }
 
     //========================================
@@ -25,21 +32,20 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     // commitTokens()
     //====================
 
-    function testCommitTokensUpdatesCommitment(uint256 ethToCommit) public {        
+    function testReentrancyResignFromAuctionMultipleTimes() public {        
         // Setup
-        vm.assume(ethToCommit > 0);
-        vm.assume(type(uint256).max / 10**token.decimals() >= ethToCommit);
-
-        vm.deal(alice, ethToCommit);
+        veriAuction.commitEth{value: 1 ether}();
         
         // Execute
-        vm.prank(alice);
-        veriAuction.commitEth{value: ethToCommit}();
 
         // Test
-        vm.prank(alice);
-        uint256 commitedAmount = veriAuction.getCommitment();
+    }
 
-        assertEq(commitedAmount, ethToCommit);   
+    function testReentrancyResignFromAuctionAndClaimTokensOnFinalizedAuction() public {        
+        // Setup
+        
+        // Execute
+
+        // Test
     }
 }

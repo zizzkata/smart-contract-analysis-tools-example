@@ -2,20 +2,15 @@
 pragma solidity ^0.8.13;
 pragma abicoder v2;
 
+import "./interfaces/IVeriAuctionTokenForEth.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract VeriAuctionTokenForEth is Ownable {
-
-    //========================================
-    // Events
-    //========================================
-    event Commited(address indexed user, uint256 amount, uint256 totalCommited, uint256 newPrice);
-    event Claimed(address indexed user, uint256 amount, uint256 price);
-
+contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
     //========================================
     // Variables
     //========================================
+
     IERC20Metadata public immutable auctionToken;
     uint256 public immutable amountToDistribute;
 
@@ -44,7 +39,7 @@ contract VeriAuctionTokenForEth is Ownable {
     }
 
     //========================================
-    // functions
+    // functions: IVeriAuctionTokenForEth
     //========================================
 
     //====================
@@ -66,8 +61,8 @@ contract VeriAuctionTokenForEth is Ownable {
     // External
     //==========
 
-    /// @notice Commit a certain amount of ETH.
-    function commitEth() payable external {
+    /// @inheritdoc IVeriAuctionTokenForEth
+    function commitEth() payable external override {
         require(auctionStarted, "VeriAuctionTokenForEth (commitEth): Auction not started");
         require(!auctionFinalized(), "VeriAuctionTokenForEth (commitEth): Auction is finalized");
         require(msg.value > 0, "VeriAuctionTokenForEth (commitEth): commitment must be greater than 0");
@@ -82,13 +77,8 @@ contract VeriAuctionTokenForEth is Ownable {
         emit Commited(msg.sender, msg.value, getEthBalance(), getCurrentPrice());
     }
 
-    /// @notice Let a user resign from the auction.
-    ///         As long as the auction is not finalized this will decrease the price of an auction token.
-    ///         When the auction is finalized the price can't change anymore (due to the ETH balance being recorded).
-    ///         Instead, when the auction is finalized, the otherwise claimable auction tokens can be withdrawn from
-    ///         the contract by the owner of the contract.
-    /// @dev User the delete keyword to get some gas back.
-    function resignFromAuction() external {
+    /// @inheritdoc IVeriAuctionTokenForEth
+    function resignFromAuction() external override {
         require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");        
 
         if(auctionFinalized()) {
