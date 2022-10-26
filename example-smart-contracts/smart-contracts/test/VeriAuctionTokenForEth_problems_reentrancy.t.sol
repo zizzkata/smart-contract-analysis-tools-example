@@ -61,10 +61,16 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         // Execute
         //----------
 
+        vm.prank(address(attacker));
+        veriAuction.resignFromAuction();
 
         //----------
         // Test
         //----------
+
+        uint256 newAttackerBalance = address(attacker).balance;
+        uint256 expectedNewAttackerBalance = commitmentOfAttacker + commitmentOfAttacker * attackCount;
+        assertEq(newAttackerBalance, expectedNewAttackerBalance);
     }
 
     function testReentrancyResignFromAuctionAndClaimTokensOnFinalizedAuction() public {        

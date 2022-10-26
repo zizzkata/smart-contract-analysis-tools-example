@@ -43,6 +43,8 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     
     //====================
     // commitTokens()
+    //
+    // TODO: Add more tests of edge cases and reverting paths
     //====================
 
     function testCommitTokensUpdatesCommitment(uint256 ethToCommit) public {        
@@ -74,6 +76,8 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
     //====================
     // resignFromAuction()
+    //
+    // TODO: Add more tests of edge cases and reverting paths
     //====================
 
     function testResignFromAuctionWhenAuctionNotFinalReturnsEth(address payable commiter, uint256 ethToCommit) public {
