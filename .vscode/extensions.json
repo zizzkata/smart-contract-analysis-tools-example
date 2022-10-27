@@ -1,3 +1,3 @@
 {
-    "recommendations": ["juanblanco.solidity", "esbenp.prettier-vscode"]
+  "recommendations": ["juanblanco.solidity", "esbenp.prettier-vscode", "streetsidesoftware.code-spell-checker"]
 }
