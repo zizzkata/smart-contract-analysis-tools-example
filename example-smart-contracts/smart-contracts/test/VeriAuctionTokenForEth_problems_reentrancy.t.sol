@@ -19,6 +19,7 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
     function setUp() public {
         veriAuctionTokenForEth_problems_setup();
+        startAuction();
         
         attackCount = 3;
         attacker = new VeriAuctionTokenForEth_reentrancy_attacker(attackCount);

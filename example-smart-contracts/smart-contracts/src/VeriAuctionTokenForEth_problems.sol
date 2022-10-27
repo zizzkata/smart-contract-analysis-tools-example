@@ -30,7 +30,9 @@ contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
     constructor(address veriTokenAddress, uint256 _amountToDistribute) Ownable() {
         auctionToken = IERC20Metadata(veriTokenAddress);
         auctionTokenDecimals = auctionToken.decimals();
+
         require(_amountToDistribute >= 10**auctionTokenDecimals, "VeriAuctionTokenForEth (constructor): must distribute at least one whole token");
+        require(type(uint256).max / _amountToDistribute >= 1e18, "VeriAuctionTokenForEth (constructor): size if _amountToDistribute could cause an overflow when claiming tokens");
 
         amountToDistribute = _amountToDistribute;
         auctionStarted = false;
@@ -67,6 +69,7 @@ contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
         require(!auctionFinalized(), "VeriAuctionTokenForEth (commitEth): Auction is finalized");
         require(msg.value > 0, "VeriAuctionTokenForEth (commitEth): commitment must be greater than 0");
         require(type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(), "VeriAuctionTokenForEth (commitEth): would result in too much ETH in the auction");
+        require(type(uint256).max / 1e18 >= commited[msg.sender] + msg.value, "VeriAuctionTokenForEth (commitEth): would result is a too large commitment");
         
         // Notice that no total counter is used.
         // This means that ETH can be send to the contract by another contract
@@ -169,7 +172,7 @@ contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
     /// @notice Calculate the amount of tokens can be claimed based on the ETH balance in when the auction
     ///         was closed.
     function calculateClaimableAmout() view public returns (uint256 claimableAmount) {
-        require(auctionFinalized(), "VeriAuctionTokenForEth (calculateClaimableAmout): Auction not finalized yet");
+        require(auctionFinalized(), "VeriAuctionTokenForEth (calculateClaimableAmout): auction not finalized yet");
 
         // Note that if we would have used getCurrentPrice() in the contract, then someone
         // could send eth to the contract using the selfdestruct method and make it so that
@@ -179,6 +182,8 @@ contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
         //  Example:
         // claimableAmount = (commited[msg.sender] * 10**auctionTokenDecimals) / getCurrentPrice();
 
+        // We know that share will always be <= 1e18
+        // The constructor already takes care of preventing an overflow in (share * amountToDistribute)
         uint256 share = (commited[msg.sender] * 1e18) / finalEthBalance;
         claimableAmount = (share * amountToDistribute) / 1e18;
     }

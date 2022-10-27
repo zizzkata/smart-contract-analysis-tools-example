@@ -32,7 +32,7 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
     // setup
     //========================================
 
-    function veriAuctionTokenForEth_problems_setup() public {
+    function veriAuctionTokenForEth_problems_setup() internal {
         // vm comes from Test -> Script
         utils = new Utils(vm);
         token = new ERC20Mock();
@@ -42,9 +42,6 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
 
         veriAuction = new VeriAuctionTokenForEth(address(token), amountOfTokensToDistribute);
 
-        token.approve(address(veriAuction), amountOfTokensToDistribute);
-        veriAuction.depositAuctionTokens();
-
         address payable[] memory users = utils.createUsers(3);
         alice = users[0];
         vm.label(alice, "alice");
@@ -52,5 +49,10 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
         vm.label(bob, "bob");
         charlie = users[2];
         vm.label(charlie, "charlie");
+    }
+
+    function startAuction() internal {
+        token.approve(address(veriAuction), amountOfTokensToDistribute);
+        veriAuction.depositAuctionTokens();
     }
 }

@@ -15,6 +15,7 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
     function setUp() public {
         veriAuctionTokenForEth_problems_setup();
+        startAuction();
     }
 
     //========================================
@@ -23,7 +24,7 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
     function commitEthToAuction(address user, uint256 ethToCommit) internal {
         vm.assume(ethToCommit > 0);
-        vm.assume(type(uint256).max / 10**token.decimals() >= ethToCommit);
+        vm.assume(type(uint256).max / 10**token.decimals() >= address(veriAuction).balance + ethToCommit);
 
         vm.deal(user, ethToCommit);
         vm.prank(user);
@@ -37,6 +38,13 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         return false;
     }
 
+    function checkCommiterAddress(address payable commiter) internal {
+        vm.assume(isPayable(commiter));
+        vm.assume(commiter != address(utils));
+        vm.assume(commiter != address(token));
+        vm.assume(commiter != address(veriAuction));
+    }
+
     //========================================
     // Tests
     //========================================
@@ -47,7 +55,7 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     // TODO: Add more tests of edge cases and reverting paths
     //====================
 
-    function testCommitTokensUpdatesCommitment(uint256 ethToCommit) public {        
+    function test_commitTokens_updatesCommitment(uint256 ethToCommit) public {        
         //----------
         // Setup
         //----------
@@ -80,7 +88,7 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     // TODO: Add more tests of edge cases and reverting paths
     //====================
 
-    function testResignFromAuctionWhenAuctionNotFinalReturnsEth(address payable commiter, uint256 ethToCommit) public {
+    function test_resignFromAuction_whenAuctionNotFinalReturnsEth(address payable commiter, uint256 ethToCommit) public {
         //----------
         // Setup
         //----------
@@ -113,5 +121,66 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
         uint256 newCommiterEthBalance = commiter.balance;
         assertEq(initialCommiterEthBalance + ethToCommit, newCommiterEthBalance);
+    }
+
+    //====================
+    // claimTokens()
+    //
+    // TODO: Add more tests of edge cases and reverting paths
+    //====================
+
+    function test_claimTokens_canNotClaimIfAuctionNotFinalized(address caller) public {
+        //----------
+        // Setup
+        //----------
+
+        vm.expectRevert("VeriAuctionTokenForEth (claimTokens): Auction not finalized yet");
+
+        //----------
+        // Execute
+        //----------
+
+        vm.prank(caller);
+        veriAuction.claimTokens();
+
+        //----------
+        // Test
+        //----------
+
+        // Succedes if function reverts with string
+    }
+
+    function test_claimTokens_canClaimTokens(address payable commiter1, address payable commiter2, uint256 ethToCommit) public {
+        //----------
+        // Setup
+        //----------
+
+        vm.assume(commiter1 != commiter2);
+        checkCommiterAddress(commiter1);
+        checkCommiterAddress(commiter2);
+
+        commitEthToAuction(commiter1, ethToCommit);
+        commitEthToAuction(commiter2, ethToCommit);
+
+        assertEq(token.balanceOf(commiter1), 0);
+        assertEq(token.balanceOf(commiter2), 0);
+        
+        veriAuction.finalize();
+
+        //----------
+        // Execute
+        //----------
+
+        vm.prank(commiter1);
+        veriAuction.claimTokens();
+
+        //----------
+        // Test
+        //----------
+
+        assertEq(token.balanceOf(commiter1), amountOfTokensToDistribute / 2);
+        assertEq(token.balanceOf(commiter2), 0);
+        assertEq(commiter1.balance, 0);
+        assertEq(address(veriAuction).balance, 2 * ethToCommit);
     }
 }
