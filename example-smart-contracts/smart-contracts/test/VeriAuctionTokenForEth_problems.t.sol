@@ -7,7 +7,6 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     //========================================
     // Variables
     //========================================
-    
 
     //========================================
     // Setup
@@ -21,14 +20,14 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     //========================================
     // Tests
     //========================================
-    
+
     //====================
     // commitTokens()
     //
     // TODO: Add more tests of edge cases and reverting paths
     //====================
 
-    function test_commitTokens_updatesCommitment(uint256 ethToCommit) public {        
+    function test_commitTokens_updatesCommitment(uint256 ethToCommit) public {
         //----------
         // Setup
         //----------
@@ -37,22 +36,22 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         vm.assume(type(uint256).max / 10**token.decimals() >= ethToCommit);
 
         vm.deal(alice, ethToCommit);
-        
+
         //----------
         // Execute
         //----------
-        
+
         vm.prank(alice);
         veriAuction.commitEth{value: ethToCommit}();
 
         //----------
         // Test
         //----------
-        
+
         vm.prank(alice);
         uint256 commitedAmount = veriAuction.getCommitment();
 
-        assertEq(commitedAmount, ethToCommit);   
+        assertEq(commitedAmount, ethToCommit);
     }
 
     //====================
@@ -61,7 +60,9 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     // TODO: Add more tests of edge cases and reverting paths
     //====================
 
-    function test_resignFromAuction_whenAuctionNotFinalReturnsEth(address payable commiter, uint256 ethToCommit) public {
+    function test_resignFromAuction_whenAuctionNotFinalReturnsEth(address payable commiter, uint256 ethToCommit)
+        public
+    {
         //----------
         // Setup
         //----------
@@ -74,8 +75,11 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
         commitEthToAuction(commiter, ethToCommit);
         uint256 initialAuctionEthBalance = address(veriAuction).balance;
-        assertEq(initialAuctionEthBalance, ethToCommit, "testResignFromAuctionWhenAuctionNotFinalReturnsEth: commitEthToAuction() does not work as expected");
-
+        assertEq(
+            initialAuctionEthBalance,
+            ethToCommit,
+            "testResignFromAuctionWhenAuctionNotFinalReturnsEth: commitEthToAuction() does not work as expected"
+        );
 
         uint256 initialCommiterEthBalance = commiter.balance;
 
@@ -124,7 +128,11 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         // Succedes if function reverts with string
     }
 
-    function test_claimTokens_canClaimTokens(address payable commiter1, address payable commiter2, uint256 ethToCommit) public {
+    function test_claimTokens_canClaimTokens(
+        address payable commiter1,
+        address payable commiter2,
+        uint256 ethToCommit
+    ) public {
         //----------
         // Setup
         //----------
@@ -138,7 +146,7 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
 
         assertEq(token.balanceOf(commiter1), 0);
         assertEq(token.balanceOf(commiter2), 0);
-        
+
         veriAuction.finalize();
 
         //----------

