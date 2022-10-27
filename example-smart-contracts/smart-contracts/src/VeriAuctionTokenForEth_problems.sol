@@ -97,7 +97,7 @@ contract VeriAuctionTokenForEth_problems is IVeriAuctionTokenForEth, Ownable {
         uint256 commitment = commited[msg.sender];
         require(getEthBalance() >= commitment, "VeriAuctionTokenForEth (resignFromAuction): contract doesn't have enough ETH");
 
-        // In these two lines the re-entrancy attack happens.
+        // In these three lines the re-entrancy attack happens.
         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
         require(transferSuccess, "VeriAuctionTokenForEth (resignFromAuction): failed to send ETH");
         
