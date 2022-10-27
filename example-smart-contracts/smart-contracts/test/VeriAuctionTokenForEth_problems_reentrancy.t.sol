@@ -11,7 +11,6 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     // Variables
     //========================================
     VeriAuctionTokenForEth_reentrancy_attacker attacker;
-    uint256 attackCount;
 
     //========================================
     // setup
@@ -21,8 +20,30 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         veriAuctionTokenForEth_problems_setup();
         startAuction();
         
-        attackCount = 3;
-        attacker = new VeriAuctionTokenForEth_reentrancy_attacker(attackCount);
+        attacker = new VeriAuctionTokenForEth_reentrancy_attacker();
+    
+        attacker.setTimesToAttack(3);
+        attacker.setClaimTokensDuringAttack(false);
+    }
+
+    //========================================
+    // Helpers
+    //========================================
+
+    function commitMultipleUsers(uint256 commitmentAttacker) internal {
+        vm.assume(address(attacker) != bob);
+        vm.assume(address(attacker) != charlie);
+
+        uint256 commitmentOfAttacker = commitmentAttacker;
+        commitEthToAuction(address(attacker), commitmentOfAttacker);
+
+        // Make sure that there is enough ETH in the auction contract.
+        uint256 commitmentOfBob = commitmentOfAttacker * attacker.timesToAttack();
+        commitEthToAuction(bob, commitmentOfBob);
+
+        // Add a little bit extra ETH to the auction contract.
+        uint256 commitmentOfCharlie = 1 ether;
+        commitEthToAuction(charlie, commitmentOfCharlie);
     }
 
     //========================================
@@ -38,25 +59,10 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         // Setup
         //----------
 
-        vm.assume(address(attacker) != bob);
-        vm.assume(address(attacker) != charlie);
-
         uint256 commitmentOfAttacker = 1 ether;
-        vm.deal(address(attacker), commitmentOfAttacker);
-        vm.prank(address(attacker));
-        veriAuction.commitEth{value: commitmentOfAttacker}();
+        commitMultipleUsers(commitmentOfAttacker);
 
-        // Make sure that there is enough ETH in the auction contract.
-        uint256 commitmentOfBob = commitmentOfAttacker * attackCount;
-        vm.deal(bob, commitmentOfBob);
-        vm.prank(bob);
-        veriAuction.commitEth{value: commitmentOfBob}();
-
-        // Add a little bit extra ETH to the auction contract.
-        uint256 commitmentOfCharlie = 1 ether;
-        vm.deal(charlie, commitmentOfCharlie);
-        vm.prank(charlie);
-        veriAuction.commitEth{value: commitmentOfCharlie}();
+        uint256 attackTimes = attacker.timesToAttack();
         
         //----------
         // Execute
@@ -70,21 +76,42 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         //----------
 
         uint256 newAttackerBalance = address(attacker).balance;
-        uint256 expectedNewAttackerBalance = commitmentOfAttacker + commitmentOfAttacker * attackCount;
+        uint256 expectedNewAttackerBalance = commitmentOfAttacker + commitmentOfAttacker * attackTimes;
         assertEq(newAttackerBalance, expectedNewAttackerBalance);
+        
+        assertEq(token.balanceOf(address(attacker)), 0);
     }
 
     function testReentrancyResignFromAuctionAndClaimTokensOnFinalizedAuction() public {        
         //----------
         // Setup
         //----------
+
+        uint256 commitmentOfAttacker = 1 ether;
+        commitMultipleUsers(commitmentOfAttacker);
+
+        attacker.setClaimTokensDuringAttack(true);
         
+        veriAuction.finalize();
+        
+        vm.prank(address(attacker));
+        uint256 claimableAmount = veriAuction.calculateClaimableAmount();
+
+        assertEq(address(attacker).balance, 0);
+        assertEq(token.balanceOf(address(attacker)), 0);
+
         //----------
         // Execute
         //----------
 
+        vm.prank(address(attacker));
+        veriAuction.resignFromAuction();
+
         //----------
         // Test
         //----------
+
+        assertEq(address(attacker).balance, commitmentOfAttacker);
+        assertEq(token.balanceOf(address(attacker)), claimableAmount);
     }
 }

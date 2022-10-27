@@ -51,8 +51,35 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
         vm.label(charlie, "charlie");
     }
 
+    //========================================
+    // Helpers
+    //========================================
+
     function startAuction() internal {
         token.approve(address(veriAuction), amountOfTokensToDistribute);
         veriAuction.depositAuctionTokens();
+    }
+
+    function commitEthToAuction(address user, uint256 ethToCommit) internal {
+        vm.assume(ethToCommit > 0);
+        vm.assume(type(uint256).max / 10**token.decimals() >= address(veriAuction).balance + ethToCommit);
+
+        vm.deal(user, ethToCommit);
+        vm.prank(user);
+        veriAuction.commitEth{value: ethToCommit}();
+    }
+
+    function isPayable(address testAddress) internal returns (bool) {
+        if(payable(testAddress).send(0)) {
+            return true;
+        }
+        return false;
+    }
+
+    function checkCommiterAddress(address payable commiter) internal {
+        vm.assume(isPayable(commiter));
+        vm.assume(commiter != address(utils));
+        vm.assume(commiter != address(token));
+        vm.assume(commiter != address(veriAuction));
     }
 }

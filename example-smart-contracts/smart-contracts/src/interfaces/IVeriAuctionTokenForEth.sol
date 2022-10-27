@@ -26,4 +26,7 @@ interface IVeriAuctionTokenForEth {
     /// @dev User the delete keyword to get some gas back.
     /// @custom:emits fdsfdsfds
     function resignFromAuction() external;
+
+    /// @notice Claim an amount of tokens based of the share of a user 
+    function claimTokens() external;
 }

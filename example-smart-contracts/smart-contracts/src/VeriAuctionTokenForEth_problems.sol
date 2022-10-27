@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 pragma abicoder v2;
 
+import "forge-std/Test.sol";
 import "./interfaces/IVeriAuctionTokenForEth.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -88,7 +89,7 @@ contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
             // Gas savings
             uint256 _unclaimableTokenAmount = unclaimableTokenAmount;
             
-            _unclaimableTokenAmount += calculateClaimableAmout();
+            _unclaimableTokenAmount += calculateClaimableAmount();
             require(_unclaimableTokenAmount <= amountToDistribute, "VeriAuctionTokenForEth (resignFromAuction): unclaimable amount would be larger than total tokens to distribute");
             
             unclaimableTokenAmount = _unclaimableTokenAmount; 
@@ -118,12 +119,15 @@ contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
     // External
     //==========
 
-    /// @notice Claim an amount of tokens based of the share of a user 
-    function claimTokens() external {
+    /// @inheritdoc IVeriAuctionTokenForEth
+    function claimTokens() external override {
         require(auctionFinalized(), "VeriAuctionTokenForEth (claimTokens): Auction not finalized yet");
 
-        uint256 claimableAmount = calculateClaimableAmout();
+        uint256 claimableAmount = calculateClaimableAmount();
         
+        // The writer of this functino might think that using the delete before the transfer prevents
+        // a re-entrancy attack. It actually succeedes in doing that. But it can still be part of another
+        // attack.
         // These two lines can also be part of the re-entrancy attack in resignFromAuction().
         // Than not only ETH was stolen, but the attacker would also get its share of the auction tokens.
         delete commited[msg.sender];
@@ -171,8 +175,8 @@ contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
     
     /// @notice Calculate the amount of tokens can be claimed based on the ETH balance in when the auction
     ///         was closed.
-    function calculateClaimableAmout() view public returns (uint256 claimableAmount) {
-        require(auctionFinalized(), "VeriAuctionTokenForEth (calculateClaimableAmout): auction not finalized yet");
+    function calculateClaimableAmount() view public returns (uint256 claimableAmount) {
+        require(auctionFinalized(), "VeriAuctionTokenForEth (calculateClaimableAmount): auction not finalized yet");
 
         // Note that if we would have used getCurrentPrice() in the contract, then someone
         // could send eth to the contract using the selfdestruct method and make it so that
