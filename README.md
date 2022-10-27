@@ -30,6 +30,18 @@ An auction contract where some problems are introduced.
 
 No custom installation, besides [Docker](https://docs.docker.com/get-docker/), is needed to use this repository. All required tools are already installed in Docker images.
 
+Only solhint should be installed locally with
+
+```bash
+$ npm install -g solhint
+```
+
+Configuring git to use the githooks folder run
+
+```bash
+$ git config core.hooksPath githooks
+```
+
 In `./example-smart-contracts/` you will find:
 
 - `*/smart-contracts/`: a standard forge project.
