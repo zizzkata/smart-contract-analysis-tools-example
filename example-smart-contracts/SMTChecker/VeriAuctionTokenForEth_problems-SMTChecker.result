@@ -1,0 +1,37 @@
+
+=================================================================
+Running SMTChecker
+=================================================================
+
+Warning: Assertion checker does not yet implement this operator.
+  --> src/VeriAuctionTokenForEth_problems.sol:71:37:
+   |
+71 |  ...        require(type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(), "VeriAuctionTo ...
+   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Assertion checker does not yet implement this operator.
+   --> src/VeriAuctionTokenForEth_problems.sol:170:37:
+    |
+170 |  ...        require(type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(), "VeriAuctionTo ...
+    |                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Assertion checker does not yet implement this operator.
+   --> src/VeriAuctionTokenForEth_problems.sol:172:51:
+    |
+172 |         pricePerAuctionToken = (getEthBalance() * 10**auctionTokenDecimals) / amountToDistribute;
+    |                                                   ^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Assertion checker does not yet implement this operator.
+  --> src/VeriAuctionTokenForEth_problems.sol:34:40:
+   |
+34 |         require(_amountToDistribute >= 10**auctionTokenDecimals, "VeriAuctionTokenForEth (constructor): must distribute at least one whole token");
+   |                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: CHC: 13 verification condition(s) could not be proved. Enable the model checker option "show unproved" to see all of them. Consider choosing a specific contract to be verified in order to reduce the solving problems. Consider increasing the timeout per query.
+
+Warning: CHC analysis was not possible since libz3.so.4.8 was not found.
+
+Warning: BMC: 24 verification condition(s) could not be proved. Enable the model checker option "show unproved" to see all of them. Consider choosing a specific contract to be verified in order to reduce the solving problems. Consider increasing the timeout per query.
+
+Warning: BMC analysis was not possible. No SMT solver (Z3 or CVC4) was available. None of the installed solvers was enabled. Install libz3.so.4.8 to enable Z3.
+
