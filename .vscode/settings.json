@@ -1,0 +1,22 @@
+{
+  "solidity.remappings": ["@openzeppelin=node_modules/@openzeppelin"],
+  "solidity.packageDefaultDependenciesContractsDirectory": "./example-smart-contracts/smart-contracts/node_modules",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "solidity.formatter": "prettier",
+  "solidity.linter": "solhint",
+  "slither.solcPath": "",
+  "slither.hiddenDetectors": [],
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  },
+  "search.exclude": {
+    "**/lib": true,
+    "**/out": true,
+    "**/cache": true
+  },
+  "files.exclude": {
+    // "**/lib": true,
+    // "**/lib-batch-auction": true
+  }
+}

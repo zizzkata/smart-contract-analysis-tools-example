@@ -70,7 +70,7 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
     }
 
     function isPayable(address testAddress) internal returns (bool) {
-        if(payable(testAddress).send(0)) {
+        if (payable(testAddress).send(0)) {
             return true;
         }
         return false;

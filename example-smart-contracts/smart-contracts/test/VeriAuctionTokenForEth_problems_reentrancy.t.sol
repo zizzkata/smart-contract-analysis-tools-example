@@ -19,9 +19,9 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     function setUp() public {
         veriAuctionTokenForEth_problems_setup();
         startAuction();
-        
+
         attacker = new VeriAuctionTokenForEth_reentrancy_attacker();
-    
+
         attacker.setTimesToAttack(3);
         attacker.setClaimTokensDuringAttack(false);
     }
@@ -49,12 +49,12 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
     //========================================
     // tests
     //========================================
-    
+
     //====================
     // commitTokens()
     //====================
 
-    function testReentrancyResignFromAuctionMultipleTimes() public {        
+    function testReentrancyResignFromAuctionMultipleTimes() public {
         //----------
         // Setup
         //----------
@@ -63,7 +63,7 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         commitMultipleUsers(commitmentOfAttacker);
 
         uint256 attackTimes = attacker.timesToAttack();
-        
+
         //----------
         // Execute
         //----------
@@ -78,11 +78,11 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         uint256 newAttackerBalance = address(attacker).balance;
         uint256 expectedNewAttackerBalance = commitmentOfAttacker + commitmentOfAttacker * attackTimes;
         assertEq(newAttackerBalance, expectedNewAttackerBalance);
-        
+
         assertEq(token.balanceOf(address(attacker)), 0);
     }
 
-    function testReentrancyResignFromAuctionAndClaimTokensOnFinalizedAuction() public {        
+    function testReentrancyResignFromAuctionAndClaimTokensOnFinalizedAuction() public {
         //----------
         // Setup
         //----------
@@ -91,9 +91,9 @@ contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems
         commitMultipleUsers(commitmentOfAttacker);
 
         attacker.setClaimTokensDuringAttack(true);
-        
+
         veriAuction.finalize();
-        
+
         vm.prank(address(attacker));
         uint256 claimableAmount = veriAuction.calculateClaimableAmount();
 

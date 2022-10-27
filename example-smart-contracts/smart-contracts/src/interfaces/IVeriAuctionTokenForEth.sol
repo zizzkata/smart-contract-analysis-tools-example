@@ -16,7 +16,7 @@ interface IVeriAuctionTokenForEth {
 
     /// @notice Commit a certain amount of ETH.
     /// @custom:emits Commited
-    function commitEth() payable external;
+    function commitEth() external payable;
 
     /// @notice Let a user resign from the auction.
     ///         As long as the auction is not finalized this will decrease the price of an auction token.
@@ -27,6 +27,6 @@ interface IVeriAuctionTokenForEth {
     /// @custom:emits fdsfdsfds
     function resignFromAuction() external;
 
-    /// @notice Claim an amount of tokens based of the share of a user 
+    /// @notice Claim an amount of tokens based of the share of a user
     function claimTokens() external;
 }
