@@ -20,4 +20,4 @@ echo "Run mythril "
 echo "================================================================="
 echo ""
 
-docker run --rm -v ${projectRoot}:/prj mythril/myth:0.23.10 -v 5 analyze /prj/flattened/${contractName}-flat.sol:${contractName} 2>&1 | tee ${contractName}-mythril.result
+docker run --rm -v ${projectRoot}:/prj mythril/myth:0.23.10 -v 5 analyze --max-depth 50 /prj/flattened/${contractName}-flat.sol:${contractName} 2>&1 | tee ${contractName}-mythril.result

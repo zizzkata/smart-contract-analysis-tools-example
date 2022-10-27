@@ -2,12 +2,11 @@
 pragma solidity ^0.8.13;
 pragma abicoder v2;
 
-import "forge-std/Test.sol";
 import "./interfaces/IVeriAuctionTokenForEth.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract VeriAuctionTokenForEth is IVeriAuctionTokenForEth, Ownable {
+contract VeriAuctionTokenForEth_problems is IVeriAuctionTokenForEth, Ownable {
     //========================================
     // Variables
     //========================================

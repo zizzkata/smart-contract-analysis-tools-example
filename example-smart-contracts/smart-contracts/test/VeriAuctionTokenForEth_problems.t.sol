@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "./VeriAuctionTokenForEth_setup.t.sol";
+import "./VeriAuctionTokenForEth_problems_setup.t.sol";
 
 contract VeriAuctionTokenForEth_problems_test is VeriAuctionTokenForEth_problems_setup {
     //========================================

@@ -19,7 +19,7 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
     // Variables
     //========================================
     Utils utils;
-    VeriAuctionTokenForEth veriAuction;
+    VeriAuctionTokenForEth_problems veriAuction;
 
     ERC20Mock token;
     uint256 amountOfTokensToDistribute;
@@ -40,7 +40,7 @@ contract VeriAuctionTokenForEth_problems_setup is Test {
         amountOfTokensToDistribute = 1_000_000 * 10**token.decimals();
         token.mint(amountOfTokensToDistribute);
 
-        veriAuction = new VeriAuctionTokenForEth(address(token), amountOfTokensToDistribute);
+        veriAuction = new VeriAuctionTokenForEth_problems(address(token), amountOfTokensToDistribute);
 
         address payable[] memory users = utils.createUsers(3);
         alice = users[0];
