@@ -14,7 +14,15 @@ Congifurations like solc version and optimize runs can be set in [foundry.toml](
 $ docker run --rm -v ${PWD}:/prj ghcr.io/foundry-rs/foundry:latest "cd /prj/smart-contracts && forge test -vvv"
 ```
 
-# Exploits in the smart contracts
+# Creating contracts with problems
+
+## [VeriAuctionTokenForEth_reentrancy.sol](./smart-contracts/src/VeriAuctionTokenForEth_reentrancy.sol)
+
+> TODO: add more detailed descriptions of the possible attacks.
+
+Some attacks are demonstrated in [VeriAuctionTokenForEth_problems_reentrancy.t](./smart-contracts/test/VeriAuctionTokenForEth_problems_reentrancy.t.sol) which uses [VeriAuctionTokenForEth_reentrancy_attacker](./smart-contracts/test/Attackers/VeriAuctionTokenForEth_reentrancy_attacker.sol) as the attacking contract. The comments in [VeriAuctionTokenForEth_reentrancy.sol](./smart-contracts/src/VeriAuctionTokenForEth_reentrancy.sol) also give some description about the possible exploits.
+
+# Other exploits in the smart contracts
 
 A nice source that explains several exploits and how to prevent them can be seen [here](https://medium.com/hackernoon/hackpedia-16-solidity-hacks-vulnerabilities-their-fixes-and-real-world-examples-f3210eba5148)
 
@@ -35,6 +43,3 @@ Some of these, along with some extra are for example:
     - Could lead to someone taking ownership of the contract 
 - Under/Overflow problems are not a problem anymore with newer Solidity versions.
 
-# Creating the contracts with problems
-
-## [VeriAuctionTokenForEth_reentrancy.sol](./smart-contracts/src/VeriAuctionTokenForEth_reentrancy.sol)
