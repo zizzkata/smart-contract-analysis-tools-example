@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "sc:build": "forge build --optimize",
+    "sc:test": "forge test -vvv",
+    "sc:test:watch": "forge test -vvv --watch",
+    "sc:coverage": "forge coverage",
+    "sc:lint": "solhint ./src/smart-contracts/*.sol",
+    "sc:slither": "./security-scans/slither/run-slither.sh ${PWD}",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3"
+  },
+  "devDependencies": {
+    "solhint": "^3.3.7"
+  }
+}
