@@ -18,8 +18,8 @@
                 "source_mapping": {
                   "start": 180,
                   "length": 411,
-                  "filename_relative": "src/VeriToken.sol",
-                  "filename_absolute": "/prj/smart-contracts/src/VeriToken.sol",
+                  "filename_relative": "../smart-contracts/src/VeriToken.sol",
+                  "filename_absolute": "../smart-contracts/src/VeriToken.sol",
                   "filename_short": "src/VeriToken.sol",
                   "is_dependency": false,
                   "lines": [
@@ -80,8 +80,8 @@
                   "source_mapping": {
                     "start": 39,
                     "length": 24,
-                    "filename_relative": "src/VeriToken.sol",
-                    "filename_absolute": "/prj/smart-contracts/src/VeriToken.sol",
+                    "filename_relative": "../smart-contracts/src/VeriToken.sol",
+                    "filename_absolute": "../smart-contracts/src/VeriToken.sol",
                     "filename_short": "src/VeriToken.sol",
                     "is_dependency": false,
                     "lines": [
@@ -101,8 +101,8 @@
                 }
               ],
               "description": "Pragma version^0.8.13 (src/VeriToken.sol#2) allows old versions\n",
-              "markdown": "Pragma version[^0.8.13](src/VeriToken.sol#L2) allows old versions\n",
-              "first_markdown_element": "src/VeriToken.sol#L2",
+              "markdown": "Pragma version[^0.8.13](../smart-contracts/src/VeriToken.sol#L2) allows old versions\n",
+              "first_markdown_element": "../smart-contracts/src/VeriToken.sol#L2",
               "id": "1950d1d673f736d5be6f5295668087a8c8a140651ba9cca53c376a39ebbd4717",
               "check": "solc-version",
               "impact": "Informational",
@@ -116,8 +116,8 @@
                   "source_mapping": {
                     "start": 39,
                     "length": 24,
-                    "filename_relative": "src/interfaces/IVeriToken.sol",
-                    "filename_absolute": "/prj/smart-contracts/src/interfaces/IVeriToken.sol",
+                    "filename_relative": "../smart-contracts/src/interfaces/IVeriToken.sol",
+                    "filename_absolute": "../smart-contracts/src/interfaces/IVeriToken.sol",
                     "filename_short": "src/interfaces/IVeriToken.sol",
                     "is_dependency": false,
                     "lines": [
@@ -137,8 +137,8 @@
                 }
               ],
               "description": "Pragma version^0.8.13 (src/interfaces/IVeriToken.sol#2) allows old versions\n",
-              "markdown": "Pragma version[^0.8.13](src/interfaces/IVeriToken.sol#L2) allows old versions\n",
-              "first_markdown_element": "src/interfaces/IVeriToken.sol#L2",
+              "markdown": "Pragma version[^0.8.13](../smart-contracts/src/interfaces/IVeriToken.sol#L2) allows old versions\n",
+              "first_markdown_element": "../smart-contracts/src/interfaces/IVeriToken.sol#L2",
               "id": "330deb2cd1bf5fabb81b213aa55fcf78b46e5253a5d4d1f38dc21f43241d59f5",
               "check": "solc-version",
               "impact": "Informational",

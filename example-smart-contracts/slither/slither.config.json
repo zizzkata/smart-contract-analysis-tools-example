@@ -1,5 +1,6 @@
 {
   "filter_paths": "lib,node_modules",
+  "solc_working_dir": "../smart-contracts",
   "solc_remaps": [
     "ds-test/=lib/ds-test/src/",
     "@openzeppelin/=node_modules/@openzeppelin/",
