@@ -1,0 +1,29 @@
+
+=================================================================
+Flatten the contract to be verified
+=================================================================
+
+Flattened file written at ../flattened/VeriToken-flat.sol
+
+=================================================================
+Run Slither
+=================================================================
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/slither/__main__.py", line 826, in main_impl
+    ) = process_all(filename, args, detector_classes, printer_classes)
+  File "/usr/local/lib/python3.10/dist-packages/slither/__main__.py", line 86, in process_all
+    compilations = compile_all(target, **vars(args))
+  File "/usr/local/lib/python3.10/dist-packages/crytic_compile/crytic_compile.py", line 660, in compile_all
+    raise ValueError(f"Unresolved target: {str(target)}")
+ValueError: Unresolved target: VeriToken
+Error in VeriToken
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/slither/__main__.py", line 826, in main_impl
+    ) = process_all(filename, args, detector_classes, printer_classes)
+  File "/usr/local/lib/python3.10/dist-packages/slither/__main__.py", line 86, in process_all
+    compilations = compile_all(target, **vars(args))
+  File "/usr/local/lib/python3.10/dist-packages/crytic_compile/crytic_compile.py", line 660, in compile_all
+    raise ValueError(f"Unresolved target: {str(target)}")
+ValueError: Unresolved target: VeriToken
+

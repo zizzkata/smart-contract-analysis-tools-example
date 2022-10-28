@@ -4,34 +4,213 @@ Running SMTChecker
 =================================================================
 
 Warning: Assertion checker does not yet implement this operator.
-  --> src/VeriAuctionTokenForEth_problems.sol:71:37:
+  --> src/VeriAuctionTokenForEth_problems.sol:78:33:
    |
-71 |  ...        require(type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(), "VeriAuctionTo ...
-   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+78 |             type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(),
+   |                                 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Warning: Assertion checker does not yet implement this operator.
-   --> src/VeriAuctionTokenForEth_problems.sol:170:37:
+   --> src/VeriAuctionTokenForEth_problems.sol:187:33:
     |
-170 |  ...        require(type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(), "VeriAuctionTo ...
-    |                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+187 |             type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(),
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Warning: Assertion checker does not yet implement this operator.
-   --> src/VeriAuctionTokenForEth_problems.sol:172:51:
+   --> src/VeriAuctionTokenForEth_problems.sol:191:51:
     |
-172 |         pricePerAuctionToken = (getEthBalance() * 10**auctionTokenDecimals) / amountToDistribute;
+191 |         pricePerAuctionToken = (getEthBalance() * 10**auctionTokenDecimals) / amountToDistribute;
     |                                                   ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Warning: Assertion checker does not yet implement this operator.
-  --> src/VeriAuctionTokenForEth_problems.sol:34:40:
+  --> src/VeriAuctionTokenForEth_problems.sol:35:36:
    |
-34 |         require(_amountToDistribute >= 10**auctionTokenDecimals, "VeriAuctionTokenForEth (constructor): must distribute at least one whole token");
-   |                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+35 |             _amountToDistribute >= 10**auctionTokenDecimals,
+   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Warning: CHC: 13 verification condition(s) could not be proved. Enable the model checker option "show unproved" to see all of them. Consider choosing a specific contract to be verified in order to reduce the solving problems. Consider increasing the timeout per query.
+Warning: CHC: Division by zero happens here.
+Counterexample:
+auctionToken = 0, amountToDistribute = 0, auctionTokenDecimals = 0, auctionStarted = false, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
+veriTokenAddress = 0x0
+_amountToDistribute = 0
 
-Warning: CHC analysis was not possible since libz3.so.4.8 was not found.
+Transaction trace:
+VeriAuctionTokenForEth_problems.constructor(0x0, 0)
+  --> src/VeriAuctionTokenForEth_problems.sol:39:13:
+   |
+39 |             type(uint256).max / _amountToDistribute >= 1e18,
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Warning: BMC: 24 verification condition(s) could not be proved. Enable the model checker option "show unproved" to see all of them. Consider choosing a specific contract to be verified in order to reduce the solving problems. Consider increasing the timeout per query.
+Warning: CHC: Division by zero happens here.
+Counterexample:
+auctionToken = 0, amountToDistribute = 1, auctionTokenDecimals = 0, auctionStarted = true, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
 
-Warning: BMC analysis was not possible. No SMT solver (Z3 or CVC4) was available. None of the installed solvers was enabled. Install libz3.so.4.8 to enable Z3.
+Transaction trace:
+VeriAuctionTokenForEth_problems.constructor(0x0, 1)
+State: auctionToken = 0, amountToDistribute = 1, auctionTokenDecimals = 0, auctionStarted = false, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
+VeriAuctionTokenForEth_problems.depositAuctionTokens(){ msg.sender: 0x0 }
+    Ownable._checkOwner() -- internal call
+        Ownable.owner() -- internal call
+        Context._msgSender() -- internal call
+    auctionToken.transferFrom(msg.sender, address(this), amountToDistribute) -- untrusted external call
+State: auctionToken = 0, amountToDistribute = 1, auctionTokenDecimals = 0, auctionStarted = true, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
+VeriAuctionTokenForEth_problems.depositAuctionTokens(){ msg.sender: 0x0 }
+    Ownable._checkOwner() -- internal call
+        Ownable.owner() -- internal call
+        Context._msgSender() -- internal call
+    auctionToken.transferFrom(msg.sender, address(this), amountToDistribute) -- untrusted external call, synthesized as:
+        VeriAuctionTokenForEth_problems.commitEth(){ msg.sender: 0x0, msg.value: 1 } -- reentrant call
+            VeriAuctionTokenForEth_problems.auctionFinalized() -- internal call
+  --> src/VeriAuctionTokenForEth_problems.sol:78:13:
+   |
+78 |             type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(),
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: CHC: Division by zero happens here.
+Counterexample:
+auctionToken = 0, amountToDistribute = 1, auctionTokenDecimals = 0, auctionStarted = false, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
+pricePerAuctionToken = 0
+
+Transaction trace:
+VeriAuctionTokenForEth_problems.constructor(0x0, 1)
+State: auctionToken = 0, amountToDistribute = 1, auctionTokenDecimals = 0, auctionStarted = false, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
+VeriAuctionTokenForEth_problems.getCurrentPrice()
+   --> src/VeriAuctionTokenForEth_problems.sol:187:13:
+    |
+187 |             type(uint256).max / 10**auctionTokenDecimals >= getEthBalance(),
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: CHC: Overflow (resulting value larger than 2**256 - 1) happens here.
+Counterexample:
+auctionToken = 0, amountToDistribute = 1, auctionTokenDecimals = 0, auctionStarted = false, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
+pricePerAuctionToken = 0
+
+Transaction trace:
+VeriAuctionTokenForEth_problems.constructor(0x0, 1)
+State: auctionToken = 0, amountToDistribute = 1, auctionTokenDecimals = 0, auctionStarted = false, finalEthBalance = 0, unclaimableTokenAmount = 0, _owner = 0x0
+VeriAuctionTokenForEth_problems.getCurrentPrice()
+    VeriAuctionTokenForEth_problems.getEthBalance() -- internal call
+    VeriAuctionTokenForEth_problems.getEthBalance() -- internal call
+   --> src/VeriAuctionTokenForEth_problems.sol:191:33:
+    |
+191 |         pricePerAuctionToken = (getEthBalance() * 10**auctionTokenDecimals) / amountToDistribute;
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: CHC: 9 verification condition(s) could not be proved. Enable the model checker option "show unproved" to see all of them. Consider choosing a specific contract to be verified in order to reduce the solving problems. Consider increasing the timeout per query.
+
+Warning: BMC: Overflow (resulting value larger than 2**256 - 1) happens here.
+  --> src/VeriAuctionTokenForEth_problems.sol:82:41:
+   |
+82 |             type(uint256).max / 1e18 >= commited[msg.sender] + msg.value,
+   |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Note: Counterexample:
+   = 1
+  <result> = 2**256
+  _owner = 0
+  address(this).balance = 1
+  amountToDistribute = 0
+  auctionStarted = true
+  auctionToken = 0
+  auctionTokenDecimals = 0
+  commited[msg.sender] = 2**256 - 1
+  finalEthBalance = 0
+  finialized = false
+  this = 0
+  unclaimableTokenAmount = 0
+
+Note: Callstack:
+Note: 
+Note that array aliasing is not supported, therefore all mapping information is erased after a mapping local variable/parameter is assigned.
+You can re-introduce information using require().
+
+Warning: BMC: Overflow (resulting value larger than 2**256 - 1) happens here.
+   --> src/VeriAuctionTokenForEth_problems.sol:209:26:
+    |
+209 |         uint256 share = (commited[msg.sender] * 1e18) / finalEthBalance;
+    |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Note: Counterexample:
+  <result> = 0x0100000000000000000000000000000000000000000000000005C5e69957480000
+  _owner = 0
+  _unclaimableTokenAmount = 0
+  amountToDistribute = 0
+  auctionToken = 0
+  auctionTokenDecimals = 0
+  claimableAmount = 0
+  commited[msg.sender] = 0x12725Dd1d243ABa0e75FE645cc4873f9e65AFE688c928E1f22
+  commitment = 0
+  finalEthBalance = 1
+  finialized = true
+  share = 0
+  transferSuccess = false
+  unclaimableTokenAmount = 0
+
+Note: Callstack:
+Note:
+   --> src/VeriAuctionTokenForEth_problems.sol:102:40:
+    |
+102 |             _unclaimableTokenAmount += calculateClaimableAmount();
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+Note: 
+Note that array aliasing is not supported, therefore all mapping information is erased after a mapping local variable/parameter is assigned.
+You can re-introduce information using require().
+Note that external function calls are not inlined, even if the source code of the function is available. This is due to the possibility that the actual called contract has the same ABI but implements the function differently.
+
+Warning: BMC: Overflow (resulting value larger than 2**256 - 1) happens here.
+   --> src/VeriAuctionTokenForEth_problems.sol:210:28:
+    |
+210 |         claimableAmount = (share * amountToDistribute) / 1e18;
+    |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+Note: Counterexample:
+  <result> = 2**256
+  _owner = 0
+  _unclaimableTokenAmount = 0
+  amountToDistribute = 0x80 * 2**248
+  auctionToken = 0
+  auctionTokenDecimals = 0
+  claimableAmount = 0
+  commited[msg.sender] = 1
+  commitment = 0
+  finalEthBalance = 0x06F05b59D3B20000
+  finialized = true
+  share = 2
+  transferSuccess = false
+  unclaimableTokenAmount = 0
+
+Note: Callstack:
+Note:
+   --> src/VeriAuctionTokenForEth_problems.sol:102:40:
+    |
+102 |             _unclaimableTokenAmount += calculateClaimableAmount();
+    |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+Note: 
+Note that array aliasing is not supported, therefore all mapping information is erased after a mapping local variable/parameter is assigned.
+You can re-introduce information using require().
+Note that external function calls are not inlined, even if the source code of the function is available. This is due to the possibility that the actual called contract has the same ABI but implements the function differently.
+
+Warning: BMC: Overflow (resulting value larger than 2**256 - 1) happens here.
+   --> src/VeriAuctionTokenForEth_problems.sol:102:13:
+    |
+102 |             _unclaimableTokenAmount += calculateClaimableAmount();
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Note: Counterexample:
+  <result> = 2**256
+  _owner = 0
+  _unclaimableTokenAmount = 0xFFFFffffFFFFffed8DA22e2dBC545f18A019ba33B78C0619A50197736D71e0df
+  amountToDistribute = 2**256 - 1
+  auctionToken = 0
+  auctionTokenDecimals = 2**256 - 1
+  claimableAmount = 0x12725Dd1d243ABa0e75FE645cc4873f9e65AFE688c928E1f21
+  commited[msg.sender] = 0x12725Dd1d243ABa0e75FE645cc4873f9e65AFE688c928E1f21
+  commitment = 0
+  finalEthBalance = 0xFFFFffffFFFFffffFFFFffffFFFFffffFFFFffffFFFFffffF7E52fe5AFE40000
+  finialized = true
+  share = 1
+  transferSuccess = false
+  unclaimableTokenAmount = 0xFFFFffffFFFFffed8DA22e2dBC545f18A019ba33B78C0619A50197736D71e0df
+
+Note: Callstack:
+Note: 
+Note that array aliasing is not supported, therefore all mapping information is erased after a mapping local variable/parameter is assigned.
+You can re-introduce information using require().
+Note that external function calls are not inlined, even if the source code of the function is available. This is due to the possibility that the actual called contract has the same ABI but implements the function differently.
+
 

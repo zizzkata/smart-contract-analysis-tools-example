@@ -20,7 +20,7 @@ echo "Run Slither"
 echo "================================================================="
 echo ""
 
-# docker run --rm  ghcr.io/byont-ventures/analysis-tools:latest /bin/bash -c "        \
-#     slither --json ${projectSlitherOutput}/slither-${nameNoExtention}-${printer}-output.json \
-#     --config-file ${projectRoot}/local.json \
-#     ${src} 2>&1 | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g' | tee ${projectSlitherOutput}/slither-${nameNoExtention}-${printer}-output.log
+docker run --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-tools:latest /bin/bash -c "             \
+     slither --json ${contractName}-output.json                                                             \
+     --config-file /prj/slither/slither.config.json                                                         \
+     ${contractName} 2>&1 | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g' | tee ${contractName}-console-output.log"

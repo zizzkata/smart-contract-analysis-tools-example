@@ -1,4 +1,5 @@
 {
+  "solc_working_dir": "../smart-contract",
   "filter_paths": "lib,node_modules",
   "solc_remaps": [
     "ds-test/=lib/ds-test/src/",
