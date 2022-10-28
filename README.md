@@ -2,15 +2,15 @@
 
 ## Context
 
-In order to see how the formal verification (FV) tools can work in real world scenarios, we need a real world scenario. It should be simple enough however to make it easy to debug and analyse manually.
+In order to see how the formal verification (FV) tools can work in real world scenarios, we need a real world scenario. It should be simple enough however to make it easy to debug and analyze manually.
 
 ## Scenarios
 
 We would like to have the following scenarios: 0. We should be able to use imports
 
-1. Throw an error which only occures by a sequence of transactions.
+1. Throw an error which only occurs by a sequence of transactions.
 2. Make sure that a certain function is always called after another function is called.
-3. Make sure that we can define contstraints on variables (non-decreasing, always less than x, etc.).
+3. Make sure that we can define constraints on variables (non-decreasing, always less than x, etc.).
 4. Having an external contract influence another contract.
 5. Make sure that a function updates the state of the contract 'as expected'.
 
@@ -66,7 +66,7 @@ Formal verification is a very wide field. The 'amount' and what kind of formal v
 Some nice resources about formal verification:
 
 - [Ethereum Formal Verification Blog](https://fv.ethereum.org/)
-- [Formal Systems Labratory](https://fsl.cs.illinois.edu/)
+- [Formal Systems Laboratory](https://fsl.cs.illinois.edu/)
 - [A list of formal verification tools for ethereum](https://github.com/leonardoalt/ethereum_formal_verification_overview)
 
 ### Satisfiable Modulo Theory (SMT)
@@ -87,9 +87,9 @@ An overview of symbolic execution in general with an example can be found [here]
 
 Model checking works on the state machine of a system.
 
-An example of a symbolic model checker is [NuSMV](https://nusmv.fbk.eu/). In NuSMV a user will define all the possible conditional transitions. Usaully this would be generated with a custom script when possible since a complete system can be quite large/complex. Then the user will define the specifications to check for using temporal logic. Whenever NuSMV find a trace (a sequence of transitions) that violates this specification it will print the trace.
+An example of a symbolic model checker is [NuSMV](https://nusmv.fbk.eu/). In NuSMV a user will define all the possible conditional transitions. Usually this would be generated with a custom script when possible since a complete system can be quite large/complex. Then the user will define the specifications to check for using temporal logic. Whenever NuSMV find a trace (a sequence of transitions) that violates this specification it will print the trace.
 
-The tool [SPACER](https://arieg.bitbucket.io/pdf/synasc2019.pdfß) enables model checking in z3 using horn cluases.
+The tool [SPACER](https://arieg.bitbucket.io/pdf/synasc2019.pdfß) enables model checking in z3 using horn clauses.
 
 ### Matching logic
 

@@ -99,13 +99,11 @@ contract VeriAuctionTokenForEth_problems is IVeriAuctionTokenForEth, Ownable {
         if (auctionFinalized()) {
             // Gas savings
             uint256 _unclaimableTokenAmount = unclaimableTokenAmount;
-
             _unclaimableTokenAmount += calculateClaimableAmount();
             require(
                 _unclaimableTokenAmount <= amountToDistribute,
                 "VeriAuctionTokenForEth (resignFromAuction): unclaimable amount would be larger than total tokens to distribute"
             );
-
             unclaimableTokenAmount = _unclaimableTokenAmount;
         }
 

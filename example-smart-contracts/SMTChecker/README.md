@@ -14,9 +14,9 @@ For more information about the SMTChecker see the [Solidity docs](https://docs.s
 You might need to run `sudo` on the command below.
 
 ```bash
-$ ./run-SMTChecker.sh ${PWD}/../ VeriStake 2>&1 | tee VeriStake-SMTChecker.result
+$ ./run-SMTChecker.sh ${PWD}/../ VeriToken 2>&1 | tee VeriToken-SMTChecker.result
 ```
 
-The output can then be found in [VeriStake-SMTChecker.result](./VeriVeriStake-SMTChecker.result).
+The output can then be found in [VeriToken-SMTChecker.result](./eriToken-SMTChecker.result).
 
 The expected output will look like this:

@@ -7,4 +7,4 @@ echo "================================================================="
 echo ""
 
 docker buildx create --use
-docker buildx build --push --platform=linux/amd64 --pull -t ghcr.io/byont-ventures/hevm:latest -f Dockerfile.hevm  .
+docker buildx build --push --platform=linux/amd64 --pull -t ghcr.io/byont-ventures/analysis-tools:latest -f Dockerfile.analysisTools  .
