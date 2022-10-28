@@ -16,7 +16,7 @@ docker run --rm -v ${projectRoot}:/prj ghcr.io/foundry-rs/foundry:latest "  \
 
 echo ""
 echo "================================================================="
-echo "Run mythril "
+echo "Run Mythril"
 echo "================================================================="
 echo ""
 

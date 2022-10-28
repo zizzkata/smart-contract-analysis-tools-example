@@ -1,0 +1,87 @@
+ARG UBUNTU_VERSION=22.04
+FROM ubuntu:${UBUNTU_VERSION} as base
+
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt update               \
+    && apt upgrade -y           \
+    && apt install -y           \
+    apt-utils                   \
+    software-properties-common  \
+    build-essential             \
+    cvc4                        \
+    wget                        \
+    tar                         \
+    unzip                       \
+    graphviz                    \
+    python3-pip
+
+# Install git
+RUN export DEBIAN_FRONTEND=noninteractive      \
+    && add-apt-repository -y ppa:git-core/ppa  \
+	&& apt update       \
+    && apt upgrade -y   \
+	&& apt install -y git
+
+# # Install CMAKE
+# ARG CMAKE_VERSION=3.25.0
+# RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}-rc2/cmake-${CMAKE_VERSION}-rc2-linux-x86_64.tar.gz \
+#     && tar -vxf cmake-${CMAKE_VERSION}-rc2-linux-x86_64.tar.gz \
+#     && rm cmake-${CMAKE_VERSION}-rc2-linux-x86_64.tar.gz
+# ENV PATH="${PATH}:${PWD}/cmake-${CMAKE_VERSION}-rc2-linux-x86_64/bin"
+
+# # Install Boost
+# ARG BOOST_VERSION=1.80.0
+# RUN export BOOST_VERSION_UNDERSCORE=$(echo ${BOOST_VERSION} | sed 's/\./_/g') \
+#     && wget https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION_UNDERSCORE}.tar.bz2
+# RUN export BOOST_VERSION_UNDERSCORE=$(echo ${BOOST_VERSION} | sed 's/\./_/g') \
+#     && tar --bzip2 -vxf boost_${BOOST_VERSION_UNDERSCORE}.tar.bz2 \
+#     && rm boost_${BOOST_VERSION_UNDERSCORE}.tar.bz2
+# RUN export BOOST_VERSION_UNDERSCORE=$(echo ${BOOST_VERSION} | sed 's/\./_/g') \
+#     && cd boost_${BOOST_VERSION_UNDERSCORE} \
+#     && ./bootstrap.sh \
+#     && ./b2 install
+    
+# Install z3
+ARG Z3_VERSION=4.11.2
+# ${Z3_VERSION} is the version required by solc
+# RUN git clone https://github.com/Z3Prover/z3.git \
+# 	&& cd z3 \
+# 	&& git checkout z3-${Z3_VERSION} \
+# 	&& python3 scripts/mk_make.py \
+# 	&& cd build \
+# 	&& make -j8 \
+# 	&& make -j8 install \
+# 	&& cd ../.. \
+#   && rm -rf z3
+RUN wget https://github.com/Z3Prover/z3/releases/download/z3-${Z3_VERSION}/z3-${Z3_VERSION}-x64-glibc-2.31.zip \
+    && unzip z3-${Z3_VERSION}-x64-glibc-2.31.zip \
+    && rm z3-${Z3_VERSION}-x64-glibc-2.31.zip
+
+RUN export Z3_VERSION_MAIN=$(echo ${Z3_VERSION} | cut -d'.' -f1)            \
+    && export Z3_VERSION_MIDDLE=$(echo ${Z3_VERSION} | cut -d'.' -f2)       \
+    && cd z3-${Z3_VERSION}-x64-glibc-2.31/bin                               \
+    && mv libz3.so /lib/libz3.so.${Z3_VERSION_MAIN}.${Z3_VERSION_MIDDLE}
+    
+RUN rm -r z3-${Z3_VERSION}-x64-glibc-2.31
+
+
+# Install solc
+ARG SOLC_VERSION=0.8.17
+# RUN git clone --recursive https://github.com/ethereum/solidity.git \
+#     && cd solidity \
+# 	&& git checkout v${SOLC_VERSION} \
+#     && mkdir build \
+#     && cd build \
+#     && cmake .. \
+#     && make
+RUN pip3 install solc-select
+RUN solc-select install ${SOLC_VERSION} \
+    && solc-select use ${SOLC_VERSION}
+
+# Install hevm
+RUN wget https://github.com/dapphub/dapptools/releases/download/seth%2F0.11.0/hevm -P /usr/bin
+RUN chmod a+x /usr/bin/hevm
+
+# Install Slither
+ARG SLITHER_VERSION=0.9.0
+RUN pip3 install slither-analyzer==${SLITHER_VERSION}

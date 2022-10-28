@@ -1,0 +1,14 @@
+
+=================================================================
+Generate bin-runtime
+=================================================================
+
+Compiler run successful. Artifact(s) can be found in directory "/prj/solc-out".
+
+=================================================================
+Function: resignFromAuction()
+=================================================================
+
+hevm: unexpected symbolic argument
+CallStack (from HasCallStack):
+  error, called at src/EVM/Symbolic.hs:42:14 in hevm-0.48.1-KdjyJ1kXYK7IQeiBwTCoFo:EVM.Symbolic

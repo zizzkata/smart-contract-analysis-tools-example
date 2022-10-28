@@ -1,0 +1,14 @@
+
+=================================================================
+Generate bin-runtime
+=================================================================
+
+Compiler run successful. Artifact(s) can be found in directory "/prj/solc-out".
+
+=================================================================
+Function: claimTokens()
+=================================================================
+
+checking postcondition...
+Q.E.D.
+Explored: 11 branches without assertion violations
