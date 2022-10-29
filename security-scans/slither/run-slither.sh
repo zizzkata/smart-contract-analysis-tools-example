@@ -19,8 +19,11 @@ echo "Run Slither"                                                          | te
 echo "================================================================="    | tee -a ${outputFile}        
 echo ""                                                                     | tee -a ${outputFile}
 
+cp ${projectRoot}/security-scans/slither/slither.config.json ${projectRoot}/slither.config.json
+
 docker run --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-tools:latest /bin/bash -c "  \
-    cd /prj/security-scans/slither/                 \
-    && rm -f ${contractName}-output.json            \
-    && slither --json ${contractName}-output.json   \
+    rm -f /prj/security-scans/slither/${contractName}-output.json                                           \
+    && slither --json /prj/security-scans/slither/${contractName}-output.json    \
     /prj/src/smart-contracts/${contractName}.sol" 2>&1 | tee -a ${outputFile}
+
+rm ${projectRoot}/slither.config.json
