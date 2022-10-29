@@ -1,11 +1,11 @@
 {
-  "filter_paths": "lib,node_modules",
-  "solc_args": "--base-path ../../ --include-path ../../node_modules --include-path ../../lib",
+  "filter_paths": "libs,node_modules",
+  "solc_args": "--base-path ../../ --include-path ../../node_modules --include-path ../../libs",
   "solc_working_dir": "../../",
   "solc_remaps": [
-    "ds-test/=lib/ds-test/src/",
+    "ds-test/=libs/ds-test/src/",
     "@openzeppelin/=node_modules/@openzeppelin/",
-    "forge-std/=lib/forge-std/src/",
+    "forge-std/=libs/forge-std/src/",
     "@smart-contracts=src/smart-contracts/"
   ],
   "printers_to_run": "human-summary",

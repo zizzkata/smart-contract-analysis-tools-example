@@ -3,6 +3,14 @@
 projectRoot=$1
 contractName=$2
 
+if [ -z "$contractName" ]
+then
+    echo ""
+    echo "Please provide the name of the contract without '.sol'"
+    echo ""
+    exit 1
+fi
+
 echo ""
 echo "================================================================="
 echo "Running SMTChecker"
@@ -10,11 +18,14 @@ echo "================================================================="
 echo ""
 
 docker run --pull --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-tools:latest bash -c " \
-    solc --base-path /prj/smart-contracts               \
-    --include-path /prj/smart-contracts/node_modules    \
-    --include-path /prj/smart-contracts/lib             \
+    cd /prj                                             \
+    && solc                                             \
+    ds-test/=libs/ds-test/src/                          \
+    forge-std/=libs/forge-std/src/                      \
+    @openzeppelin/=node_modules/@openzeppelin/          \
+    @smart-contracts=src/smart-contracts/               \
     --model-checker-engine all                          \
     --model-checker-solvers all                         \
     --model-checker-targets all                         \
     --model-checker-timeout 60000                       \
-    /prj/smart-contracts/src/${contractName}.sol"
+    /prj/src/smart-contracts/${contractName}.sol"

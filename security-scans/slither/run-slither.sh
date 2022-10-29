@@ -3,6 +3,14 @@
 projectRoot=$1
 contractName=$2
 
+if [ -z "$contractName" ]
+then
+    echo ""
+    echo "Please provide the name of the contract without '.sol'"
+    echo ""
+    exit 1
+fi
+
 echo ""
 echo "================================================================="
 echo "Run Slither"
