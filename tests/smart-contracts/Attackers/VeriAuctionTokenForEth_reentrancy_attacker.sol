@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 pragma abicoder v2;
 
-import "../../src/interfaces/IVeriAuctionTokenForEth.sol";
+import "@smart-contracts/interfaces/IVeriAuctionTokenForEth.sol";
 
 contract VeriAuctionTokenForEth_reentrancy_attacker {
     //========================================

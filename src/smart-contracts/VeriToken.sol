@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 pragma abicoder v2;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "./interfaces/IVeriToken.sol";
+import "@smart-contracts/interfaces/IVeriToken.sol";
 
 contract VeriToken is ERC20, IVeriToken {
     constructor() ERC20("VeriToken", "VT") {}

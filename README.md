@@ -11,7 +11,11 @@ $ yarn install
 ```
 
 ```bash
-$ git submodule update --init --recursive -- lib/forge-std
+$ git submodule update --init --recursive
+```
+
+```bash
+$ sudo yarn run sc:test
 ```
 
 ```bash

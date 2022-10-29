@@ -5,7 +5,8 @@
   "solc_remaps": [
     "ds-test/=lib/ds-test/src/",
     "@openzeppelin/=node_modules/@openzeppelin/",
-    "forge-std/=lib/forge-std/src/"
+    "forge-std/=lib/forge-std/src/",
+    "@smart-contracts=src/smart-contracts/"
   ],
   "printers_to_run": "human-summary",
   "detectors_to_run": "all"

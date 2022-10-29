@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import "Utils/Utils.sol";
-import "src/VeriToken.sol";
+import "@smart-contracts/VeriToken.sol";
 
 contract VeriTokenTest is Test {
     //======================================================

@@ -6,7 +6,7 @@ import "./Utils/Utils.sol";
 import "./Mocks/ERC20Mock.sol";
 
 // Contract Under Test
-import "src/VeriAuctionTokenForEth_problems.sol";
+import "@smart-contracts/VeriAuctionTokenForEth_problems.sol";
 
 contract VeriAuctionTokenForEth_problems_setup is Test {
     //========================================
