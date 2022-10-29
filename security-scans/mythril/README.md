@@ -1,5 +1,5 @@
-You might need to use sudo.
+You might need to run `sudo` on the command below.
 
 ```bash
-$ ./run-mythril.sh ${PWD}/../ VeriToken 2>&1 | tee VeriToken-mythril.result
+$ ./run-mythril.sh ${PWD}/../ VeriToken
 ```

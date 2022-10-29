@@ -11,11 +11,13 @@ then
     exit 1
 fi
 
-echo ""
-echo "================================================================="
-echo "Running SMTChecker"
-echo "================================================================="
-echo ""
+outputFile=$(dirname "$0")/${contractName}-SMTChecker.result
+
+echo ""                                                                     | tee ${outputFile}
+echo "================================================================="    | tee -a ${outputFile}
+echo "Running SMTChecker"                                                   | tee -a ${outputFile}
+echo "================================================================="    | tee -a ${outputFile}
+echo ""                                                                     | tee -a ${outputFile}
 
 docker run --pull --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-tools:latest bash -c " \
     cd /prj                                             \
@@ -28,4 +30,4 @@ docker run --pull --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-to
     --model-checker-solvers all                         \
     --model-checker-targets all                         \
     --model-checker-timeout 60000                       \
-    /prj/src/smart-contracts/${contractName}.sol"
+    /prj/src/smart-contracts/${contractName}.sol" 2>&1 | tee -a ${outputFile}

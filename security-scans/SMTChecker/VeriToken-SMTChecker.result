@@ -4,13 +4,13 @@ Running SMTChecker
 =================================================================
 
 Warning: Function state mutability can be restricted to pure
-  --> src/VeriToken.sol:12:5:
+  --> src/smart-contracts/VeriToken.sol:12:5:
    |
 12 |     function decimals() public view override returns (uint8) {
    |     ^ (Relevant source part starts here and spans across multiple lines).
 
 Warning: CHC: Overflow (resulting value larger than 2**256 - 1) happens here.
-   --> @openzeppelin/contracts/token/ERC20/ERC20.sol:183:34:
+   --> node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol:183:34:
     |
 183 |         _approve(owner, spender, allowance(owner, spender) + addedValue);
     |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -18,7 +18,7 @@ Warning: CHC: Overflow (resulting value larger than 2**256 - 1) happens here.
 Warning: CHC: 1 verification condition(s) could not be proved. Enable the model checker option "show unproved" to see all of them. Consider choosing a specific contract to be verified in order to reduce the solving problems. Consider increasing the timeout per query.
 
 Warning: BMC: Overflow (resulting value larger than 2**256 - 1) happens here.
-   --> @openzeppelin/contracts/token/ERC20/ERC20.sol:241:9:
+   --> node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol:241:9:
     |
 241 |         _balances[to] += amount;
     |         ^^^^^^^^^^^^^^^^^^^^^^^
@@ -36,7 +36,7 @@ Note: Counterexample:
 
 Note: Callstack:
 Note:
-   --> @openzeppelin/contracts/token/ERC20/ERC20.sol:115:9:
+   --> node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol:115:9:
     |
 115 |         _transfer(owner, to, amount);
     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -52,15 +52,15 @@ amount = 2438
 Transaction trace:
 VeriToken.constructor()
 State: _totalSupply = 0, _name = [0x56, 0x65, 0x72, 0x69, 0x54, 0x6f, 0x6b, 0x65, 0x6e], _symbol = [0x56, 0x54]
-VeriToken.mint(115792089237316195423570985008687907853269984665640564039457584007913129637498){ msg.sender: 0x1dd1 }
-    ERC20._mint(0x1dd1, 115792089237316195423570985008687907853269984665640564039457584007913129637498) -- internal call
-        ERC20._beforeTokenTransfer(0x0, 0x1dd1, 115792089237316195423570985008687907853269984665640564039457584007913129637498) -- internal call
-        ERC20._afterTokenTransfer(0x0, 0x1dd1, 115792089237316195423570985008687907853269984665640564039457584007913129637498) -- internal call
+VeriToken.mint(115792089237316195423570985008687907853269984665640564039457584007913129637498){ msg.sender: 0x0760 }
+    ERC20._mint(0x0760, 115792089237316195423570985008687907853269984665640564039457584007913129637498) -- internal call
+        ERC20._beforeTokenTransfer(0x0, 0x0760, 115792089237316195423570985008687907853269984665640564039457584007913129637498) -- internal call
+        ERC20._afterTokenTransfer(0x0, 0x0760, 115792089237316195423570985008687907853269984665640564039457584007913129637498) -- internal call
 State: _totalSupply = 115792089237316195423570985008687907853269984665640564039457584007913129637498, _name = [0x56, 0x65, 0x72, 0x69, 0x54, 0x6f, 0x6b, 0x65, 0x6e], _symbol = [0x56, 0x54]
 VeriToken.mint(2438){ msg.sender: 0x52f7 }
     ERC20._mint(0x52f7, 2438) -- internal call
         ERC20._beforeTokenTransfer(0x0, 0x52f7, 2438) -- internal call
-   --> @openzeppelin/contracts/token/ERC20/ERC20.sol:262:9:
+   --> node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol:262:9:
     |
 262 |         _totalSupply += amount;
     |         ^^^^^^^^^^^^^^^^^^^^^^
