@@ -22,7 +22,7 @@ echo ""                                                                     | te
 
 docker run --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-tools:latest /bin/bash -c "  \
     cd /prj                                                                                         \
-    && rm -f ./security-scans/slither/${contractName}-output.json                                   \
+    && rm -f ./security-scans/slither/results/${contractName}/${contractName}-output.json           \
     && slither --json ./security-scans/slither/results/${contractName}/${contractName}-output.json  \
     --config-file ./security-scans/slither/slither.config.json                                      \
     ./src/smart-contracts/${contractName}.sol" 2>&1 | tee -a ${outputFile}

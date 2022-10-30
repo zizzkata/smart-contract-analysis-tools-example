@@ -33,4 +33,3 @@ ERCs: ERC20
 |           |             |       |                    |              |          |
 +-----------+-------------+-------+--------------------+--------------+----------+
 ./src/smart-contracts/VeriToken.sol analyzed (6 contracts)
-INFO:Slither:./security-scans/slither/results/VeriToken/VeriToken-output.json exists already, the overwrite is prevented

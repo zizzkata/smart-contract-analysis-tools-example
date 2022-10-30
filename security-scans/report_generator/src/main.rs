@@ -25,8 +25,10 @@ fn main() {
     let result = slither::run_slither(path_string, contract_name);
     println!("{}", result);
 
-    println!("Running SMTChecker");
+    slither::format_output_to_markdown(path_string, contract_name);
 
-    let result = smtchecker::run_smtchecker(path_string, contract_name);
-    println!("{}", result);
+    // println!("Running SMTChecker");
+
+    // let result = smtchecker::run_smtchecker(path_string, contract_name);
+    // println!("{}", result);
 }
