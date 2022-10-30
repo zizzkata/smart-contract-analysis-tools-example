@@ -35,6 +35,10 @@ $ sudo yarn run sc:test
 $ sudo yarn run sc:slither VeriToken
 ```
 
+```bash
+$ yarn run sc:generate-report VeriToken
+```
+
 ## Scenarios
 
 We would like to have the following scenarios: 0. We should be able to use imports
