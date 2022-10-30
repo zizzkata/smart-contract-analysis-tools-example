@@ -3,9 +3,9 @@
 Run Slither
 =================================================================
 
-Compilation warnings/errors on /prj/smart-contracts/src/VeriToken.sol:
+Compilation warnings/errors on ./src/smart-contracts/VeriToken.sol:
 Warning: Function state mutability can be restricted to pure
-  --> src/VeriToken.sol:12:5:
+  --> src/smart-contracts/VeriToken.sol:12:5:
    |
 12 |     function decimals() public view override returns (uint8) {
    |     ^ (Relevant source part starts here and spans across multiple lines).
@@ -32,4 +32,5 @@ ERCs: ERC20
 |           |             |       | Approve Race Cond. |              |          |
 |           |             |       |                    |              |          |
 +-----------+-------------+-------+--------------------+--------------+----------+
-/prj/smart-contracts/src/VeriToken.sol analyzed (6 contracts)
+./src/smart-contracts/VeriToken.sol analyzed (6 contracts)
+INFO:Slither:./security-scans/slither/results/VeriToken/VeriToken-output.json exists already, the overwrite is prevented

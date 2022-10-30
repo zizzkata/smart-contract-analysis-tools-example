@@ -21,3 +21,6 @@ pub fn run_slither(prj_root_path: &str, contract_name: &str) -> String {
 
     return output.to_string();
 }
+
+// https://github.com/crytic/slither/wiki/JSON-output
+pub fn format_output_to_markdown() {}

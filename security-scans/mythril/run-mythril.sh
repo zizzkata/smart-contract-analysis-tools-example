@@ -11,7 +11,8 @@ then
     exit 1
 fi
 
-outputFile=$(dirname "$0")/${contractName}-Mythril.result
+mkdir -p $(dirname "$0")/results/${contractName}
+outputFile=$(dirname "$0")/results/${contractName}/${contractName}-Mythril.result
 
 echo ""                                                                     | tee ${outputFile}
 echo "================================================================="    | tee -a ${outputFile}
