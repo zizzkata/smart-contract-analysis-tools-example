@@ -1,0 +1,15 @@
+
+=================================================================
+Flatten the contract to be verified
+=================================================================
+
+Flattened file written at /prj/security-scans/flattened/VeriToken-flat.sol
+
+=================================================================
+Run Mythril
+=================================================================
+
+usage: myth [-h] [-v LOG_LEVEL]
+            {safe-functions,analyze,a,disassemble,d,list-detectors,read-storage,function-to-hash,hash-to-address,version,help}
+            ...
+myth: error: argument command: invalid choice: '       -v 4 analyze                                                    --max-depth 50                                                  /prj/security-scans/flattened/VeriToken-flat.sol:VeriToken' (choose from 'safe-functions', 'analyze', 'a', 'disassemble', 'd', 'list-detectors', 'read-storage', 'function-to-hash', 'hash-to-address', 'version', 'help')

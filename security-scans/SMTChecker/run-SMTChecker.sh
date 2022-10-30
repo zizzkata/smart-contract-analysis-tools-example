@@ -22,7 +22,7 @@ echo ""                                                                     | te
 docker run --pull --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-tools:latest bash -c " \
     cd /prj                                             \
     && solc                                             \
-    ds-test/=libs/ds-test/src/                          \
+    ds-test/=libs/forge-std/lib/ds-test/src/            \
     forge-std/=libs/forge-std/src/                      \
     @openzeppelin/=node_modules/@openzeppelin/          \
     @smart-contracts=src/smart-contracts/               \

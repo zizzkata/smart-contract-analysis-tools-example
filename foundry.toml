@@ -7,7 +7,7 @@
     solc = "0.8.17"
 
 [profile.ci]
- src = 'src/smart-contracts'
+    src = 'src/smart-contracts'
     test = 'tests/smart-contracts'
     out = 'dist/smart-contracts/'
     cache_path = 'cache/smart-contracts'
