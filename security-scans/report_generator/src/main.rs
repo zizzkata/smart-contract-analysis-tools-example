@@ -10,7 +10,7 @@ fn main() {
 
     if args.len() <= 1 {
         println!("\nERROR: Please provide the name of the contract without '.sol'!\n");
-        process::exit(1)
+        process::exit(1);
     }
 
     let contract_name = &args[1];
