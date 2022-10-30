@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use serde_json::{Result, Value};
 use std::any::type_name;
 use std::env;
@@ -31,6 +32,13 @@ pub fn run_slither(prj_root_path: &str, contract_name: &str) -> String {
 }
 
 // Check if strongly typed output if possible with optional fields
+#[derive(Serialize, Deserialize)]
+struct SlitherOutput {
+    success: bool,
+    error: Value,
+    results: Value,
+}
+
 // Out of date: https://github.com/crytic/slither/wiki/JSON-output
 pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Result<()> {
     let slither_json_path =
@@ -41,28 +49,24 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
 
     println!("{contents}");
 
-    let result: Value = serde_json::from_str(&contents)?;
+    let result: SlitherOutput = serde_json::from_str(&contents)?;
 
-    println!("{}", result["success"]);
+    println!("success: {}", result.success);
 
-    let printers = &result["results"]["printers"];
+    // let printers = &result["results"]["printers"];
 
-    println!("{}", type_of(printers));
+    // let printer_count = 1; // printers.len()
+    // for i in 0..printer_count {
+    //     let current_printer = match printers[i]["printer"].as_str() {
+    //         Some(s) => s,
+    //         _ => "",
+    //     };
 
-    let printer_count = 1; // printers.len()
-    for i in 0..printer_count {
-        let current_printer = match printers[i]["printer"].as_str() {
-            Some(s) => s,
-            _ => "",
-        };
-
-        let printer_data = &printers[i];
-
-        match current_printer {
-            "human-summary" => format_printer_markdown_human_summary(printer_data),
-            _ => println!("Printer ({}) not supported", current_printer),
-        }
-    }
+    //     match current_printer {
+    //         "human-summary" => format_printer_markdown_human_summary(&printers[i]),
+    //         _ => println!("Printer ({}) not supported", current_printer),
+    //     }
+    // }
 
     Ok(())
 }
