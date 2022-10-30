@@ -4,6 +4,24 @@
 
 In order to see how the formal verification (FV) tools can work in real world scenarios, we need a real world scenario. It should be simple enough however to make it easy to debug and analyze manually.
 
+## Usage
+
+```bash
+$ yarn install
+```
+
+```bash
+$ git submodule update --init --recursive
+```
+
+```bash
+$ sudo yarn run sc:test
+```
+
+```bash
+$ sudo yarn run sc:slither VeriToken
+```
+
 ## Scenarios
 
 We would like to have the following scenarios: 0. We should be able to use imports

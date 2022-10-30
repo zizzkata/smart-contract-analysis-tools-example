@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+echo pre-push checks
+solhint ./src/smart-contract/*.sol
+
+if [ $? -eq 0 ]; 
+then
+	echo "solhint check is correct"
+else
+	exit 1
+fi
