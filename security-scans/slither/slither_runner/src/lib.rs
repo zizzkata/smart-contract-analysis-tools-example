@@ -59,8 +59,20 @@ struct SlitherOutputHumanSummaryAdditionalFields {
     standard_libraries: Value,
     ercs: Vec<String>,
     number_findings: Value,
-    detectors: Value,
+    detectors: Vec<SlitherOutputHumanSummaryAdditionalFieldsDetectors>,
     number_lines__dependencies: i32,
+}
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsDetectors {
+    elements: Vec<Value>,
+    description: String,
+    markdown: String,
+    first_markdown_element: String,
+    id: String,
+    check: String,
+    impact: String,
+    confidence: String,
 }
 
 // Out of date: https://github.com/crytic/slither/wiki/JSON-output
@@ -70,8 +82,6 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
 
     let contents =
         fs::read_to_string(&slither_json_path).expect("Should have been able to read the file");
-
-    println!("{contents}");
 
     let result: SlitherOutput = serde_json::from_str(&contents)?;
 
