@@ -1,7 +1,13 @@
+use serde_json::{Result, Value};
+use std::any::type_name;
 use std::env;
 use std::fs;
 use std::process::Command;
 use std::str;
+
+fn type_of<T>(_: T) -> &'static str {
+    type_name::<T>()
+}
 
 pub fn run_slither(prj_root_path: &str, contract_name: &str) -> String {
     // TODO: see if sudo can be removed
@@ -24,58 +30,41 @@ pub fn run_slither(prj_root_path: &str, contract_name: &str) -> String {
     return output.to_string();
 }
 
-// https://github.com/crytic/slither/wiki/JSON-output
-//
-/*
-{
-    "success": true,
-    "error": null,
-    "results": {
-        "detectors": [
-            {
-                "check": "...",
-                "impact": "...",
-                "confidence": "...",
-                "description": "...",
-                "elements": [
-                    {
-                        "type": "...",
-                        "name": "...",
-                        "source_mapping": {
-                            "start": 45
-                            "length": 58,
-                            "filename_relative": "contracts/tests/constant.sol",
-                            "filename_absolute": "/tmp/contracts/tests/constant.sol",
-                            "filename_short": "tests/constant.sol",
-                            "filename_used": "contracts/tests/constant.sol",
-                            "lines": [
-                                5,
-                                6,
-                                7
-                            ],
-                            "starting_column": 1,
-                            "ending_column": 24,
-                        },
-                        "type_specific_fields": {},
-                        "additional_fields": {
-                            https://github.com/crytic/slither/wiki/JSON-output#detector-specific-additional-fields
-                        }
-                    }
-                ]
-            }
-        ],
-        "upgradeability-check": {}
-    }
-}
- */
-pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) {
+// Check if strongly typed output if possible with optional fields
+// Out of date: https://github.com/crytic/slither/wiki/JSON-output
+pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Result<()> {
     let slither_json_path =
         format!("{prj_root_path}/security-scans/slither/results/{contract_name}/{contract_name}-output.json");
-
-    println!("In file {}", slither_json_path);
 
     let contents =
         fs::read_to_string(slither_json_path).expect("Should have been able to read the file");
 
-    println!("With text:\n{contents}");
+    println!("{contents}");
+
+    let result: Value = serde_json::from_str(&contents)?;
+
+    println!("{}", result["success"]);
+
+    let printers = &result["results"]["printers"];
+
+    println!("{}", type_of(printers));
+
+    let printer_count = 1; // printers.len()
+    for i in 0..printer_count {
+        let current_printer = match printers[i]["printer"].as_str() {
+            Some(s) => s,
+            _ => "",
+        };
+
+        let printer_data = &printers[i];
+
+        match current_printer {
+            "human-summary" => format_printer_markdown_human_summary(printer_data),
+            _ => println!("Printer ({}) not supported", current_printer),
+        }
+    }
+
+    Ok(())
 }
+
+fn format_printer_markdown_human_summary(json_data: &Value) {}
