@@ -11,7 +11,14 @@ echo "Generate bin-runtime: solc ${solcVersion}"
 echo "================================================================="
 echo ""
 
-docker run --rm -v ${projectRoot}s:/prj ethereum/solc:${solcVersion} --base-path /prj --include-path /prj/node_modules --include-path /prj/lib -o /prj/src/smart-contracts/solc-out --bin-runtime --overwrite /prj/src/smart-contracts/${contractName}.sol
+docker run --rm -v ${projectRoot}s:/prj ethereum/solc:${solcVersion}    \
+    --base-path /prj                                                    \
+    --include-path /prj/node_modules                                    \
+    --include-path /prj/lib                                             \
+    -o /prj/src/smart-contracts/solc-out                                \
+    --bin-runtime                                                       \
+    --overwrite                                                         \
+    /prj/src/smart-contracts/${contractName}.sol
 
 echo ""
 echo "================================================================="
