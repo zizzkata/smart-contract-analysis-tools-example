@@ -7,8 +7,13 @@ name = "report_generator"
 version = "0.1.0"
 dependencies = [
  "slither_runner",
+ "smtchecker_runner",
 ]
 
 [[package]]
 name = "slither_runner"
+version = "0.1.0"
+
+[[package]]
+name = "smtchecker_runner"
 version = "0.1.0"
