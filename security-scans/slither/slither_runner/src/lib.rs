@@ -2,9 +2,11 @@ use std::process::Command;
 use std::str;
 
 pub fn run_slither(prj_root_path: &str, contract_name: &str) -> String {
-
     // TODO: see if sudo can be removed
-    let command = format!("sudo ./security-scans/slither/run-slither.sh {} {}", prj_root_path, contract_name);
+    let command = format!(
+        "sudo ./security-scans/slither/run-slither.sh {} {}",
+        prj_root_path, contract_name
+    );
 
     let result = Command::new("sh")
         .arg("-c")

@@ -1,5 +1,5 @@
-use std::process;
 use std::env;
+use std::process;
 
 // Import the different tools
 use slither_runner as slither;
@@ -16,7 +16,9 @@ fn main() {
     let contract_name = &args[1];
 
     let path = env::current_dir().expect("ERROR: Failed to get current path!");
-    let path_string = path.to_str().expect("ERROR: can not convert path to string!");
+    let path_string = path
+        .to_str()
+        .expect("ERROR: can not convert path to string!");
 
     println!("Running Slither");
 
