@@ -1,10 +1,15 @@
+use std::process;
 use slither_runner as slither;
 use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    // TODO: show message if no argument was given
+    if args.len() <= 1 {
+        println!("\nERROR: Please provide the name of the contract without '.sol'!\n");
+        process::exit(1)
+    }
+
     let contract_name = &args[1];
 
     let path = env::current_dir().expect("ERROR: Failed to get current path!");
