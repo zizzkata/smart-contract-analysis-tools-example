@@ -31,7 +31,8 @@ pub fn run_slither(prj_root_path: &str, contract_name: &str) -> String {
     return output.to_string();
 }
 
-// Check if strongly typed output if possible with optional fields
+// For Slither v0.9.0
+// https://github.com/crytic/slither/tree/0.9.0
 #[derive(Serialize, Deserialize)]
 struct SlitherOutput {
     success: bool,
@@ -74,6 +75,18 @@ struct SlitherOutputHumanSummaryAdditionalFieldsDetectors {
     impact: String,
     confidence: String,
 }
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsTypePragma {}
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsTypeContract {}
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsTypeFunction {}
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsTypeNode {}
 
 // Out of date: https://github.com/crytic/slither/wiki/JSON-output
 pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Result<()> {
