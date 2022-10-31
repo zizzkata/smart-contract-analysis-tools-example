@@ -3,7 +3,7 @@
 Run Slither
 =================================================================
 
-Compilation warnings/errors on ./src/smart-contracts/VeriToken.sol:
+Compilation warnings/errors on ./src/smart-contracts//VeriToken.sol:
 Warning: Function state mutability can be restricted to pure
   --> src/smart-contracts/VeriToken.sol:12:5:
    |
@@ -32,4 +32,4 @@ ERCs: ERC20
 |           |             |       | Approve Race Cond. |              |          |
 |           |             |       |                    |              |          |
 +-----------+-------------+-------+--------------------+--------------+----------+
-./src/smart-contracts/VeriToken.sol analyzed (6 contracts)
+./src/smart-contracts//VeriToken.sol analyzed (6 contracts)

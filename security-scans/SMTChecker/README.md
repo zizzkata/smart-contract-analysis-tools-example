@@ -9,14 +9,4 @@ Using the custom Docker image because the [official solc image](https://hub.dock
 
 For more information about the SMTChecker see the [Solidity docs](https://docs.soliditylang.org/en/v0.8.17/smtchecker.html).
 
-## Running
-
-You might need to run `sudo` on the command below.
-
-```bash
-$ ./run-SMTChecker.sh ${PWD}/../ VeriToken
-```
-
-The output can then be found in [VeriToken-SMTChecker.result](./eriToken-SMTChecker.result).
-
-The expected output will look like this:
+# Limiations

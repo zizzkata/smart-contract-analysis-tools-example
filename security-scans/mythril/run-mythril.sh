@@ -1,9 +1,11 @@
 #!/bin/bash
 
 projectRoot=$1
-contractName=$2
+pathToSecurityScansFromRoot=$2
+pathToSourceFileFromRoot=$3
+contractName=$4
 
-if [ -z "$contractName" ]
+if [ -z "${contractName}" ]
 then
     echo ""
     echo "Please provide the name of the contract without '.sol'"
@@ -23,8 +25,8 @@ echo ""                                                                     | te
 docker run --rm -v ${projectRoot}:/prj ghcr.io/foundry-rs/foundry:latest "  \
     cd /prj                                                                 \
     && forge flatten                                                        \
-    --output /prj/security-scans/flattened/${contractName}-flat.sol         \
-    ./src/smart-contracts/${contractName}.sol" 2>&1 | tee -a ${outputFile}
+    --output /prj/${pathToSecurityScansFromRoot}/flattened/${contractName}-flat.sol         \
+    ${pathToSourceFileFromRoot}/${contractName}.sol" 2>&1 | tee -a ${outputFile}
 
 echo ""                                                                     | tee -a ${outputFile}
 echo "================================================================="    | tee -a ${outputFile}    
@@ -35,5 +37,5 @@ echo ""                                                                     | te
 docker run --rm -v ${projectRoot}:/prj mythril/myth:0.23.10                 \
     -v 4 analyze                                                            \
     --max-depth 50                                                          \
-    /prj/security-scans/flattened/${contractName}-flat.sol:${contractName}  \
+    /prj/${pathToSecurityScansFromRoot}/flattened/${contractName}-flat.sol:${contractName}  \
     2>&1 | tee -a ${outputFile}

@@ -13,11 +13,16 @@ fn type_of<T>(_: T) -> &'static str {
     type_name::<T>()
 }
 
-pub fn run_slither(prj_root_path: &str, contract_name: &str) -> String {
+pub fn run_slither(
+    project_root_path_abs: &str,
+    security_scan_path_rel: &str,
+    contract_source_path_rel: &str,
+    contract_name: &str,
+) -> String {
     // TODO: see if sudo can be removed
     let command = format!(
-        "sudo ./security-scans/slither/run-slither.sh {} {}",
-        prj_root_path, contract_name
+        "sudo {project_root_path_abs}/{security_scan_path_rel}/slither/run-slither.sh {} {} {} {}",
+        project_root_path_abs, security_scan_path_rel, contract_source_path_rel, contract_name
     );
 
     let result = Command::new("sh")
@@ -118,9 +123,13 @@ struct SlitherOutputHumanSummaryAdditionalFieldsTypeFunction {}
 struct SlitherOutputHumanSummaryAdditionalFieldsTypeNode {}
 
 // Out of date: https://github.com/crytic/slither/wiki/JSON-output
-pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Result<String> {
+pub fn format_output_to_markdown(
+    project_root_path_abs: &str,
+    security_scan_path_rel: &str,
+    contract_name: &str,
+) -> Result<String> {
     let slither_json_path =
-        format!("{prj_root_path}/security-scans/slither/results/{contract_name}/{contract_name}-output.json");
+        format!("{project_root_path_abs}/{security_scan_path_rel}/slither/results/{contract_name}/{contract_name}-output.json");
 
     let contents =
         fs::read_to_string(&slither_json_path).expect("Should have been able to read the file");
@@ -151,7 +160,7 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
                     serde_json::from_str(&*tmp_string)?;
 
                 let human_summary_content = match format_printer_markdown_human_summary(
-                    prj_root_path,
+                    project_root_path_abs,
                     human_summary_result,
                 ) {
                     Ok(s) => s,
@@ -171,7 +180,7 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
 }
 
 fn format_printer_markdown_human_summary(
-    prj_root_path: &str,
+    project_root_path_abs: &str,
     json_data: SlitherOutputHumanSummary,
 ) -> Result<String> {
     let mut content = format!("{}\n", json_data.description.replace("\n", "\n\n"));
@@ -192,7 +201,7 @@ fn format_printer_markdown_human_summary(
 
             for e in detector_elements.elements.iter() {
                 let relative_path = &e.source_mapping.filename_relative;
-                let source_path = format!("{prj_root_path}/{relative_path}");
+                let source_path = format!("{project_root_path_abs}/{relative_path}");
 
                 if e.r#type == "function" {
                     content.push_str("\n**In Function**\n");
