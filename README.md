@@ -4,15 +4,28 @@
 
 In order to see how the formal verification (FV) tools can work in real world scenarios, we need a real world scenario. It should be simple enough however to make it easy to debug and analyze manually.
 
-## Usage
+## Setup
 
 ```bash
 $ yarn install
 ```
 
 ```bash
+$ curl -L https://foundry.paradigm.xyz | bash
+$ source /home/enzoevers/.bashrc
+$ foundryup
+```
+
+```bash
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+$ source /home/enzoevers/.bashrc
+```
+
+```bash
 $ git submodule update --init --recursive
 ```
+
+## Usage
 
 ```bash
 $ sudo yarn run sc:test
@@ -20,6 +33,10 @@ $ sudo yarn run sc:test
 
 ```bash
 $ sudo yarn run sc:slither VeriToken
+```
+
+```bash
+$ yarn run sc:generate-report VeriToken
 ```
 
 ## Scenarios

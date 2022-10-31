@@ -7,7 +7,7 @@ The hevm tool is a symbolic executor which is originally part of the [dapptools]
 You might need to run `sudo` on the command below.
 
 ```bash
-$ ./run-hevm.sh ${PWD}/../ VeriToken 'transfer(address, uint256)' 0.8.17 2>&1 | tee VeriToken-transfer-hevm.result
+$ ./run-hevm.sh ${PWD}/../ VeriToken 'transfer(address, uint256)' 0.8.17
 ```
 
 The output can then be found in [VeriToken-transfer-hevm.result](./VeriToken-transfer-hevm.result).

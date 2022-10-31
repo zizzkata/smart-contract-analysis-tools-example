@@ -26,4 +26,4 @@ ERCs: ERC20
 |                                 |             |       |                    |              |      Send ETH      |
 |                                 |             |       |                    |              | Tokens interaction |
 +---------------------------------+-------------+-------+--------------------+--------------+--------------------+
-/prj/smart-contracts/src/VeriAuctionTokenForEth_problems.sol analyzed (6 contracts)
+./src/smart-contracts/VeriAuctionTokenForEth_problems.sol analyzed (6 contracts)

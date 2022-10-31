@@ -18,5 +18,8 @@
   "files.exclude": {
     // "**/lib": true,
     // "**/lib-batch-auction": true
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
   }
 }
