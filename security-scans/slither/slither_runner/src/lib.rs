@@ -191,8 +191,10 @@ fn format_printer_markdown_human_summary(
                 serde_json::from_str(&*tmp_string)?;
 
             for e in detector_elements.elements.iter() {
-                if e.r#type != "function" {
-                    continue;
+                if e.r#type == "function" {
+                    content.push_str("\n**In Function**\n");
+                } else if e.r#type == "node" {
+                    content.push_str("\n**Lines of relevance**\n");
                 }
 
                 let relative_path = &e.source_mapping.filename_relative;
