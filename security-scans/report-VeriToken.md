@@ -30,28 +30,32 @@ ERCs: ERC20
 
 
 
-### check: solc-version
+### solc-version
 
-- Impact: Informational
-- Confidence: High
+- Impact: `Informational`
+- Confidence: `High`
 
 
-### check: solc-version
+### solc-version
 
-- Impact: Informational
-- Confidence: High
+- Impact: `Informational`
+- Confidence: `High`
 
 
 ```Solidity
+// src/smart-contracts/interfaces/IVeriToken.sol
+
 2 pragma solidity ^0.8.13;
 ```
 
-### check: solc-version
+### solc-version
 
-- Impact: Informational
-- Confidence: High
+- Impact: `Informational`
+- Confidence: `High`
 
 
 ```Solidity
+// src/smart-contracts/VeriToken.sol
+
 2 pragma solidity ^0.8.13;
 ```

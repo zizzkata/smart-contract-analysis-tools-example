@@ -179,11 +179,10 @@ fn format_printer_markdown_human_summary(
     let detector_items = json_data.additional_fields.detectors;
 
     for d in detector_items.iter() {
-        content.push_str(&format!("\n### check: {}\n\n", d.check));
-        content.push_str(&format!("- Impact: {}\n", d.impact));
-        content.push_str(&format!("- Confidence: {}\n", d.confidence));
+        content.push_str(&format!("\n### {}\n\n", d.check));
+        content.push_str(&format!("- Impact: `{}`\n", d.impact));
+        content.push_str(&format!("- Confidence: `{}`\n", d.confidence));
         content.push_str("\n");
-        //content.push_str(&format!("- Description: {}\n", d.description));
 
         if d.elements != serde_json::Value::Null && d.elements[0]["type"] != "contract" {
             let tmp_string = serde_json::to_string(&d)?;
@@ -191,18 +190,19 @@ fn format_printer_markdown_human_summary(
                 serde_json::from_str(&*tmp_string)?;
 
             for e in detector_elements.elements.iter() {
+                let relative_path = &e.source_mapping.filename_relative;
+                let source_path = format!("{prj_root_path}/{relative_path}");
+
                 if e.r#type == "function" {
                     content.push_str("\n**In Function**\n");
                 } else if e.r#type == "node" {
                     content.push_str("\n**Lines of relevance**\n");
                 }
 
-                let relative_path = &e.source_mapping.filename_relative;
-                let source_path = format!("{prj_root_path}/{relative_path}");
-
                 let mut mappedSourceLineIndex = 0;
 
                 content.push_str("\n```Solidity\n");
+                content.push_str(&format!("// {relative_path}\n\n"));
                 if let Ok(source_lines) = read_lines(source_path) {
                     // Consumes the iterator, returns an (Optional) String
                     let mut line_number = 1;

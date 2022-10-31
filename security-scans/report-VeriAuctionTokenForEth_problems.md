@@ -28,41 +28,47 @@ ERCs: ERC20
 
 
 
-### check: solc-version
+### solc-version
 
-- Impact: Informational
-- Confidence: High
-
-
-```Solidity
-2 pragma solidity ^0.8.13;
-```
-
-### check: solc-version
-
-- Impact: Informational
-- Confidence: High
-
-
-### check: solc-version
-
-- Impact: Informational
-- Confidence: High
+- Impact: `Informational`
+- Confidence: `High`
 
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 2 pragma solidity ^0.8.13;
 ```
 
-### check: low-level-calls
+### solc-version
 
-- Impact: Informational
-- Confidence: High
+- Impact: `Informational`
+- Confidence: `High`
+
+
+### solc-version
+
+- Impact: `Informational`
+- Confidence: `High`
+
+
+```Solidity
+// src/smart-contracts/interfaces/IVeriAuctionTokenForEth.sol
+
+2 pragma solidity ^0.8.13;
+```
+
+### low-level-calls
+
+- Impact: `Informational`
+- Confidence: `High`
 
 
 **In Function**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 96     function resignFromAuction() external override {
 97         require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");
 98 
@@ -94,24 +100,28 @@ ERCs: ERC20
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
 ```
 
-### check: naming-convention
+### naming-convention
 
-- Impact: Informational
-- Confidence: High
+- Impact: `Informational`
+- Confidence: `High`
 
 
-### check: reentrancy-benign
+### reentrancy-benign
 
-- Impact: Low
-- Confidence: Medium
+- Impact: `Low`
+- Confidence: `Medium`
 
 
 **In Function**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 57     function depositAuctionTokens() external onlyOwner {
 58         // The deployer of this auction contract should have approved the auction
 59         // contract to transfer the auction token before deploying this contract.
@@ -123,30 +133,38 @@ ERCs: ERC20
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
 ```
 
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
 ```
 
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 61         auctionStarted = true;
 ```
 
-### check: divide-before-multiply
+### divide-before-multiply
 
-- Impact: Medium
-- Confidence: Medium
+- Impact: `Medium`
+- Confidence: `Medium`
 
 
 **In Function**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 196     function calculateClaimableAmount() public view returns (uint256 claimableAmount) {
 197         require(auctionFinalized(), "VeriAuctionTokenForEth (calculateClaimableAmount): auction not finalized yet");
 198 
@@ -168,24 +186,30 @@ ERCs: ERC20
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 209         uint256 share = (commited[msg.sender] * 1e18) / finalEthBalance;
 ```
 
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 210         claimableAmount = (share * amountToDistribute) / 1e18;
 ```
 
-### check: reentrancy-eth
+### reentrancy-eth
 
-- Impact: High
-- Confidence: Medium
+- Impact: `High`
+- Confidence: `Medium`
 
 
 **In Function**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 96     function resignFromAuction() external override {
 97         require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");
 98 
@@ -217,24 +241,30 @@ ERCs: ERC20
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
 ```
 
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 120         delete commited[msg.sender];
 ```
 
-### check: unchecked-transfer
+### unchecked-transfer
 
-- Impact: High
-- Confidence: Medium
+- Impact: `High`
+- Confidence: `Medium`
 
 
 **In Function**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 138     function claimTokens() external override {
 139         require(auctionFinalized(), "VeriAuctionTokenForEth (claimTokens): Auction not finalized yet");
 140 
@@ -253,18 +283,22 @@ ERCs: ERC20
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 149         auctionToken.transfer(msg.sender, claimableAmount);
 ```
 
-### check: unchecked-transfer
+### unchecked-transfer
 
-- Impact: High
-- Confidence: Medium
+- Impact: `High`
+- Confidence: `Medium`
 
 
 **In Function**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 57     function depositAuctionTokens() external onlyOwner {
 58         // The deployer of this auction contract should have approved the auction
 59         // contract to transfer the auction token before deploying this contract.
@@ -276,18 +310,22 @@ ERCs: ERC20
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
 ```
 
-### check: unchecked-transfer
+### unchecked-transfer
 
-- Impact: High
-- Confidence: Medium
+- Impact: `High`
+- Confidence: `Medium`
 
 
 **In Function**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 154     function claimUndistributedAuctionTokens() external onlyOwner {
 155         uint256 tokensToSend = unclaimableTokenAmount;
 156         delete unclaimableTokenAmount;
@@ -300,5 +338,7 @@ ERCs: ERC20
 **Lines of relevance**
 
 ```Solidity
+// src/smart-contracts/VeriAuctionTokenForEth_problems.sol
+
 159         auctionToken.transfer(owner(), tokensToSend);
 ```
