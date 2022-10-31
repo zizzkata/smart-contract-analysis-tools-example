@@ -176,33 +176,34 @@ fn format_printer_markdown_human_summary(
 ) -> Result<String> {
     let mut content = json_data.description;
 
-    let other_content = "fdsafsdafsd";
-    content.push_str(&format!("\n{}\n", other_content));
-
     let detector_items = json_data.additional_fields.detectors;
 
     for d in detector_items.iter() {
-        println!("{}", d.check);
+        content.push_str(&format!("\n### {}\n\n", d.check));
+        content.push_str(&format!("{}\n", d.impact));
+        content.push_str(&format!("{}\n", d.confidence));
+        content.push_str("\n");
+        content.push_str(&format!("{}\n", d.markdown));
+
         if d.elements != serde_json::Value::Null && d.elements[0]["type"] != "contract" {
             let tmp_string = serde_json::to_string(&d)?;
             let detector_elements: SlitherOutputHumanSummaryAdditionalFieldsDetectorsNonSolcVersionCheck =
                 serde_json::from_str(&*tmp_string)?;
 
             for e in detector_elements.elements.iter() {
-                println!("\n----------\n\t{}\n", e.r#type);
-
                 let relative_path = &e.source_mapping.filename_relative;
                 let source_path = format!("{prj_root_path}/{relative_path}");
 
                 let mut mappedSourceLineIndex = 0;
 
+                content.push_str("\n```Solidity\n");
                 if let Ok(source_lines) = read_lines(source_path) {
                     // Consumes the iterator, returns an (Optional) String
                     let mut line_number = 1;
                     for line in source_lines {
                         if let Ok(source_line) = line {
                             if line_number == e.source_mapping.lines[mappedSourceLineIndex] {
-                                println!("{line_number} {}", source_line);
+                                content.push_str(&format!("{line_number} {}\n", source_line));
                                 mappedSourceLineIndex += 1;
                                 if mappedSourceLineIndex == e.source_mapping.lines.len() {
                                     break;
@@ -212,8 +213,7 @@ fn format_printer_markdown_human_summary(
                         line_number += 1;
                     }
                 }
-
-                println!("");
+                content.push_str("```\n");
 
                 // TODO: read lines e.source_mapping.lines from prj_root_path/e.source_mapping.filename_relative
                 //

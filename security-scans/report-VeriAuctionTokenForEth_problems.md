@@ -15,4 +15,274 @@ Number of medium issues: 1
 Number of high issues: 4
 ERCs: ERC20
 
-fdsafsdafsd
+### solc-version
+
+Informational
+High
+
+Pragma version[^0.8.13](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L2) allows old versions
+
+
+```Solidity
+2 pragma solidity ^0.8.13;
+```
+
+### solc-version
+
+Informational
+High
+
+solc-0.8.17 is not recommended for deployment
+
+
+### solc-version
+
+Informational
+High
+
+Pragma version[^0.8.13](src/smart-contracts/interfaces/IVeriAuctionTokenForEth.sol#L2) allows old versions
+
+
+```Solidity
+2 pragma solidity ^0.8.13;
+```
+
+### low-level-calls
+
+Informational
+High
+
+Low level call in [VeriAuctionTokenForEth_problems.resignFromAuction()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L96-L121):
+	- [(transferSuccess) = msg.sender.call{value: commitment}()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L117)
+
+
+```Solidity
+96     function resignFromAuction() external override {
+97         require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");
+98 
+99         if (auctionFinalized()) {
+100             // Gas savings
+101             uint256 _unclaimableTokenAmount = unclaimableTokenAmount;
+102             _unclaimableTokenAmount += calculateClaimableAmount();
+103             require(
+104                 _unclaimableTokenAmount <= amountToDistribute,
+105                 "VeriAuctionTokenForEth (resignFromAuction): unclaimable amount would be larger than total tokens to distribute"
+106             );
+107             unclaimableTokenAmount = _unclaimableTokenAmount;
+108         }
+109 
+110         uint256 commitment = commited[msg.sender];
+111         require(
+112             getEthBalance() >= commitment,
+113             "VeriAuctionTokenForEth (resignFromAuction): contract doesn't have enough ETH"
+114         );
+115 
+116         // In these three lines the re-entrancy attack happens.
+117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
+118         require(transferSuccess, "VeriAuctionTokenForEth (resignFromAuction): failed to send ETH");
+119 
+120         delete commited[msg.sender];
+121     }
+```
+
+```Solidity
+117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
+```
+
+### naming-convention
+
+Informational
+High
+
+Contract [VeriAuctionTokenForEth_problems](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L9-L225) is not in CapWords
+
+
+### reentrancy-benign
+
+Low
+Medium
+
+Reentrancy in [VeriAuctionTokenForEth_problems.depositAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L57-L62):
+	External calls:
+	- [auctionToken.transferFrom(msg.sender,address(this),amountToDistribute)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L60)
+	State variables written after the call(s):
+	- [auctionStarted = true](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L61)
+
+
+```Solidity
+57     function depositAuctionTokens() external onlyOwner {
+58         // The deployer of this auction contract should have approved the auction
+59         // contract to transfer the auction token before deploying this contract.
+60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
+61         auctionStarted = true;
+62     }
+```
+
+```Solidity
+60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
+```
+
+```Solidity
+60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
+```
+
+```Solidity
+61         auctionStarted = true;
+```
+
+### divide-before-multiply
+
+Medium
+Medium
+
+[VeriAuctionTokenForEth_problems.calculateClaimableAmount()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L196-L211) performs a multiplication on the result of a division:
+	- [share = (commited[msg.sender] * 1e18) / finalEthBalance](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L209)
+	- [claimableAmount = (share * amountToDistribute) / 1e18](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L210)
+
+
+```Solidity
+196     function calculateClaimableAmount() public view returns (uint256 claimableAmount) {
+197         require(auctionFinalized(), "VeriAuctionTokenForEth (calculateClaimableAmount): auction not finalized yet");
+198 
+199         // Note that if we would have used getCurrentPrice() in the contract, then someone
+200         // could send eth to the contract using the selfdestruct method and make it so that
+201         // no one can claim tokens due to getCurrentPrice() reverting.
+202         // Even though a lot of ETH should be sent to the contract, theoratically it is possible.
+203         //
+204         //  Example:
+205         // claimableAmount = (commited[msg.sender] * 10**auctionTokenDecimals) / getCurrentPrice();
+206 
+207         // We know that share will always be <= 1e18
+208         // The constructor already takes care of preventing an overflow in (share * amountToDistribute)
+209         uint256 share = (commited[msg.sender] * 1e18) / finalEthBalance;
+210         claimableAmount = (share * amountToDistribute) / 1e18;
+211     }
+```
+
+```Solidity
+209         uint256 share = (commited[msg.sender] * 1e18) / finalEthBalance;
+```
+
+```Solidity
+210         claimableAmount = (share * amountToDistribute) / 1e18;
+```
+
+### reentrancy-eth
+
+High
+Medium
+
+Reentrancy in [VeriAuctionTokenForEth_problems.resignFromAuction()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L96-L121):
+	External calls:
+	- [(transferSuccess) = msg.sender.call{value: commitment}()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L117)
+	State variables written after the call(s):
+	- [delete commited[msg.sender]](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L120)
+
+
+```Solidity
+96     function resignFromAuction() external override {
+97         require(commited[msg.sender] > 0, "VeriAuctionTokenForEth (resignFromAuction): must have commited some ETH");
+98 
+99         if (auctionFinalized()) {
+100             // Gas savings
+101             uint256 _unclaimableTokenAmount = unclaimableTokenAmount;
+102             _unclaimableTokenAmount += calculateClaimableAmount();
+103             require(
+104                 _unclaimableTokenAmount <= amountToDistribute,
+105                 "VeriAuctionTokenForEth (resignFromAuction): unclaimable amount would be larger than total tokens to distribute"
+106             );
+107             unclaimableTokenAmount = _unclaimableTokenAmount;
+108         }
+109 
+110         uint256 commitment = commited[msg.sender];
+111         require(
+112             getEthBalance() >= commitment,
+113             "VeriAuctionTokenForEth (resignFromAuction): contract doesn't have enough ETH"
+114         );
+115 
+116         // In these three lines the re-entrancy attack happens.
+117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
+118         require(transferSuccess, "VeriAuctionTokenForEth (resignFromAuction): failed to send ETH");
+119 
+120         delete commited[msg.sender];
+121     }
+```
+
+```Solidity
+117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
+```
+
+```Solidity
+120         delete commited[msg.sender];
+```
+
+### unchecked-transfer
+
+High
+Medium
+
+[VeriAuctionTokenForEth_problems.claimTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L138-L150) ignores return value by [auctionToken.transfer(msg.sender,claimableAmount)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L149)
+
+
+```Solidity
+138     function claimTokens() external override {
+139         require(auctionFinalized(), "VeriAuctionTokenForEth (claimTokens): Auction not finalized yet");
+140 
+141         uint256 claimableAmount = calculateClaimableAmount();
+142 
+143         // The writer of this functino might think that using the delete before the transfer prevents
+144         // a re-entrancy attack. It actually succeedes in doing that. But it can still be part of another
+145         // attack.
+146         // These two lines can also be part of the re-entrancy attack in resignFromAuction().
+147         // Than not only ETH was stolen, but the attacker would also get its share of the auction tokens.
+148         delete commited[msg.sender];
+149         auctionToken.transfer(msg.sender, claimableAmount);
+150     }
+```
+
+```Solidity
+149         auctionToken.transfer(msg.sender, claimableAmount);
+```
+
+### unchecked-transfer
+
+High
+Medium
+
+[VeriAuctionTokenForEth_problems.depositAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L57-L62) ignores return value by [auctionToken.transferFrom(msg.sender,address(this),amountToDistribute)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L60)
+
+
+```Solidity
+57     function depositAuctionTokens() external onlyOwner {
+58         // The deployer of this auction contract should have approved the auction
+59         // contract to transfer the auction token before deploying this contract.
+60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
+61         auctionStarted = true;
+62     }
+```
+
+```Solidity
+60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
+```
+
+### unchecked-transfer
+
+High
+Medium
+
+[VeriAuctionTokenForEth_problems.claimUndistributedAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L154-L160) ignores return value by [auctionToken.transfer(owner(),tokensToSend)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L159)
+
+
+```Solidity
+154     function claimUndistributedAuctionTokens() external onlyOwner {
+155         uint256 tokensToSend = unclaimableTokenAmount;
+156         delete unclaimableTokenAmount;
+157 
+158         // The transfer will fail on insufficient balance
+159         auctionToken.transfer(owner(), tokensToSend);
+160     }
+```
+
+```Solidity
+159         auctionToken.transfer(owner(), tokensToSend);
+```
