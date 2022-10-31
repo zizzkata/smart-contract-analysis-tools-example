@@ -2,19 +2,6 @@
 
 This repository is meant to be used as a submodule in existing projects.
 
-As of now this project **MUST** be located at the root of the project in the folder `security-scans`. So
-
-```
-root-of-project
-    /security-scans
-        /report-generator
-        /the-other-folders
-        README.md
-    /other-folder
-    .gitmodules
-    .gitignore
-```
-
 # Setup and usage
 
 ## Pre-requisites
@@ -35,7 +22,23 @@ All of these commands should be executed from the root folder of the main projec
 ### Generate a report for a contract
 
 ```bash
-$ yarn --cwd security-scans run scan:generate-report <your contract name without '.sol'>
+$ yarn --cwd <path to this folder> run                  \
+    scan:generate-report                                \
+    <path to project root>                              \
+    <relative path to this folder from project root>    \
+    <relative path to source files from project root>   \
+    <your contract name without '.sol'>
+```
+
+So for example:
+
+```bash
+$ yarn --cwd ./security-scans run   \
+    scan:generate-report            \
+    ${PWD}                          \
+    ./security-scans                \
+    ./src/smart-contracts/          \
+    coolDefiContract
 ```
 
 # Possible exploits in the smart contracts

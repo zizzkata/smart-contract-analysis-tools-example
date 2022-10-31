@@ -10,21 +10,18 @@ use smtchecker_runner as smtchecker;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    if args.len() <= 1 {
-        println!("\nERROR: Please provide the name of the contract without '.sol'!\n");
+    if args.len() <= 4 {
+        println!("\nERROR: Please provide the required arguments!\n");
         process::exit(1);
     }
 
-    let contract_name = &args[1];
+    let project_root_path_abs = &args[1];
+    let security_scan_path_rel = &args[2];
+    let contract_source_path_rel = &args[3];
+    let contract_name = &args[4];
 
-    let path = env::current_dir().expect("ERROR: Failed to get current path!");
-    let path_string = path
-        .parent()
-        .unwrap()
-        .to_str()
-        .expect("ERROR: can not convert path to string!");
-
-    let filePath = format!("{path_string}/security-scans/report-{contract_name}.md");
+    let filePath =
+        format!("{project_root_path_abs}/{security_scan_path_rel}/report-{contract_name}.md");
     let mut file = match create_file(&filePath) {
         Ok(f) => f,
         _ => {
@@ -43,13 +40,21 @@ fn main() {
     let slither_header = "## Slither\n\n";
     write_to_report(&mut file, &slither_header);
 
-    let result = slither::run_slither(path_string, contract_name);
+    let result = slither::run_slither(
+        project_root_path_abs,
+        security_scan_path_rel,
+        contract_source_path_rel,
+        contract_name,
+    );
 
-    let slither_markdown_content =
-        match slither::format_output_to_markdown(path_string, contract_name) {
-            Ok(s) => s,
-            _ => "".to_string(),
-        };
+    let slither_markdown_content = match slither::format_output_to_markdown(
+        project_root_path_abs,
+        security_scan_path_rel,
+        contract_name,
+    ) {
+        Ok(s) => s,
+        _ => "".to_string(),
+    };
 
     write_to_report(&mut file, &slither_markdown_content);
 

@@ -1,9 +1,11 @@
 #!/bin/bash
 
 projectRoot=$1
-contractName=$2
+pathToSecurityScansFromRoot=$2
+pathToSourceFileFromRoot=$3
+contractName=$4
 
-if [ -z "$contractName" ]
+if [ -z "${contractName}" ]
 then
     echo ""
     echo "Please provide the name of the contract without '.sol'"
@@ -22,7 +24,7 @@ echo ""                                                                     | te
 
 docker run --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-tools:latest /bin/bash -c "  \
     cd /prj                                                                                         \
-    && rm -f ./security-scans/slither/results/${contractName}/${contractName}-output.json           \
-    && slither --json ./security-scans/slither/results/${contractName}/${contractName}-output.json  \
-    --config-file ./security-scans/slither/slither.config.json                                      \
-    ./src/smart-contracts/${contractName}.sol" 2>&1 | tee -a ${outputFile}
+    && rm -f ${pathToSecurityScansFromRoot}/slither/results/${contractName}/${contractName}-output.json           \
+    && slither --json ${pathToSecurityScansFromRoot}/slither/results/${contractName}/${contractName}-output.json  \
+    --config-file ${pathToSecurityScansFromRoot}/slither/slither.config.json                                      \
+    ${pathToSourceFileFromRoot}/${contractName}.sol" 2>&1 | tee -a ${outputFile}

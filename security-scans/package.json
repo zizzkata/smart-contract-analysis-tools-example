@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "scan:slither": "./slither/run-slither.sh ${PWD}/../",
+    "scan:slither": "./slither/run-slither.sh ${PWD}",
     "scan:smt-checker": "./SMTChecker/run-SMTChecker.sh ${PWD}/../",
     "scan:mythril": "./mythril/run-mythril.sh ${PWD}/../",
     "scan:generate-report": "cargo run --manifest-path ./report_generator/Cargo.toml -- ",
