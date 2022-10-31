@@ -174,7 +174,7 @@ fn format_printer_markdown_human_summary(
     prj_root_path: &str,
     json_data: SlitherOutputHumanSummary,
 ) -> Result<String> {
-    let mut content = format!("{}\n", json_data.description);
+    let mut content = format!("{}\n", json_data.description.replace("\n", "\n\n"));
 
     let detector_items = json_data.additional_fields.detectors;
 
