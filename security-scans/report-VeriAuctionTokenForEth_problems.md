@@ -15,12 +15,13 @@ Number of medium issues: 1
 Number of high issues: 4
 ERCs: ERC20
 
+
 ### check: solc-version
 
-Impact: Informational
-Confidence: High
+- Impact: Informational
+- Confidence: High
 
-Description: Pragma version[^0.8.13](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L2) allows old versions
+- Description: Pragma version^0.8.13 (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#2) allows old versions
 
 
 ```Solidity
@@ -29,18 +30,18 @@ Description: Pragma version[^0.8.13](src/smart-contracts/VeriAuctionTokenForEth_
 
 ### check: solc-version
 
-Impact: Informational
-Confidence: High
+- Impact: Informational
+- Confidence: High
 
-Description: solc-0.8.17 is not recommended for deployment
+- Description: solc-0.8.17 is not recommended for deployment
 
 
 ### check: solc-version
 
-Impact: Informational
-Confidence: High
+- Impact: Informational
+- Confidence: High
 
-Description: Pragma version[^0.8.13](src/smart-contracts/interfaces/IVeriAuctionTokenForEth.sol#L2) allows old versions
+- Description: Pragma version^0.8.13 (src/smart-contracts/interfaces/IVeriAuctionTokenForEth.sol#2) allows old versions
 
 
 ```Solidity
@@ -49,11 +50,11 @@ Description: Pragma version[^0.8.13](src/smart-contracts/interfaces/IVeriAuction
 
 ### check: low-level-calls
 
-Impact: Informational
-Confidence: High
+- Impact: Informational
+- Confidence: High
 
-Description: Low level call in [VeriAuctionTokenForEth_problems.resignFromAuction()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L96-L121):
-	- [(transferSuccess) = msg.sender.call{value: commitment}()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L117)
+- Description: Low level call in VeriAuctionTokenForEth_problems.resignFromAuction() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#96-121):
+	- (transferSuccess) = msg.sender.call{value: commitment}() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#117)
 
 
 **In Function**
@@ -95,22 +96,22 @@ Description: Low level call in [VeriAuctionTokenForEth_problems.resignFromAuctio
 
 ### check: naming-convention
 
-Impact: Informational
-Confidence: High
+- Impact: Informational
+- Confidence: High
 
-Description: Contract [VeriAuctionTokenForEth_problems](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L9-L225) is not in CapWords
+- Description: Contract VeriAuctionTokenForEth_problems (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#9-225) is not in CapWords
 
 
 ### check: reentrancy-benign
 
-Impact: Low
-Confidence: Medium
+- Impact: Low
+- Confidence: Medium
 
-Description: Reentrancy in [VeriAuctionTokenForEth_problems.depositAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L57-L62):
+- Description: Reentrancy in VeriAuctionTokenForEth_problems.depositAuctionTokens() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#57-62):
 	External calls:
-	- [auctionToken.transferFrom(msg.sender,address(this),amountToDistribute)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L60)
+	- auctionToken.transferFrom(msg.sender,address(this),amountToDistribute) (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#60)
 	State variables written after the call(s):
-	- [auctionStarted = true](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L61)
+	- auctionStarted = true (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#61)
 
 
 **In Function**
@@ -144,12 +145,12 @@ Description: Reentrancy in [VeriAuctionTokenForEth_problems.depositAuctionTokens
 
 ### check: divide-before-multiply
 
-Impact: Medium
-Confidence: Medium
+- Impact: Medium
+- Confidence: Medium
 
-Description: [VeriAuctionTokenForEth_problems.calculateClaimableAmount()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L196-L211) performs a multiplication on the result of a division:
-	- [share = (commited[msg.sender] * 1e18) / finalEthBalance](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L209)
-	- [claimableAmount = (share * amountToDistribute) / 1e18](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L210)
+- Description: VeriAuctionTokenForEth_problems.calculateClaimableAmount() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#196-211) performs a multiplication on the result of a division:
+	- share = (commited[msg.sender] * 1e18) / finalEthBalance (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#209)
+	- claimableAmount = (share * amountToDistribute) / 1e18 (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#210)
 
 
 **In Function**
@@ -187,14 +188,14 @@ Description: [VeriAuctionTokenForEth_problems.calculateClaimableAmount()](src/sm
 
 ### check: reentrancy-eth
 
-Impact: High
-Confidence: Medium
+- Impact: High
+- Confidence: Medium
 
-Description: Reentrancy in [VeriAuctionTokenForEth_problems.resignFromAuction()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L96-L121):
+- Description: Reentrancy in VeriAuctionTokenForEth_problems.resignFromAuction() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#96-121):
 	External calls:
-	- [(transferSuccess) = msg.sender.call{value: commitment}()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L117)
+	- (transferSuccess) = msg.sender.call{value: commitment}() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#117)
 	State variables written after the call(s):
-	- [delete commited[msg.sender]](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L120)
+	- delete commited[msg.sender] (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#120)
 
 
 **In Function**
@@ -242,10 +243,10 @@ Description: Reentrancy in [VeriAuctionTokenForEth_problems.resignFromAuction()]
 
 ### check: unchecked-transfer
 
-Impact: High
-Confidence: Medium
+- Impact: High
+- Confidence: Medium
 
-Description: [VeriAuctionTokenForEth_problems.claimTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L138-L150) ignores return value by [auctionToken.transfer(msg.sender,claimableAmount)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L149)
+- Description: VeriAuctionTokenForEth_problems.claimTokens() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#138-150) ignores return value by auctionToken.transfer(msg.sender,claimableAmount) (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#149)
 
 
 **In Function**
@@ -274,10 +275,10 @@ Description: [VeriAuctionTokenForEth_problems.claimTokens()](src/smart-contracts
 
 ### check: unchecked-transfer
 
-Impact: High
-Confidence: Medium
+- Impact: High
+- Confidence: Medium
 
-Description: [VeriAuctionTokenForEth_problems.depositAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L57-L62) ignores return value by [auctionToken.transferFrom(msg.sender,address(this),amountToDistribute)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L60)
+- Description: VeriAuctionTokenForEth_problems.depositAuctionTokens() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#57-62) ignores return value by auctionToken.transferFrom(msg.sender,address(this),amountToDistribute) (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#60)
 
 
 **In Function**
@@ -299,10 +300,10 @@ Description: [VeriAuctionTokenForEth_problems.depositAuctionTokens()](src/smart-
 
 ### check: unchecked-transfer
 
-Impact: High
-Confidence: Medium
+- Impact: High
+- Confidence: Medium
 
-Description: [VeriAuctionTokenForEth_problems.claimUndistributedAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L154-L160) ignores return value by [auctionToken.transfer(owner(),tokensToSend)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L159)
+- Description: VeriAuctionTokenForEth_problems.claimUndistributedAuctionTokens() (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#154-160) ignores return value by auctionToken.transfer(owner(),tokensToSend) (src/smart-contracts/VeriAuctionTokenForEth_problems.sol#159)
 
 
 **In Function**

@@ -174,16 +174,16 @@ fn format_printer_markdown_human_summary(
     prj_root_path: &str,
     json_data: SlitherOutputHumanSummary,
 ) -> Result<String> {
-    let mut content = json_data.description;
+    let mut content = format!("{}\n", json_data.description);
 
     let detector_items = json_data.additional_fields.detectors;
 
     for d in detector_items.iter() {
         content.push_str(&format!("\n### check: {}\n\n", d.check));
-        content.push_str(&format!("Impact: {}\n", d.impact));
-        content.push_str(&format!("Confidence: {}\n", d.confidence));
+        content.push_str(&format!("- Impact: {}\n", d.impact));
+        content.push_str(&format!("- Confidence: {}\n", d.confidence));
         content.push_str("\n");
-        content.push_str(&format!("Description: {}\n", d.markdown));
+        content.push_str(&format!("- Description: {}\n", d.description));
 
         if d.elements != serde_json::Value::Null && d.elements[0]["type"] != "contract" {
             let tmp_string = serde_json::to_string(&d)?;

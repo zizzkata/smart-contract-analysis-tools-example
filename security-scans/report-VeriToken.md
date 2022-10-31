@@ -16,20 +16,21 @@ Number of high issues: 0
 
 ERCs: ERC20
 
-### check: solc-version
-
-Impact: Informational
-Confidence: High
-
-Description: solc-0.8.17 is not recommended for deployment
-
 
 ### check: solc-version
 
-Impact: Informational
-Confidence: High
+- Impact: Informational
+- Confidence: High
 
-Description: Pragma version[^0.8.13](src/smart-contracts/interfaces/IVeriToken.sol#L2) allows old versions
+- Description: solc-0.8.17 is not recommended for deployment
+
+
+### check: solc-version
+
+- Impact: Informational
+- Confidence: High
+
+- Description: Pragma version^0.8.13 (src/smart-contracts/interfaces/IVeriToken.sol#2) allows old versions
 
 
 ```Solidity
@@ -38,10 +39,10 @@ Description: Pragma version[^0.8.13](src/smart-contracts/interfaces/IVeriToken.s
 
 ### check: solc-version
 
-Impact: Informational
-Confidence: High
+- Impact: Informational
+- Confidence: High
 
-Description: Pragma version[^0.8.13](src/smart-contracts/VeriToken.sol#L2) allows old versions
+- Description: Pragma version^0.8.13 (src/smart-contracts/VeriToken.sol#2) allows old versions
 
 
 ```Solidity
