@@ -1,3 +1,6 @@
 [submodule "libs/forge-std"]
 	path = libs/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "security-scans"]
+	path = security-scans
+	url = https://github.com/Byont-Ventures/smart-contract-analysis-tools
