@@ -41,6 +41,12 @@ $ yarn --cwd ./security-scans run   \
     coolDefiContract
 ```
 
+Afterwards your report can be found at:
+
+```
+<relative path to this folder from project root>/report-<your contract name without '.sol'>.md
+```
+
 # Possible exploits in the smart contracts
 
 A nice source that explains several exploits and how to prevent them can be seen [here](https://medium.com/hackernoon/hackpedia-16-solidity-hacks-vulnerabilities-their-fixes-and-real-world-examples-f3210eba5148)
