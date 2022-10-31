@@ -22,15 +22,11 @@ ERCs: ERC20
 - Impact: Informational
 - Confidence: High
 
-- Description: solc-0.8.17 is not recommended for deployment
-
 
 ### check: solc-version
 
 - Impact: Informational
 - Confidence: High
-
-- Description: Pragma version^0.8.13 (src/smart-contracts/interfaces/IVeriToken.sol#2) allows old versions
 
 
 ```Solidity
@@ -41,8 +37,6 @@ ERCs: ERC20
 
 - Impact: Informational
 - Confidence: High
-
-- Description: Pragma version^0.8.13 (src/smart-contracts/VeriToken.sol#2) allows old versions
 
 
 ```Solidity

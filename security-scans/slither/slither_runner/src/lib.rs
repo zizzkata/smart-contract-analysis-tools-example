@@ -183,7 +183,7 @@ fn format_printer_markdown_human_summary(
         content.push_str(&format!("- Impact: {}\n", d.impact));
         content.push_str(&format!("- Confidence: {}\n", d.confidence));
         content.push_str("\n");
-        content.push_str(&format!("- Description: {}\n", d.description));
+        //content.push_str(&format!("- Description: {}\n", d.description));
 
         if d.elements != serde_json::Value::Null && d.elements[0]["type"] != "contract" {
             let tmp_string = serde_json::to_string(&d)?;
