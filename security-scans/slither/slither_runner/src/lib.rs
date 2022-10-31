@@ -191,7 +191,9 @@ fn format_printer_markdown_human_summary(
                 serde_json::from_str(&*tmp_string)?;
 
             for e in detector_elements.elements.iter() {
-                content.push_str(&format!("\n#### Type: {}\n\n", e.r#type));
+                if e.r#type != "function" {
+                    continue;
+                }
 
                 let relative_path = &e.source_mapping.filename_relative;
                 let source_path = format!("{prj_root_path}/{relative_path}");

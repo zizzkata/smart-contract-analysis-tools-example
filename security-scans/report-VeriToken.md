@@ -32,13 +32,6 @@ Confidence: High
 Description: Pragma version[^0.8.13](src/smart-contracts/interfaces/IVeriToken.sol#L2) allows old versions
 
 
-#### Type: pragma
-
-
-```Solidity
-2 pragma solidity ^0.8.13;
-```
-
 ### check: solc-version
 
 Impact: Informational
@@ -46,10 +39,3 @@ Confidence: High
 
 Description: Pragma version[^0.8.13](src/smart-contracts/VeriToken.sol#L2) allows old versions
 
-
-#### Type: pragma
-
-
-```Solidity
-2 pragma solidity ^0.8.13;
-```

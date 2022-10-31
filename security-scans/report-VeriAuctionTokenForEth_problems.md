@@ -23,13 +23,6 @@ Confidence: High
 Description: Pragma version[^0.8.13](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L2) allows old versions
 
 
-#### Type: pragma
-
-
-```Solidity
-2 pragma solidity ^0.8.13;
-```
-
 ### check: solc-version
 
 Impact: Informational
@@ -46,13 +39,6 @@ Confidence: High
 Description: Pragma version[^0.8.13](src/smart-contracts/interfaces/IVeriAuctionTokenForEth.sol#L2) allows old versions
 
 
-#### Type: pragma
-
-
-```Solidity
-2 pragma solidity ^0.8.13;
-```
-
 ### check: low-level-calls
 
 Impact: Informational
@@ -60,9 +46,6 @@ Confidence: High
 
 Description: Low level call in [VeriAuctionTokenForEth_problems.resignFromAuction()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L96-L121):
 	- [(transferSuccess) = msg.sender.call{value: commitment}()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L117)
-
-
-#### Type: function
 
 
 ```Solidity
@@ -92,13 +75,6 @@ Description: Low level call in [VeriAuctionTokenForEth_problems.resignFromAuctio
 119 
 120         delete commited[msg.sender];
 121     }
-```
-
-#### Type: node
-
-
-```Solidity
-117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
 ```
 
 ### check: naming-convention
@@ -121,9 +97,6 @@ Description: Reentrancy in [VeriAuctionTokenForEth_problems.depositAuctionTokens
 	- [auctionStarted = true](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L61)
 
 
-#### Type: function
-
-
 ```Solidity
 57     function depositAuctionTokens() external onlyOwner {
 58         // The deployer of this auction contract should have approved the auction
@@ -131,27 +104,6 @@ Description: Reentrancy in [VeriAuctionTokenForEth_problems.depositAuctionTokens
 60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
 61         auctionStarted = true;
 62     }
-```
-
-#### Type: node
-
-
-```Solidity
-60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
-```
-
-#### Type: node
-
-
-```Solidity
-60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
-```
-
-#### Type: node
-
-
-```Solidity
-61         auctionStarted = true;
 ```
 
 ### check: divide-before-multiply
@@ -162,9 +114,6 @@ Confidence: Medium
 Description: [VeriAuctionTokenForEth_problems.calculateClaimableAmount()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L196-L211) performs a multiplication on the result of a division:
 	- [share = (commited[msg.sender] * 1e18) / finalEthBalance](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L209)
 	- [claimableAmount = (share * amountToDistribute) / 1e18](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L210)
-
-
-#### Type: function
 
 
 ```Solidity
@@ -186,20 +135,6 @@ Description: [VeriAuctionTokenForEth_problems.calculateClaimableAmount()](src/sm
 211     }
 ```
 
-#### Type: node
-
-
-```Solidity
-209         uint256 share = (commited[msg.sender] * 1e18) / finalEthBalance;
-```
-
-#### Type: node
-
-
-```Solidity
-210         claimableAmount = (share * amountToDistribute) / 1e18;
-```
-
 ### check: reentrancy-eth
 
 Impact: High
@@ -210,9 +145,6 @@ Description: Reentrancy in [VeriAuctionTokenForEth_problems.resignFromAuction()]
 	- [(transferSuccess) = msg.sender.call{value: commitment}()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L117)
 	State variables written after the call(s):
 	- [delete commited[msg.sender]](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L120)
-
-
-#### Type: function
 
 
 ```Solidity
@@ -244,29 +176,12 @@ Description: Reentrancy in [VeriAuctionTokenForEth_problems.resignFromAuction()]
 121     }
 ```
 
-#### Type: node
-
-
-```Solidity
-117         (bool transferSuccess, ) = msg.sender.call{value: commitment}("");
-```
-
-#### Type: node
-
-
-```Solidity
-120         delete commited[msg.sender];
-```
-
 ### check: unchecked-transfer
 
 Impact: High
 Confidence: Medium
 
 Description: [VeriAuctionTokenForEth_problems.claimTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L138-L150) ignores return value by [auctionToken.transfer(msg.sender,claimableAmount)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L149)
-
-
-#### Type: function
 
 
 ```Solidity
@@ -285,22 +200,12 @@ Description: [VeriAuctionTokenForEth_problems.claimTokens()](src/smart-contracts
 150     }
 ```
 
-#### Type: node
-
-
-```Solidity
-149         auctionToken.transfer(msg.sender, claimableAmount);
-```
-
 ### check: unchecked-transfer
 
 Impact: High
 Confidence: Medium
 
 Description: [VeriAuctionTokenForEth_problems.depositAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L57-L62) ignores return value by [auctionToken.transferFrom(msg.sender,address(this),amountToDistribute)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L60)
-
-
-#### Type: function
 
 
 ```Solidity
@@ -312,22 +217,12 @@ Description: [VeriAuctionTokenForEth_problems.depositAuctionTokens()](src/smart-
 62     }
 ```
 
-#### Type: node
-
-
-```Solidity
-60         auctionToken.transferFrom(msg.sender, address(this), amountToDistribute);
-```
-
 ### check: unchecked-transfer
 
 Impact: High
 Confidence: Medium
 
 Description: [VeriAuctionTokenForEth_problems.claimUndistributedAuctionTokens()](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L154-L160) ignores return value by [auctionToken.transfer(owner(),tokensToSend)](src/smart-contracts/VeriAuctionTokenForEth_problems.sol#L159)
-
-
-#### Type: function
 
 
 ```Solidity
@@ -338,11 +233,4 @@ Description: [VeriAuctionTokenForEth_problems.claimUndistributedAuctionTokens()]
 158         // The transfer will fail on insufficient balance
 159         auctionToken.transfer(owner(), tokensToSend);
 160     }
-```
-
-#### Type: node
-
-
-```Solidity
-159         auctionToken.transfer(owner(), tokensToSend);
 ```
