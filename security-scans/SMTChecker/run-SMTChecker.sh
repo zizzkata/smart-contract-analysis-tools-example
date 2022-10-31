@@ -1,9 +1,11 @@
 #!/bin/bash
 
 projectRoot=$1
-contractName=$2
+pathToSecurityScansFromRoot=$2
+pathToSourceFileFromRoot=$3
+contractName=$4
 
-if [ -z "$contractName" ]
+if [ -z "${contractName}" ]
 then
     echo ""
     echo "Please provide the name of the contract without '.sol'"
@@ -31,4 +33,4 @@ docker run --pull --rm -v ${projectRoot}:/prj ghcr.io/byont-ventures/analysis-to
     --model-checker-solvers all                         \
     --model-checker-targets all                         \
     --model-checker-timeout 60000                       \
-    /prj/src/smart-contracts/${contractName}.sol" 2>&1 | tee -a ${outputFile}
+    /prj/${pathToSourceFileFromRoot}/${contractName}.sol" 2>&1 | tee -a ${outputFile}

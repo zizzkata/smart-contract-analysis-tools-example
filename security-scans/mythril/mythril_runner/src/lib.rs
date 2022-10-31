@@ -1,7 +1,7 @@
 use std::process::Command;
 use std::str;
 
-pub fn run_smtchecker(
+pub fn run_mythril(
     project_root_path_abs: &str,
     security_scan_path_rel: &str,
     contract_source_path_rel: &str,
@@ -9,7 +9,7 @@ pub fn run_smtchecker(
 ) -> String {
     // TODO: see if sudo can be removed
     let command = format!(
-        "sudo {project_root_path_abs}/{security_scan_path_rel}/SMTChecker/run-SMTChecker.sh {} {} {} {}",
+        "sudo {project_root_path_abs}/{security_scan_path_rel}/mythril/run-mythril.sh {} {} {} {}",
         project_root_path_abs, security_scan_path_rel, contract_source_path_rel, contract_name
     );
 

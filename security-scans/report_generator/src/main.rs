@@ -4,6 +4,7 @@ use std::io::prelude::*;
 use std::process;
 
 // Import the different tools
+use mythril_runner as mythril;
 use slither_runner as slither;
 use smtchecker_runner as smtchecker;
 
@@ -40,7 +41,7 @@ fn main() {
     let slither_header = "## Slither\n\n";
     write_to_report(&mut file, &slither_header);
 
-    let result = slither::run_slither(
+    let slither_result = slither::run_slither(
         project_root_path_abs,
         security_scan_path_rel,
         contract_source_path_rel,
@@ -62,8 +63,33 @@ fn main() {
     // SMTChecker
     //---------------
 
-    // let result = smtchecker::run_smtchecker(path_string, contract_name);
-    // println!("{}", result);
+    let smtchecker_header = "## SMTChecker\n\n";
+    write_to_report(&mut file, &smtchecker_header);
+
+    let smtchecker_result = smtchecker::run_smtchecker(
+        project_root_path_abs,
+        security_scan_path_rel,
+        contract_source_path_rel,
+        contract_name,
+    );
+
+    write_to_report(&mut file, &smtchecker_result.replace("\n", "\n\n"));
+
+    //---------------
+    // Mythril
+    //---------------
+
+    let mythril_header = "## Mythril\n\n";
+    write_to_report(&mut file, &mythril_header);
+
+    let mythril_result = mythril::run_mythril(
+        project_root_path_abs,
+        security_scan_path_rel,
+        contract_source_path_rel,
+        contract_name,
+    );
+
+    write_to_report(&mut file, &mythril_result.replace("\n", "\n\n"));
 }
 
 fn create_file(file_name: &str) -> std::io::Result<File> {

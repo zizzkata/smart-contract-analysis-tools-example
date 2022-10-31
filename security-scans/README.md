@@ -15,6 +15,19 @@ $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 $ source ~/.bashrc
 ```
 
+## Update configs
+
+> TODO: read the solc version to use from the project's foundry.toml and use that everywhere
+
+### Update remappings
+
+> TODO: Make a script that automatically reads the remappings from foundry.toml in the main project
+
+In:
+
+- [./slither/slither.config.json](./slither/slither.config.json)
+- [./SMTChecker/run-SMTChecker.sh](./SMTChecker/run-SMTChecker.sh)
+
 ## Usage
 
 All of these commands should be executed from the root folder of the main project (so root-of-project in the diagram at the start of this README).
