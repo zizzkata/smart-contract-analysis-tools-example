@@ -66,7 +66,7 @@ struct SlitherOutputHumanSummaryAdditionalFields {
 
 #[derive(Serialize, Deserialize)]
 struct SlitherOutputHumanSummaryAdditionalFieldsDetectors {
-    elements: Vec<Value>,
+    elements: Value,
     description: String,
     markdown: String,
     first_markdown_element: String,
@@ -74,6 +74,19 @@ struct SlitherOutputHumanSummaryAdditionalFieldsDetectors {
     check: String,
     impact: String,
     confidence: String,
+}
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsDetectorsNonSolcVersionCheck {
+    elements: Vec<SlitherOutputHumanSummaryAdditionalFieldsDetectorsElements>,
+}
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsDetectorsElements {
+    r#type: String,
+    name: String,
+    source_mapping: Value,
+    type_specific_fields: Value,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -122,7 +135,13 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
                     serde_json::from_str(&*tmpString)?;
 
                 let human_summary_content =
-                    format_printer_markdown_human_summary(human_summary_result);
+                    match format_printer_markdown_human_summary(human_summary_result) {
+                        Ok(s) => s,
+                        _ => {
+                            println!("\nERROR: Error while parsing {tmpString}\n");
+                            process::exit(1);
+                        }
+                    };
 
                 slither_markdown.push_str(&human_summary_content);
             }
@@ -133,11 +152,27 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
     return Ok(slither_markdown);
 }
 
-fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -> String {
+fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -> Result<String> {
     let mut content = json_data.description;
 
     let other_content = "fdsafsdafsd";
     content.push_str(&format!("\n{}\n", other_content));
 
-    return content;
+    let detector_items = json_data.additional_fields.detectors;
+
+    for d in detector_items.iter() {
+        println!("{}", d.check);
+        if d.elements != serde_json::Value::Null {
+            let tmpString = serde_json::to_string(&d)?;
+
+            let detector_elements: SlitherOutputHumanSummaryAdditionalFieldsDetectorsNonSolcVersionCheck =
+                serde_json::from_str(&*tmpString)?;
+
+            for e in detector_elements.elements.iter() {
+                println!("\t{}", e.r#type);
+            }
+        }
+    }
+
+    return Ok(content);
 }
