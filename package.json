@@ -5,12 +5,6 @@
     "sc:test:watch": "forge test -vvv --watch",
     "sc:coverage": "forge coverage",
     "sc:lint": "solhint ./src/smart-contracts/*.sol",
-    "sc:slither": "./security-scans/slither/run-slither.sh ${PWD}",
-    "sc:smt-checker": "./security-scans/SMTChecker/run-SMTChecker.sh ${PWD}",
-    "sc:mythril": "./security-scans/mythril/run-mythril.sh ${PWD}",
-    "sc:generate-report": "cargo run --manifest-path ./security-scans/report_generator/Cargo.toml -- ",
-    "docker:release:analysis-tools": "./docker/releaseDockerAnalysisTools.sh",
-    "docker:release:kevm": "./docker/releaseDockerKevm.sh",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },

@@ -19,6 +19,8 @@ fn main() {
 
     let path = env::current_dir().expect("ERROR: Failed to get current path!");
     let path_string = path
+        .parent()
+        .unwrap()
         .to_str()
         .expect("ERROR: can not convert path to string!");
 
