@@ -183,7 +183,9 @@ fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -
             for e in detector_elements.elements.iter() {
                 println!("\t{}", e.r#type);
                 println!("\t{}", e.source_mapping.start);
-                println!("\t{}", e.source_mapping.filename_absolute);
+                println!("\t{}", e.source_mapping.filename_relative);
+
+                // TODO: read lines e.source_mapping.lines from prj_root_path/e.source_mapping.filename_relative
             }
         }
     }
