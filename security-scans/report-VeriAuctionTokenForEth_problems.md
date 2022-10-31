@@ -28,6 +28,9 @@ ERCs: ERC20
 
 
 
+For more information about the detected items see the [Slither documentation](https://github.com/crytic/slither/wiki/Detector-Documentation).
+
+
 ### solc-version
 
 - Impact: `Informational`

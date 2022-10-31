@@ -175,6 +175,7 @@ fn format_printer_markdown_human_summary(
     json_data: SlitherOutputHumanSummary,
 ) -> Result<String> {
     let mut content = format!("{}\n", json_data.description.replace("\n", "\n\n"));
+    content.push_str("\nFor more information about the detected items see the [Slither documentation](https://github.com/crytic/slither/wiki/Detector-Documentation).\n\n");
 
     let detector_items = json_data.additional_fields.detectors;
 
