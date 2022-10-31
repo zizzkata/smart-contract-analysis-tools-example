@@ -85,8 +85,21 @@ struct SlitherOutputHumanSummaryAdditionalFieldsDetectorsNonSolcVersionCheck {
 struct SlitherOutputHumanSummaryAdditionalFieldsDetectorsElements {
     r#type: String,
     name: String,
-    source_mapping: Value,
+    source_mapping: SlitherOutputHumanSummaryAdditionalFieldsDetectorsElementsSourceMapping,
     type_specific_fields: Value,
+}
+
+#[derive(Serialize, Deserialize)]
+struct SlitherOutputHumanSummaryAdditionalFieldsDetectorsElementsSourceMapping {
+    start: i32,
+    length: i32,
+    filename_relative: String,
+    filename_absolute: String,
+    filename_short: String,
+    is_dependency: bool,
+    lines: Vec<i32>,
+    starting_column: i32,
+    ending_column: i32,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -129,16 +142,16 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
 
         match current_printer {
             "human-summary" => {
-                let tmpString = serde_json::to_string(&printers[i])?;
+                let tmp_string = serde_json::to_string(&printers[i])?;
 
                 let human_summary_result: SlitherOutputHumanSummary =
-                    serde_json::from_str(&*tmpString)?;
+                    serde_json::from_str(&*tmp_string)?;
 
                 let human_summary_content =
                     match format_printer_markdown_human_summary(human_summary_result) {
                         Ok(s) => s,
                         _ => {
-                            println!("\nERROR: Error while parsing {tmpString}\n");
+                            println!("\nERROR: Error while parsing {tmp_string}\n");
                             process::exit(1);
                         }
                     };
@@ -162,14 +175,15 @@ fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -
 
     for d in detector_items.iter() {
         println!("{}", d.check);
-        if d.elements != serde_json::Value::Null {
-            let tmpString = serde_json::to_string(&d)?;
-
+        if d.elements != serde_json::Value::Null && d.elements[0]["type"] != "contract" {
+            let tmp_string = serde_json::to_string(&d)?;
             let detector_elements: SlitherOutputHumanSummaryAdditionalFieldsDetectorsNonSolcVersionCheck =
-                serde_json::from_str(&*tmpString)?;
+                serde_json::from_str(&*tmp_string)?;
 
             for e in detector_elements.elements.iter() {
                 println!("\t{}", e.r#type);
+                println!("\t{}", e.source_mapping.start);
+                println!("\t{}", e.source_mapping.filename_absolute);
             }
         }
     }
