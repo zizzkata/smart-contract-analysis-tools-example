@@ -22,7 +22,7 @@ fn main() {
         .to_str()
         .expect("ERROR: can not convert path to string!");
 
-    let filePath = format!("{path_string}/security-scans/report.md");
+    let filePath = format!("{path_string}/security-scans/report-{contract_name}.md");
     let mut file = match create_file(&filePath) {
         Ok(f) => f,
         _ => {
@@ -31,10 +31,17 @@ fn main() {
         }
     };
 
-    println!("Running Slither");
+    let main_header = "# Code report\n\n";
+    write_to_report(&mut file, &main_header);
+
+    //---------------
+    // Slither
+    //---------------
+
+    let slither_header = "## Slither\n\n";
+    write_to_report(&mut file, &slither_header);
 
     let result = slither::run_slither(path_string, contract_name);
-    println!("{}", result);
 
     let slither_markdown_content =
         match slither::format_output_to_markdown(path_string, contract_name) {
@@ -44,7 +51,9 @@ fn main() {
 
     write_to_report(&mut file, &slither_markdown_content);
 
-    // println!("Running SMTChecker");
+    //---------------
+    // SMTChecker
+    //---------------
 
     // let result = smtchecker::run_smtchecker(path_string, contract_name);
     // println!("{}", result);

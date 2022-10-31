@@ -134,6 +134,10 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
 }
 
 fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -> String {
-    let content = json_data.description;
+    let mut content = json_data.description;
+
+    let other_content = "fdsafsdafsd";
+    content.push_str(&format!("\n{}\n", other_content));
+
     return content;
 }
