@@ -89,7 +89,7 @@ struct SlitherOutputHumanSummaryAdditionalFieldsTypeFunction {}
 struct SlitherOutputHumanSummaryAdditionalFieldsTypeNode {}
 
 // Out of date: https://github.com/crytic/slither/wiki/JSON-output
-pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Result<()> {
+pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Result<String> {
     let slither_json_path =
         format!("{prj_root_path}/security-scans/slither/results/{contract_name}/{contract_name}-output.json");
 
@@ -102,6 +102,8 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
         println!("\nERROR: Slither had an error while running!\nSee {slither_json_path} for more info.\n");
         process::exit(1);
     }
+
+    let mut slither_markdown = "".to_owned();
 
     let printers = &result.results["printers"];
 
@@ -119,15 +121,19 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
                 let human_summary_result: SlitherOutputHumanSummary =
                     serde_json::from_str(&*tmpString)?;
 
-                format_printer_markdown_human_summary(human_summary_result);
+                let human_summary_content =
+                    format_printer_markdown_human_summary(human_summary_result);
+
+                slither_markdown.push_str(&human_summary_content);
             }
             _ => println!("Printer ({}) not supported", current_printer),
         }
     }
 
-    Ok(())
+    return Ok(slither_markdown);
 }
 
-fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) {
-    println!("{}", json_data.description);
+fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -> String {
+    let content = json_data.description;
+    return content;
 }

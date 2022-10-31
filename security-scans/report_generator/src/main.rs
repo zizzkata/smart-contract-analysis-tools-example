@@ -1,4 +1,6 @@
 use std::env;
+use std::fs::File;
+use std::io::prelude::*;
 use std::process;
 
 // Import the different tools
@@ -20,15 +22,40 @@ fn main() {
         .to_str()
         .expect("ERROR: can not convert path to string!");
 
+    let filePath = format!("{path_string}/security-scans/report.md");
+    let mut file = match create_file(&filePath) {
+        Ok(f) => f,
+        _ => {
+            println!("\nERROR: Failed to create file: {}\n", filePath);
+            process::exit(1);
+        }
+    };
+
     println!("Running Slither");
 
     let result = slither::run_slither(path_string, contract_name);
     println!("{}", result);
 
-    slither::format_output_to_markdown(path_string, contract_name);
+    let slither_markdown_content =
+        match slither::format_output_to_markdown(path_string, contract_name) {
+            Ok(s) => s,
+            _ => "".to_string(),
+        };
+
+    write_to_report(&mut file, &slither_markdown_content);
 
     // println!("Running SMTChecker");
 
     // let result = smtchecker::run_smtchecker(path_string, contract_name);
     // println!("{}", result);
+}
+
+fn create_file(file_name: &str) -> std::io::Result<File> {
+    let file = File::create(file_name)?;
+    return Ok(file);
+}
+
+fn write_to_report(file: &mut File, content: &str) -> std::io::Result<()> {
+    file.write_all(content.as_bytes())?;
+    Ok(())
 }
