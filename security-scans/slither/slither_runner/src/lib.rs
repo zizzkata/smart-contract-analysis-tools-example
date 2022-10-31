@@ -2,6 +2,9 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Result, Value};
 use std::any::type_name;
 use std::fs;
+use std::fs::File;
+use std::io::{self, BufRead};
+use std::path::Path;
 use std::process;
 use std::process::Command;
 use std::str;
@@ -147,14 +150,16 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
                 let human_summary_result: SlitherOutputHumanSummary =
                     serde_json::from_str(&*tmp_string)?;
 
-                let human_summary_content =
-                    match format_printer_markdown_human_summary(human_summary_result) {
-                        Ok(s) => s,
-                        _ => {
-                            println!("\nERROR: Error while parsing {tmp_string}\n");
-                            process::exit(1);
-                        }
-                    };
+                let human_summary_content = match format_printer_markdown_human_summary(
+                    prj_root_path,
+                    human_summary_result,
+                ) {
+                    Ok(s) => s,
+                    _ => {
+                        println!("\nERROR: Error while parsing {tmp_string}\n");
+                        process::exit(1);
+                    }
+                };
 
                 slither_markdown.push_str(&human_summary_content);
             }
@@ -165,7 +170,10 @@ pub fn format_output_to_markdown(prj_root_path: &str, contract_name: &str) -> Re
     return Ok(slither_markdown);
 }
 
-fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -> Result<String> {
+fn format_printer_markdown_human_summary(
+    prj_root_path: &str,
+    json_data: SlitherOutputHumanSummary,
+) -> Result<String> {
     let mut content = json_data.description;
 
     let other_content = "fdsafsdafsd";
@@ -181,14 +189,48 @@ fn format_printer_markdown_human_summary(json_data: SlitherOutputHumanSummary) -
                 serde_json::from_str(&*tmp_string)?;
 
             for e in detector_elements.elements.iter() {
-                println!("\t{}", e.r#type);
-                println!("\t{}", e.source_mapping.start);
-                println!("\t{}", e.source_mapping.filename_relative);
+                println!("\n----------\n\t{}\n", e.r#type);
+
+                let relative_path = &e.source_mapping.filename_relative;
+                let source_path = format!("{prj_root_path}/{relative_path}");
+
+                let mut mappedSourceLineIndex = 0;
+
+                if let Ok(source_lines) = read_lines(source_path) {
+                    // Consumes the iterator, returns an (Optional) String
+                    let mut line_number = 1;
+                    for line in source_lines {
+                        if let Ok(source_line) = line {
+                            if line_number == e.source_mapping.lines[mappedSourceLineIndex] {
+                                println!("{line_number} {}", source_line);
+                                mappedSourceLineIndex += 1;
+                                if mappedSourceLineIndex == e.source_mapping.lines.len() {
+                                    break;
+                                }
+                            }
+                        }
+                        line_number += 1;
+                    }
+                }
+
+                println!("");
 
                 // TODO: read lines e.source_mapping.lines from prj_root_path/e.source_mapping.filename_relative
+                //
             }
         }
     }
 
     return Ok(content);
+}
+
+// Source:  https://doc.rust-lang.org/rust-by-example/std_misc/file/read_lines.html
+// The output is wrapped in a Result to allow matching on errors
+// Returns an Iterator to the Reader of the lines of the file.
+fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
+where
+    P: AsRef<Path>,
+{
+    let file = File::open(filename)?;
+    Ok(io::BufReader::new(file).lines())
 }
