@@ -35,8 +35,9 @@ $ yarn --cwd ./security-scans run   \
     scan:generate-report            \
     ${PWD}                          \
     ./security-scans                \
-    ./src/smart-contracts/          \
-    VeriToken
+    ./src/smart-contracts           \
+    ./reports                       \
+    VeriAuctionTokenForEth_problems
 ```
 
 # Creating contracts with problems
