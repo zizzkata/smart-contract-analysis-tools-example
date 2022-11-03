@@ -14,19 +14,19 @@ solc_version = "0.8.17"
 [report]
 report_output_rel_path = "./report"
 
-[[report.contract]]
-name = "VeriToken"
-report_custom_name = ""
+# [[report.contract]]
+# name = "VeriToken"
+# report_custom_name = ""
 
 [[report.contract]]
 name = "VeriAuctionTokenForEth_problems"
 report_custom_name = ""
 
 [mythril]
-enabled = false
+enabled = true
 
 [slither]
 enabled = true
 
 [smtchecker]
-enabled = false
+enabled = true
