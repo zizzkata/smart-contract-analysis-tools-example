@@ -26,7 +26,6 @@ contract VeriAuctionTokenForEth_problems is IVeriAuctionTokenForEth, Ownable {
     //========================================
     // constructor
     //========================================
-
     constructor(address veriTokenAddress, uint256 _amountToDistribute) Ownable() {
         auctionToken = IERC20Metadata(veriTokenAddress);
         auctionTokenDecimals = auctionToken.decimals();
