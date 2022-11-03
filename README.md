@@ -22,22 +22,33 @@ $ git submodule update --init --recursive
 
 ## Usage
 
+### Normal smart-contract development
+
 ```bash
 $ yarn run sc:test
 ```
 
+### Report generation with security-scans
+
+Installing Rust.
+
 ```bash
-$ sudo yarn --cwd security-scans run scan:slither VeriToken
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+$ source ~/.bashrc
 ```
+
+Copy the configuration file.
+
+```bash
+$ cp ./security-scans/analysis-config-example.toml ./analysis-config.toml
+```
+
+Update `./analysis-config.toml` as seen fit. The run the report generator.
 
 ```bash
 $ yarn --cwd ./security-scans run   \
     scan:generate-report            \
-    ${PWD}                          \
-    ./security-scans                \
-    ./src/smart-contracts           \
-    ./reports                       \
-    VeriAuctionTokenForEth_problems
+    ${PWD}/analysis-config.toml
 ```
 
 # Creating contracts with problems
@@ -129,14 +140,4 @@ function claimTokens() external override {
 }
 ```
 
-Preventing this attack is excactly the same as for the previous attack.
-
-## How to use this repository
-
-In the [security-scans](./security-scans/) folder you can find several tools to run security scans and formal verification.
-
-## Docker
-
-Installing formal verification tools can take quite some time. Additionally, installing kevm can be a bit tricky since it is still development. Therefore docker images are created to make life easier.
-
-See the `./docker/` folder for more info.
+Preventing this attack is exactly the same as for the previous attack.
