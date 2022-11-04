@@ -23,10 +23,10 @@ name = "VeriAuctionTokenForEth_problems"
 report_custom_name = ""
 
 [mythril]
-enabled = true
+enabled = false
 
 [slither]
 enabled = true
 
 [smtchecker]
-enabled = true
+enabled = false
