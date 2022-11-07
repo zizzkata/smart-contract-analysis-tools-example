@@ -1,3 +1,6 @@
+# k framework
+*-kompiled
+
 # compiled output
 /dist
 /tmp
@@ -29,4 +32,6 @@ yarn-error.log*
 **/**/typechain-types
 
 # Custom
+**/**/flattened
+**/**/generated
 **/**/solc-out

@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "juanblanco.solidity",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "rust-lang.rust-analyzer",
+    "vivaxy.vscode-conventional-commits"
+  ]
+}
