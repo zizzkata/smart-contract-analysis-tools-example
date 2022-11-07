@@ -51,6 +51,18 @@ $ yarn --cwd ./security-scans run   \
     ${PWD}/analysis-config.toml
 ```
 
+kevm
+
+```bash
+$ yarn --cwd ./security-scans run   \
+    scan:kevm                       \
+    ${PWD}                          \
+    ./security-scans                \
+    ./src/smart-contracts           \
+    ./kevm-specs                    \
+    VeriToken
+```
+
 # Creating contracts with problems
 
 ## [VeriAuctionTokenForEth_problems.sol](./smart-contracts/src/VeriAuctionTokenForEth_problems.sol)
