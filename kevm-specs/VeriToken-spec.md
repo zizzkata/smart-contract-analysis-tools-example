@@ -57,7 +57,7 @@ claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLe
 
 ### Calling decimals() works
 
-```k
+```
 claim [decimals]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
@@ -88,7 +88,7 @@ claim [decimals]:
 
 ### Calling totalSupply() works
 
-```k
+```
 claim [totalSupply]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
@@ -123,7 +123,7 @@ claim [totalSupply]:
 
 ### Calling approve(address spender, uint256 amount) works
 
-```k
+```
 claim [approve.success]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
@@ -163,7 +163,7 @@ claim [approve.success]:
         andBool SPENDER =/=Int 0
 ```
 
-```k
+```
 claim [approve.revert]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
@@ -203,7 +203,7 @@ claim [approve.revert]:
 
 ### Calling transfer(address to, uint256 amount) works
 
-```
+```k
 claim [transfer.success]:
     <mode>     NORMAL   </mode>
     <schedule> ISTANBUL </schedule>
@@ -211,6 +211,7 @@ claim [transfer.success]:
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
     <jumpDests> #computeValidJumpDests(#binRuntime(VeriToken)) </jumpDests>
+    <static> false                                          </static>
 
     <id>         ACCTID      => ?_ </id>
     <caller>     OWNER       => ?_ </caller>
