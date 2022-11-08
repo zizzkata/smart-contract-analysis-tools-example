@@ -60,7 +60,7 @@ claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLe
 ```
 claim [decimals]:
     <mode>     NORMAL   </mode>
-    <schedule> ISTANBUL </schedule>
+    <schedule> BERLIN </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -91,7 +91,7 @@ claim [decimals]:
 ```
 claim [totalSupply]:
     <mode>     NORMAL   </mode>
-    <schedule> ISTANBUL </schedule>
+    <schedule> BERLIN </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -126,7 +126,7 @@ claim [totalSupply]:
 ```
 claim [approve.success]:
     <mode>     NORMAL   </mode>
-    <schedule> ISTANBUL </schedule>
+    <schedule> BERLIN </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -166,7 +166,7 @@ claim [approve.success]:
 ```
 claim [approve.revert]:
     <mode>     NORMAL   </mode>
-    <schedule> ISTANBUL </schedule>
+    <schedule> BERLIN </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -206,12 +206,12 @@ claim [approve.revert]:
 ```k
 claim [transfer.success]:
     <mode>     NORMAL   </mode>
-    <schedule> ISTANBUL </schedule>
+    <schedule> BERLIN </schedule>
 
-    <callStack> .List                                      </callStack>
+    <callStack> .List                                          </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
     <jumpDests> #computeValidJumpDests(#binRuntime(VeriToken)) </jumpDests>
-    <static> false                                          </static>
+    <static>    false                                          </static>
 
     <id>         ACCTID      => ?_ </id>
     <caller>     OWNER       => ?_ </caller>
@@ -230,22 +230,29 @@ claim [transfer.success]:
 
     <account>
         <acctID> ACCTID </acctID>
-        <storage> ACCT_STORAGE => ACCT_STORAGE [ BALANCE_OWNER_KEY <- BALANCE_NEW_OWNER ] [ BALANCE_RECEIVER_KEY <- BALANCE_NEW_RECEIVER ] </storage>
+        <storage> ACCT_STORAGE => ACCT_STORAGE [ BALANCE_RECEIVER_KEY <- AMOUNT ] </storage>
         ...
      </account>
 
-    requires BALANCE_OWNER_KEY ==Int #loc(VeriToken._balances[OWNER])
-        andBool BALANCE_RECEIVER_KEY ==Int #loc(VeriToken._balances[RECEIVER])
+    requires BALANCE_RECEIVER_KEY ==Int #loc(VeriToken._balances[RECEIVER])
         andBool #rangeUInt(256, AMOUNT)
         andBool #rangeAddress(OWNER)
         andBool #rangeAddress(RECEIVER)
-        andBool OWNER =/=Int 0
-        andBool RECEIVER =/=Int 0
-        andBool #lookup(ACCT_STORAGE, BALANCE_OWNER_KEY) >=Int AMOUNT
-        andBool #rangeUInt(256, (#lookup(ACCT_STORAGE, BALANCE_RECEIVER_KEY) +Int AMOUNT))
-        andBool BALANCE_NEW_OWNER ==Int (#lookup(ACCT_STORAGE, BALANCE_OWNER_KEY) -Int AMOUNT)
-        andBool BALANCE_NEW_RECEIVER ==Int (#lookup(ACCT_STORAGE, BALANCE_RECEIVER_KEY) +Int AMOUNT)
 ```
+
+BALANCE_OWNER_KEY ==Int #loc(VeriToken.\_balances[OWNER])
+andBool BALANCE_INITIAL_RECEIVER ==Int #lookup(ACCT_STORAGE, BALANCE_RECEIVER_KEY)
+andBool BALANCE_INITIAL_OWNER ==Int #lookup(ACCT_STORAGE, BALANCE_OWNER_KEY)
+andBool #rangeUInt(256, BALANCE_INITIAL_RECEIVER)
+andBool #rangeUInt(256, BALANCE_INITIAL_OWNER)
+andBool BALANCE_INITIAL_OWNER >=Int AMOUNT
+andBool BALANCE_NEW_OWNER ==Int (BALANCE_INITIAL_OWNER -Int AMOUNT)
+andBool #rangeUInt(256, BALANCE_NEW_OWNER)
+andBool OWNER =/=Int 0
+andBool RECEIVER =/=Int 0
+andBool OWNER =/=Int RECEIVER
+andBool BALANCE_NEW_RECEIVER ==Int (BALANCE_INITIAL_RECEIVER +Int AMOUNT)
+andBool #rangeUInt(256, BALANCE_NEW_RECEIVER)
 
 ```k
 endmodule
