@@ -60,7 +60,7 @@ claim <k> runLemma(#bufStrict(32, #loc(VeriToken._allowances[OWNER]))) => doneLe
 ```
 claim [decimals]:
     <mode>     NORMAL   </mode>
-    <schedule> BERLIN </schedule>
+    <schedule> ISTANBUL </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -91,7 +91,7 @@ claim [decimals]:
 ```
 claim [totalSupply]:
     <mode>     NORMAL   </mode>
-    <schedule> BERLIN </schedule>
+    <schedule> ISTANBUL </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -126,7 +126,7 @@ claim [totalSupply]:
 ```
 claim [approve.success]:
     <mode>     NORMAL   </mode>
-    <schedule> BERLIN </schedule>
+    <schedule> ISTANBUL </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -166,7 +166,7 @@ claim [approve.success]:
 ```
 claim [approve.revert]:
     <mode>     NORMAL   </mode>
-    <schedule> BERLIN </schedule>
+    <schedule> ISTANBUL </schedule>
 
     <callStack> .List                                      </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -206,7 +206,7 @@ claim [approve.revert]:
 ```k
 claim [transfer.success]:
     <mode>     NORMAL   </mode>
-    <schedule> BERLIN </schedule>
+    <schedule> ISTANBUL </schedule>
 
     <callStack> .List                                          </callStack>
     <program>   #binRuntime(VeriToken)                         </program>
@@ -222,6 +222,7 @@ claim [transfer.success]:
     <endPC>      _           => ?_ </endPC>
     <gas>        #gas(_VGAS) => ?_ </gas>
     <callValue>  0           => ?_ </callValue>
+    <substate>   _           => ?_ </substate>
 
     <callData>   VeriToken.transfer(RECEIVER, AMOUNT)       </callData>
     <k>          #execute   => #halt ...                    </k>
@@ -230,7 +231,6 @@ claim [transfer.success]:
 
     <account>
         <acctID> ACCTID </acctID>
-        <storage> ACCT_STORAGE => ACCT_STORAGE [ BALANCE_RECEIVER_KEY <- AMOUNT ] </storage>
         ...
      </account>
 
@@ -239,6 +239,8 @@ claim [transfer.success]:
         andBool #rangeAddress(OWNER)
         andBool #rangeAddress(RECEIVER)
 ```
+
+        <storage> ACCT_STORAGE => ACCT_STORAGE [ BALANCE_RECEIVER_KEY <- AMOUNT ] </storage>
 
 BALANCE_OWNER_KEY ==Int #loc(VeriToken.\_balances[OWNER])
 andBool BALANCE_INITIAL_RECEIVER ==Int #lookup(ACCT_STORAGE, BALANCE_RECEIVER_KEY)
