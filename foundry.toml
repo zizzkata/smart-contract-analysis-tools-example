@@ -5,6 +5,7 @@
     cache_path = 'cache/smart-contracts'
     libs = ['libs', 'node_modules']
     solc = "0.8.17"
+    evm_version = 'london'
 
 [profile.ci]
     src = 'src/smart-contracts'
